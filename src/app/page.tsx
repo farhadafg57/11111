@@ -72,31 +72,31 @@ export default function LandingPage() {
   });
 
   // Act I -> Act II
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.1], [1, 0.8]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.8]);
   
   // Orrery animation
-  const orreryY = useTransform(scrollYProgress, [0, 0.1, 0.15], [0, -150, -200]);
-  const orreryScale = useTransform(scrollYProgress, [0, 0.1, 0.15], [1, 0.5, 0.3]);
-  const orreryX = useTransform(scrollYProgress, [0.1, 0.15], [0, 150]);
+  const orreryY = useTransform(scrollYProgress, [0, 0.15, 0.2], [0, -150, -200]);
+  const orreryScale = useTransform(scrollYProgress, [0, 0.15, 0.2], [1, 0.5, 0.3]);
+  const orreryX = useTransform(scrollYProgress, [0.15, 0.2], [0, 150]);
 
 
   // Act II animations
-  const act2Opacity = useTransform(scrollYProgress, [0.1, 0.2, 0.3], [0, 1, 0]);
-  const chaosOpacity = useTransform(scrollYProgress, [0.2, 0.25], [1, 0]);
-  const orderedOpacity = useTransform(scrollYProgress, [0.25, 0.3], [0, 1]);
-  const textOpacity = useTransform(scrollYProgress, [0.28, 0.3], [0, 1]);
+  const act2Opacity = useTransform(scrollYProgress, [0.15, 0.25, 0.35], [0, 1, 0]);
+  const chaosOpacity = useTransform(scrollYProgress, [0.2, 0.28], [1, 0]);
+  const orderedOpacity = useTransform(scrollYProgress, [0.28, 0.35], [0, 1]);
+  const textOpacity = useTransform(scrollYProgress, [0.3, 0.35], [0, 1]);
 
   // Act III animations
-  const act3Opacity = useTransform(scrollYProgress, [0.3, 0.4, 0.5], [0, 1, 0]);
+  const act3Opacity = useTransform(scrollYProgress, [0.35, 0.45, 0.55], [0, 1, 0]);
 
   // Act IV animations
-  const act4Opacity = useTransform(scrollYProgress, [0.5, 0.6, 0.7], [0, 1, 0]);
+  const act4Opacity = useTransform(scrollYProgress, [0.55, 0.65, 0.75], [0, 1, 0]);
 
   // Act V animations
-  const act5Opacity = useTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
-  const finalOrreryScale = useTransform(scrollYProgress, [0.75, 0.85], [0.5, 1]);
-  const finalOrreryY = useTransform(scrollYProgress, [0.75, 0.85], [-200, 0]);
+  const act5Opacity = useTransform(scrollYProgress, [0.75, 0.85], [0, 1]);
+  const finalOrreryScale = useTransform(scrollYProgress, [0.8, 0.9], [0.5, 1]);
+  const finalOrreryY = useTransform(scrollYProgress, [0.8, 0.9], [-200, 0]);
 
 
   return (
@@ -106,7 +106,7 @@ export default function LandingPage() {
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
         {/* ACT I */}
         <motion.main
-          style={{ opacity: heroOpacity, scale: heroScale, display: useTransform(scrollYProgress, v => v > 0.15 ? 'none' : 'flex') }}
+          style={{ opacity: heroOpacity, scale: heroScale, display: useTransform(scrollYProgress, v => v > 0.2 ? 'none' : 'flex') }}
           className="w-full flex-1 flex flex-col items-center justify-center text-center p-4"
         >
           <div className="max-w-4xl flex flex-col items-center">
@@ -180,7 +180,7 @@ export default function LandingPage() {
 
         {/* ACT II */}
         <motion.section
-          style={{ opacity: act2Opacity, display: useTransform(scrollYProgress, v => (v > 0.1 && v < 0.35) ? 'flex' : 'none') }}
+          style={{ opacity: act2Opacity, display: useTransform(scrollYProgress, v => (v > 0.15 && v < 0.4) ? 'flex' : 'none') }}
           className="h-screen w-full flex items-center justify-center absolute inset-0"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center max-w-5xl mx-auto">
@@ -200,7 +200,7 @@ export default function LandingPage() {
 
         {/* ACT III */}
         <motion.section
-          style={{ opacity: act3Opacity, display: useTransform(scrollYProgress, v => (v > 0.3 && v < 0.55) ? 'flex' : 'none') }}
+          style={{ opacity: act3Opacity, display: useTransform(scrollYProgress, v => (v > 0.35 && v < 0.6) ? 'flex' : 'none') }}
           className="h-screen w-full flex flex-col items-center justify-center absolute inset-0 text-center p-4"
         >
             <h2 className="text-4xl md:text-5xl font-headline font-bold mb-16">An Entire Civilization of Agents at Your Command</h2>
@@ -223,7 +223,7 @@ export default function LandingPage() {
 
         {/* ACT IV */}
         <motion.section
-            style={{ opacity: act4Opacity, display: useTransform(scrollYProgress, v => (v > 0.5 && v < 0.75) ? 'flex' : 'none') }}
+            style={{ opacity: act4Opacity, display: useTransform(scrollYProgress, v => (v > 0.55 && v < 0.8) ? 'flex' : 'none') }}
             className="h-screen w-full flex flex-col items-center justify-center absolute inset-0 text-center p-4 space-y-24"
         >
             <div className="max-w-4xl">
@@ -238,7 +238,7 @@ export default function LandingPage() {
 
         {/* ACT V */}
         <motion.section
-            style={{ opacity: act5Opacity, display: useTransform(scrollYProgress, v => v > 0.7 ? 'flex' : 'none') }}
+            style={{ opacity: act5Opacity, display: useTransform(scrollYProgress, v => v > 0.75 ? 'flex' : 'none') }}
             className="h-screen w-full flex flex-col items-center justify-center absolute inset-0 text-center p-4"
         >
              <motion.div
