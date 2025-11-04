@@ -130,12 +130,10 @@ const processUserCommandFlow = ai.defineFlow(
     const agentName = selection?.agentName || 'Oracle'; // Default to Oracle
     const complexity = selection?.complexity || 'simple';
     const model = complexity === 'complex' ? 'googleai/gemini-2.5-pro' : 'googleai/gemini-2.5-flash';
-    const modelName = complexity === 'complex' ? 'Hakim' : 'Hafiz';
-
 
     // 2. Check for a cached response in Firestore
     if (userId) {
-      const cacheKey = btoa(command + agentName + modelName);
+      const cacheKey = Buffer.from(command + agentName + model).toString('base64');
       const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);
       const cacheSnap = await getDoc(cacheRef);
 
@@ -162,18 +160,16 @@ const processUserCommandFlow = ai.defineFlow(
     });
     
     const agentResponse = output || "I apologize, but I was unable to process your command.";
-    const finalAgentName = `${agentName} (${modelName})`;
-
 
     // 4. Write the new response to the cache using a non-blocking operation
     if (userId) {
-       const cacheKey = btoa(command + agentName + modelName);
+       const cacheKey = Buffer.from(command + agentName + model).toString('base64');
        const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);
        
        setDocumentNonBlocking(cacheRef, {
         prompt: command,
         response: agentResponse,
-        agentId: finalAgentName,
+        agentId: agentName,
         userId: userId,
         timestamp: serverTimestamp(),
         ttl: 3600, // Cache for 1 hour
@@ -182,7 +178,7 @@ const processUserCommandFlow = ai.defineFlow(
 
     return {
       agentResponse: agentResponse,
-      agentName: finalAgentName,
+      agentName: agentName,
     };
   }
 );

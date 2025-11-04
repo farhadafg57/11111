@@ -1,5 +1,27 @@
 {
   "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user profile.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the User entity."
+        },
+        "email": {
+          "type": "string",
+          "description": "The user's email address.",
+          "format": "email"
+        },
+        "name": {
+          "type": "string",
+          "description": "The user's display name."
+        }
+      },
+      "required": ["id", "email", "name"]
+    },
     "Agent": {
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "Agent",
@@ -29,28 +51,6 @@
       },
       "required": ["id", "name", "description", "category", "icon"]
     },
-    "User": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "User",
-      "type": "object",
-      "description": "Represents a user profile.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the User entity."
-        },
-        "email": {
-          "type": "string",
-          "description": "The user's email address.",
-          "format": "email"
-        },
-        "name": {
-          "type": "string",
-          "description": "The user's display name."
-        }
-      },
-      "required": ["id", "email", "name"]
-    },
     "Interaction": {
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "Interaction",
@@ -77,13 +77,9 @@
         "prompt": {
           "type": "string",
           "description": "The user's prompt or input."
-        },
-        "response": {
-          "type": "string",
-          "description": "The AI agent's response."
         }
       },
-      "required": ["id", "userId", "agentId", "timestamp", "prompt", "response"]
+      "required": ["id", "userId", "agentId", "timestamp", "prompt"]
     },
     "Metric": {
       "$schema": "http://json-schema.org/draft-07/schema#",
