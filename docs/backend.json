@@ -27,13 +27,7 @@
           "description": "The icon associated with the AI agent."
         }
       },
-      "required": [
-        "id",
-        "name",
-        "description",
-        "category",
-        "icon"
-      ]
+      "required": ["id", "name", "description", "category", "icon"]
     },
     "User": {
       "$schema": "http://json-schema.org/draft-07/schema#",
@@ -55,11 +49,7 @@
           "description": "The user's display name."
         }
       },
-      "required": [
-        "id",
-        "email",
-        "name"
-      ]
+      "required": ["id", "email", "name"]
     },
     "Interaction": {
       "$schema": "http://json-schema.org/draft-07/schema#",
@@ -93,14 +83,7 @@
           "description": "The AI agent's response."
         }
       },
-      "required": [
-        "id",
-        "userId",
-        "agentId",
-        "timestamp",
-        "prompt",
-        "response"
-      ]
+      "required": ["id", "userId", "agentId", "timestamp", "prompt", "response"]
     },
     "Metric": {
       "$schema": "http://json-schema.org/draft-07/schema#",
@@ -169,12 +152,7 @@
           "description": "The text associated with the embedding."
         }
       },
-      "required": [
-        "id",
-        "agentId",
-        "embedding",
-        "text"
-      ]
+      "required": ["id", "agentId", "embedding", "text"]
     },
     "CachedResponse": {
       "$schema": "http://json-schema.org/draft-07/schema#",
@@ -224,126 +202,32 @@
     }
   },
   "auth": {
-    "providers": [
-      "password",
-      "anonymous"
-    ]
+    "providers": ["password", "anonymous"]
   },
   "firestore": {
-    "structure": [
-      {
-        "path": "/agents/{agentId}",
-        "definition": {
-          "entityName": "Agent",
-          "schema": {
-            "$ref": "#/backend/entities/Agent"
-          },
-          "description": "Collection of AI agent definitions. Agents are globally accessible and their definitions are static.",
-          "params": [
-            {
-              "name": "agentId",
-              "description": "Unique identifier for the agent."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/users/{userId}",
-        "definition": {
-          "entityName": "User",
-          "schema": {
-            "$ref": "#/backend/entities/User"
-          },
-          "description": "Collection of user profiles. Each document represents a user authenticated via Firebase Auth.",
-          "params": [
-            {
-              "name": "userId",
-              "description": "Unique identifier for the user."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/users/{userId}/interactions/{interactionId}",
-        "definition": {
-          "entityName": "Interaction",
-          "schema": {
-            "$ref": "#/backend/entities/Interaction"
-          },
-          "description": "Subcollection of user interactions with AI agents. Includes denormalized 'userId' for authorization independence.",
-          "params": [
-            {
-              "name": "userId",
-              "description": "Unique identifier for the user."
-            },
-            {
-              "name": "interactionId",
-              "description": "Unique identifier for the interaction."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/agents/{agentId}/metrics/{metricId}",
-        "definition": {
-          "entityName": "Metric",
-          "schema": {
-            "$ref": "#/backend/entities/Metric"
-          },
-          "description": "Subcollection of performance metrics for AI agents. Includes denormalized 'agentId' for authorization independence.",
-          "params": [
-            {
-              "name": "agentId",
-              "description": "Unique identifier for the agent."
-            },
-            {
-              "name": "metricId",
-              "description": "Unique identifier for the metric."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/agents/{agentId}/knowledgeGraph/{knowledgeGraphId}",
-        "definition": {
-          "entityName": "KnowledgeGraph",
-          "schema": {
-            "$ref": "#/backend/entities/KnowledgeGraph"
-          },
-          "description": "Subcollection of vector embeddings for knowledge representation. Includes denormalized 'agentId' for authorization independence.",
-          "params": [
-            {
-              "name": "agentId",
-              "description": "Unique identifier for the agent."
-            },
-            {
-              "name": "knowledgeGraphId",
-              "description": "Unique identifier for the knowledge graph entry."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/users/{userId}/cachedResponses/{cachedResponseId}",
-        "definition": {
-          "entityName": "CachedResponse",
-          "schema": {
-            "$ref": "#/backend/entities/CachedResponse"
-          },
-          "description": "Subcollection of cached responses from AI agents, keyed by userId. Includes denormalized 'userId' and 'agentId' for authorization independence.",
-          "params": [
-            {
-              "name": "userId",
-              "description": "Unique identifier for the user."
-            },
-            {
-              "name": "cachedResponseId",
-              "description": "Unique identifier for the cached response."
-            }
-          ]
-        }
-      }
-    ],
-    "reasoning": "The Firestore data structure is designed to support a multi-agent AI ecosystem, prioritizing security, scalability, and debuggability. It leverages path-based ownership for user-specific data (interactions, cached responses) and segregates agent definitions into a separate collection. This design adheres to the principles of Authorization Independence and Structural Segregation. The structure supports secure `list` operations (QAPs) by ensuring that each collection has a homogeneous security posture, avoiding the need for complex filtering in rules. Denormalization is applied by including `userId` and `agentId` in subcollections for authorization independence. Compound indexes on userId+agentId and timestamp+status are recommended as specified."
+    "/agents/{agentId}": {
+      "schema": { "$ref": "#/entities/Agent" },
+      "description": "Collection of AI agent definitions. Agents are globally accessible and their definitions are static."
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Collection of user profiles. Each document represents a user authenticated via Firebase Auth."
+    },
+    "/users/{userId}/interactions/{interactionId}": {
+      "schema": { "$ref": "#/entities/Interaction" },
+      "description": "Subcollection of user interactions with AI agents."
+    },
+    "/agents/{agentId}/metrics/{metricId}": {
+      "schema": { "$ref": "#/entities/Metric" },
+      "description": "Subcollection of performance metrics for AI agents."
+    },
+    "/agents/{agentId}/knowledgeGraph/{knowledgeGraphId}": {
+      "schema": { "$ref": "#/entities/KnowledgeGraph" },
+      "description": "Subcollection of vector embeddings for knowledge representation."
+    },
+    "/users/{userId}/cachedResponses/{cachedResponseId}": {
+      "schema": { "$ref": "#/entities/CachedResponse" },
+      "description": "Subcollection of cached responses from AI agents, keyed by userId."
+    }
   }
 }

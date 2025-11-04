@@ -1,131 +1,35 @@
-/**
- * @file Firestore Security Rules for AfghanAI Hub
- * @description This ruleset enforces a strict user-ownership model for user-specific data,
- *              allows public read access to agent definitions, and restricts management of
- *              agent metrics and knowledge graphs to authorized services (simulated in this
- *              prototype with a simple "isAdmin" check).
- *
- * Data Structure:
- * - /agents/{agentId}: Publicly readable definitions of AI agents.
- * - /users/{userId}: User profiles, only accessible by the respective user.
- * - /users/{userId}/interactions/{interactionId}: User-specific interaction logs, only accessible by the respective user.
- * - /agents/{agentId}/metrics/{metricId}: Agent performance metrics, writable only by admins.
- * - /agents/{agentId}/knowledgeGraph/{knowledgeGraphId}: Agent knowledge graphs, writable only by admins.
- * - /users/{userId}/cachedResponses/{cachedResponseId}: Cached agent responses, only accessible by the respective user.
- *
- * Key Security Decisions:
- * - User data is strictly controlled by the authenticated user.
- * - Agent definitions are publicly readable.
- * - Agent metrics and knowledge graphs are only manageable by admins.
- * - User listing is disallowed for privacy.
- *
- * Denormalization for Authorization:
- * - The 'interactions' and 'cachedResponses' subcollections include 'userId' and 'agentId'
- *   within each document to allow direct authorization checks without needing to query parent documents.
- *
- * Structural Segregation:
- * - Agent definitions are stored in a separate top-level collection ('agents') to allow public
- *   read access without compromising the security of user-specific data.
- */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    /**
-     * @description Allows public read access to agent definitions.
-     * @path /agents/{agentId}
-     * @allow (get, list) Anyone can read agent definitions.
-     * @deny (create, update, delete) No one can create, update, or delete agent definitions through the client.
-     * @principle Public read access for agent definitions; write access is denied.
-     */
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
     match /agents/{agentId} {
-      allow get, list: if true;
-      allow create, update, delete: if false;
+      allow read: if true;
+      allow write: if false; // Agents are static, managed outside the app
     }
 
-    /**
-     * @description Enforces user-ownership for user profiles.
-     * @path /users/{userId}
-     * @allow (create) A user can create their own profile if the userId matches their auth.uid.
-     * @allow (get, update, delete) A user can only access or modify their own profile.
-     * @deny (list) User listing is not allowed.
-     * @deny (create, update, delete) A different user cannot create, update, or delete another user's profile.
-     * @principle Enforces user-ownership for profile data.
-     */
     match /users/{userId} {
-      allow get, update, delete: if isOwner(userId) && resource.data.id == userId;
-      allow create: if isOwner(userId) && request.resource.data.id == userId;
-      allow list: if false;
+      allow read, update, delete: if isOwner(userId);
+      allow create: if request.auth != null;
     }
 
-    /**
-     * @description Enforces user-ownership for interaction logs.
-     * @path /users/{userId}/interactions/{interactionId}
-     * @allow (create) A user can create interaction logs under their own user ID.
-     * @allow (get, list, update, delete) A user can only access and modify their own interaction logs.
-     * @deny (create, update, delete) A different user cannot create, update, or delete another user's interaction logs.
-     * @principle Enforces user-ownership for interaction logs.
-     */
     match /users/{userId}/interactions/{interactionId} {
-      allow get, list: if isOwner(userId);
-      allow create: if isOwner(userId) && request.resource.data.userId == userId;
-      allow update, delete: if isExistingOwner(userId) && resource.data.userId == userId;
+      allow read, write: if isOwner(userId);
     }
-
-    /**
-     * @description Restricts management of agent metrics to admins.
-     * @path /agents/{agentId}/metrics/{metricId}
-     * @allow (create, update, delete) Only admins can manage agent metrics.
-     * @allow (get, list) Anyone can read agent metrics.
-     * @principle Restricts write access to agent metrics to admins.
-     */
-    match /agents/{agentId}/metrics/{metricId} {
-      allow get, list: if true;
-      allow create, update, delete: if isAdmin();
-    }
-
-    /**
-     * @description Restricts management of agent knowledge graphs to admins.
-     * @path /agents/{agentId}/knowledgeGraph/{knowledgeGraphId}
-     * @allow (create, update, delete) Only admins can manage agent knowledge graphs.
-     * @allow (get, list) Anyone can read agent knowledge graphs.
-     * @principle Restricts write access to agent knowledge graphs to admins.
-     */
-    match /agents/{agentId}/knowledgeGraph/{knowledgeGraphId} {
-      allow get, list: if true;
-      allow create, update, delete: if isAdmin();
-    }
-
-    /**
-     * @description Enforces user-ownership for cached responses.
-     * @path /users/{userId}/cachedResponses/{cachedResponseId}
-     * @allow (create) A user can create cached responses under their own user ID.
-     * @allow (get, list, update, delete) A user can only access and modify their own cached responses.
-     * @deny (create, update, delete) A different user cannot create, update, or delete another user's cached responses.
-     * @principle Enforces user-ownership for cached responses.
-     */
+    
     match /users/{userId}/cachedResponses/{cachedResponseId} {
-      allow get, list: if isOwner(userId);
-      allow create: if isOwner(userId) && request.resource.data.userId == userId;
-      allow update, delete: if isExistingOwner(userId) && resource.data.userId == userId;
+      allow read, write: if isOwner(userId);
     }
-  }
 
-  // Helper functions
-  function isSignedIn() {
-    return request.auth != null;
-  }
+    match /agents/{agentId}/metrics/{metricId} {
+      allow read, write: if false; // Managed by backend processes
+    }
 
-  function isOwner(userId) {
-    return isSignedIn() && request.auth.uid == userId;
-  }
-
-  function isExistingOwner(userId) {
-    return isOwner(userId) && resource != null;
-  }
-
-  function isAdmin() {
-    // TODO: Implement a more robust admin check (e.g., via a custom claim) in production.
-    return isSignedIn() && request.auth.uid == 'admin'; // Prototype: Only user with UID 'admin' is an admin.
+    match /agents/{agentId}/knowledgeGraph/{knowledgeGraphId} {
+      allow read, write: if false; // Managed by backend processes
+    }
   }
 }
