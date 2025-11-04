@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import ChatDisplay from '@/components/layout/chat-display';
 import CommandBar from '@/components/layout/command-bar';
 import { useUser } from '@/firebase';
@@ -18,7 +18,7 @@ export default function AgentChatPage({ params }: { params: { agentId: string } 
   const { user } = useUser();
   const { t } = useLanguage();
   
-  const agent = agents.find(a => a.slug === params.agentId);
+  const agent = useMemo(() => agents.find(a => a.slug === params.agentId), [params.agentId]);
 
   if (!agent) {
     notFound();
@@ -40,10 +40,8 @@ export default function AgentChatPage({ params }: { params: { agentId: string } 
 
   const handleAgentResponse = (response: Message) => {
     setMessages(prev => {
-      const newMessages = [...prev];
-      if (newMessages[newMessages.length - 1]?.content === '...') {
-        newMessages.pop();
-      }
+      // Replace the "thinking" message with the actual response
+      const newMessages = prev.filter(msg => msg.content !== '...');
       return [...newMessages, response];
     });
     setIsResponding(false);
@@ -54,7 +52,7 @@ export default function AgentChatPage({ params }: { params: { agentId: string } 
   }
 
   return (
-    <>
+    <div className="flex flex-col h-full">
       <ChatDisplay messages={messages} />
       <CommandBar
         userId={user?.uid}
@@ -63,6 +61,6 @@ export default function AgentChatPage({ params }: { params: { agentId: string } 
         onThinking={handleThinking}
         isResponding={isResponding}
       />
-    </>
+    </div>
   );
 }

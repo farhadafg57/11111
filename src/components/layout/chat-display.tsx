@@ -1,23 +1,29 @@
-import type { Message } from '@/app/hub/page';
+import type { Message } from '@/app/hub/[agentId]/page';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { agents } from '@/lib/agents';
 import { BrainCircuit } from 'lucide-react';
-import { Skeleton } from '../ui/skeleton';
+import { motion } from 'framer-motion';
 
 const ChatBubbleSkeleton = () => (
-    <div className="flex items-center space-x-2">
-      <Skeleton className="h-4 w-4 rounded-full" />
-      <Skeleton className="h-4 w-10" />
-    </div>
+    <motion.div 
+      className="flex items-center space-x-2"
+      initial={{ opacity: 0.5, y: 5 }}
+      animate={{ opacity: [0.5, 1, 0.5], y: [5, 0, 5] }}
+      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+    >
+      <span className="h-2 w-2 bg-muted-foreground/50 rounded-full" />
+      <span className="h-2 w-2 bg-muted-foreground/50 rounded-full" />
+      <span className="h-2 w-2 bg-muted-foreground/50 rounded-full" />
+    </motion.div>
 );
 
 
 export default function ChatDisplay({ messages }: { messages: Message[] }) {
   const getAgentInfo = (agentName?: string) => {
     if (!agentName) return { Icon: BrainCircuit, name: 'System' };
-    const agent = agents.find(a => a.name === agentName);
+    const agent = agents.find(a => a.name === agentName || a.name === agentName.split('(')[0].trim());
     return agent ? { Icon: agent.Icon, name: agent.name } : { Icon: BrainCircuit, name: agentName };
   };
   
@@ -44,10 +50,10 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
                   </AvatarFallback>
                 </Avatar>
               )}
-              <div className="flex flex-col gap-1 max-w-xl">
+              <div className="flex flex-col gap-1 max-w-[calc(100%-4rem-1rem)] md:max-w-xl">
                  {!isUser && (
                     <div className="font-bold text-sm font-headline text-foreground/80">
-                      {agentName}
+                      {message.agentName}
                     </div>
                   )}
                 <Card
@@ -59,13 +65,13 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
                   )}
                 >
                   <CardContent className="p-3">
-                    {isThinking ? <ChatBubbleSkeleton /> : <p className="text-base font-body whitespace-pre-wrap">{message.content}</p> }
+                    {isThinking ? <ChatBubbleSkeleton /> : <div className="text-base font-body whitespace-pre-wrap">{message.content}</div> }
                   </CardContent>
                 </Card>
               </div>
               {isUser && (
                 <Avatar className="size-10">
-                   <AvatarImage src="https://picsum.photos/seed/user/100/100" alt="User" data-ai-hint="portrait person" />
+                   <AvatarImage src="https://picsum.photos/seed/user/100/100" alt="User" width={100} height={100} data-ai-hint="portrait person" />
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
               )}

@@ -9,13 +9,17 @@ export default function HubLayout({
 }) {
     return (
         <SidebarProvider>
-            <Sidebar collapsible="icon" className="border-r">
-                <AgentList />
-            </Sidebar>
-            <SidebarInset className="flex flex-col max-h-screen">
+            <div className="flex flex-col h-screen">
                 <AppHeader />
-                {children}
-            </SidebarInset>
+                <div className="flex flex-1 overflow-hidden">
+                    <Sidebar collapsible="icon" className="border-r">
+                        <AgentList />
+                    </Sidebar>
+                    <SidebarInset className="flex flex-col flex-1">
+                        {children}
+                    </SidebarInset>
+                </div>
+            </div>
         </SidebarProvider>
     );
 }

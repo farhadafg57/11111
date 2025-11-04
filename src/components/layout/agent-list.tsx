@@ -57,7 +57,7 @@ const UserStatus = () => {
     return (
          <div className="flex items-center gap-3 p-3 group-data-[collapsible=icon]:justify-center">
             <Avatar className="size-9">
-                <AvatarImage src={`https://picsum.photos/seed/${user.uid}/100/100`} alt="User" data-ai-hint="portrait person" />
+                <AvatarImage src={`https://picsum.photos/seed/${user.uid}/100/100`} alt="User" width={100} height={100} data-ai-hint="portrait person" />
                 <AvatarFallback>{user.isAnonymous ? 'A' : 'U'}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col group-data-[collapsible=icon]:hidden">

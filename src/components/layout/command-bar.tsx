@@ -5,7 +5,7 @@ import { CornerDownLeft, LoaderCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { handleCommand } from '@/app/actions';
-import type { Message } from '@/app/hub/page';
+import type { Message } from '@/app/hub/[agentId]/page';
 import { useLanguage } from '@/lib/language';
 
 type CommandBarProps = {

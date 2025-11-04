@@ -1,3 +1,5 @@
+'use client';
+
 import AppHeader from '@/components/layout/header';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,7 +16,7 @@ export default function AboutPage() {
           <Card className="overflow-hidden shadow-lg">
             <CardHeader className="bg-muted/30 p-6 md:p-8 text-center">
               <Avatar className="mx-auto h-24 w-24 mb-4 border-4 border-background shadow-md">
-                <AvatarImage src="https://picsum.photos/seed/founder/200/200" alt="Founder" data-ai-hint="portrait man" />
+                <AvatarImage src="https://picsum.photos/seed/founder/200/200" alt="Founder" width={200} height={200} data-ai-hint="portrait man" />
                 <AvatarFallback>FM</AvatarFallback>
               </Avatar>
               <CardTitle className="text-3xl md:text-4xl font-headline tracking-tight">
@@ -26,11 +28,11 @@ export default function AboutPage() {
             </CardHeader>
             <CardContent className="p-6 md:p-8">
               <div className="prose prose-lg max-w-none font-body text-foreground/90 leading-relaxed space-y-4">
-                <p>{t('founderMsgP1')}</p>
-                <p>{t('founderMsgP2')}</p>
-                <p>{t('founderMsgP3')}</p>
-                <p>{t('founderMsgP4')}</p>
-                <p className="font-semibold text-primary">{t('founderMsgP5')}</p>
+                <div>{t('founderMsgP1')}</div>
+                <div>{t('founderMsgP2')}</div>
+                <div>{t('founderMsgP3')}</div>
+                <div>{t('founderMsgP4')}</div>
+                <div className="font-semibold text-primary">{t('founderMsgP5')}</div>
               </div>
             </CardContent>
           </Card>

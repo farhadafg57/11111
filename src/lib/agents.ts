@@ -1,4 +1,3 @@
-
 import type { LucideIcon } from 'lucide-react';
 import { Leaf, Video, Network, BrainCircuit, Eye, Mic, Languages, Combine, Shield, Scale, Box, DollarSign, TrendingUp, Search, Cog, Target, ClipboardCheck, Cloud, ShieldCheck, Banknote, Users, Truck, Landmark, HeartHandshake, Siren, AreaChart, Scan, FileScan, Building2, Receipt, Vote, Code, PenTool, Plug, TestTube2, Rocket, Paintbrush, Clapperboard, Music, Cuboid, MicVocal, Book, Megaphone, Podcast, AudioWaveform, Film, GraduationCap, BookOpen, MessageSquare, Wrench, ClipboardPen, FileCheck, GitBranch, HelpCircle, School, BookText, Thermometer, Pill, Smile, CalendarDays, FileCode, FileHeart, Activity, MonitorSmartphone, FileText, FlaskConical, Wallet, LineChart, ShieldAlert, Bot, MessageCircle, Users2, Star, Sun, Dumbbell, Sprout, Telescope, Microscope, Globe, Blocks, Brick, Home, View, Move, DraftingCompass, Drama, Hand, Gavel, Briefcase, LandPlot, Ear } from 'lucide-react';
 
@@ -28,7 +27,7 @@ export const agents: Agent[] = [
   { name: 'Process Optimizer', slug: 'process-optimizer', description: 'Business process optimization.', Icon: Cog },
   { name: 'ROI Predictor', slug: 'roi-predictor', description: 'Predicts return on investment.', Icon: Target },
   { name: 'Compliance Inspector', slug: 'compliance-inspector', description: 'Audits for compliance.', Icon: ClipboardCheck },
-  { name 'Cloud Advisor', slug: 'cloud-advisor', description: 'Advises on cloud operations.', Icon: Cloud },
+  { name: 'Cloud Advisor', slug: 'cloud-advisor', description: 'Advises on cloud operations.', Icon: Cloud },
   { name: 'Cyber Defender', slug: 'cyber-defender', description: 'Cyber defense strategies.', Icon: ShieldCheck },
   { name: 'Finance Optimizer', slug: 'finance-optimizer', description: 'Financial operations optimization.', Icon: Banknote },
   { name: 'Talent Matcher', slug: 'talent-matcher', description: 'Matches talent with opportunities.', Icon: Users },
@@ -85,7 +84,7 @@ export const agents: Agent[] = [
   { name: 'Fraud Detector', slug: 'fraud-detector', description: 'Detects financial fraud.', Icon: ShieldAlert },
   { name: 'Crypto Analyst', slug: 'crypto-analyst', description: 'Analyzes crypto markets.', Icon: DollarSign },
   { name: 'Loan Assistant', slug: 'loan-assistant', description: 'Assists with SME loans.', Icon: Landmark },
-  { name: 'Payroll Manager', slugg: 'payroll-manager', description: 'Manages payroll.', Icon: Banknote },
+  { name: 'Payroll Manager', slug: 'payroll-manager', description: 'Manages payroll.', Icon: Banknote },
   { name: 'Accountant', slug: 'accountant', description: 'Handles accounting tasks.', Icon: Receipt },
   { name: 'E-commerce Optimizer', slug: 'e-commerce-optimizer', description: 'Optimizes e-commerce operations.', Icon: Cog },
   { name: 'FinTech Analyst', slug: 'fintech-analyst', description: 'Provides FinTech intelligence.', Icon: Search },
