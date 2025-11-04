@@ -16,10 +16,10 @@ import {
   getDoc,
   setDoc,
   serverTimestamp,
-  collection,
 } from 'firebase/firestore';
-import {getFirestore} from 'firebase/firestore';
-import {initializeFirebase} from '@/firebase';
+import { initializeFirebase } from '@/firebase';
+import { generateAgentDescription } from './generate-agent-description';
+import { agents } from '@/lib/agents';
 
 const ProcessUserCommandInputSchema = z.object({
   command: z.string().describe('The command entered by the user.'),
@@ -47,14 +47,14 @@ const agentList = `You are in charge of choosing an AI agent to respond to a use
 
 1.  PlantDiagnoser: an expert botanist specializing in diagnosing plant illnesses.
 2.  VideoGenerator: an AI that can generate videos based on text or image prompts using the Veo models.
-// Add other agent descriptions here as they are implemented
+3.  GenerateAgentDescription: Generates a short description of an AI agent's capabilities.
 
 For the command: {{{command}}}, which agent is most appropriate to handle this command? Only respond with the name of the agent.`;
 
 const routeToAgentPrompt = ai.definePrompt({
   name: 'routeToAgentPrompt',
   input: {schema: z.object({command: z.string()})},
-  output: z.string(),
+  output: {schema: z.string()},
   prompt: agentList,
 });
 
@@ -96,7 +96,7 @@ const processUserCommandFlow = ai.defineFlow(
       }
     }
 
-    // 3. If no cache, execute the agent's logic (placeholder)
+    // 3. If no cache, execute the agent's logic
     let agentResponse = '';
     switch (agentName) {
       case 'VideoGenerator':
@@ -105,6 +105,19 @@ const processUserCommandFlow = ai.defineFlow(
       case 'PlantDiagnoser':
         agentResponse = `Routing to PlantDiagnoser to process: "${command}"`;
         break;
+      case 'GenerateAgentDescription': {
+        const agentToDescribe = agents.find(agent => command.toLowerCase().includes(agent.name.toLowerCase()));
+        if(agentToDescribe) {
+            const descriptionResult = await generateAgentDescription({
+                agentName: agentToDescribe.name,
+                agentCapabilities: agentToDescribe.description
+            });
+            agentResponse = descriptionResult.shortDescription;
+        } else {
+            agentResponse = "I can generate a description for any agent in the Scriptorium. Which agent would you like to know more about?";
+        }
+        break;
+      }
       default:
         agentResponse = `Unknown agent: ${agentName}. Could not process command.`;
         break;
