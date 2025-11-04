@@ -107,18 +107,16 @@ const processUserCommandFlow = ai.defineFlow(
     const model = complexity === 'complex' ? 'googleai/gemini-2.5-pro' : 'googleai/gemini-2.5-flash';
     const modelName = complexity === 'complex' ? 'Hakim' : 'Hafiz';
 
-    // For now, we will use a simple keyword-based agent router.
     // A more advanced implementation would use a prompt to select the agent.
     let agentName = 'Oracle'; // Default agent
     const commandLower = command.toLowerCase();
 
-    if (commandLower.includes('describe')) {
-        agentName = 'Agent Describer';
-    } else if (commandLower.includes('diagnose') && commandLower.includes('plant')) {
-        agentName = 'Plant Diagnoser';
-    } else if (commandLower.includes('generate') && commandLower.includes('video')) {
-        agentName = 'Video Generator';
+    // Find the first agent whose name is mentioned in the command
+    const matchedAgent = agents.find(agent => commandLower.includes(agent.name.toLowerCase()));
+    if (matchedAgent) {
+        agentName = matchedAgent.name;
     }
+
 
     // 2. Check for a cached response in Firestore
     if (userId) {

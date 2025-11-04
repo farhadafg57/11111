@@ -204,9 +204,9 @@ export default function LandingPage() {
                 <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
                   {t('founderMessageTitle')}
                 </h2>
-                 <p className="text-lg text-foreground/80 mb-8 font-body">
+                 <div className="text-lg text-foreground/80 mb-8 font-body">
                     "{t('founderQuote')}"
-                 </p>
+                 </div>
                  <Button asChild variant="outline">
                     <Link href="/about">{t('readMore')}</Link>
                 </Button>
@@ -244,7 +244,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="py-6 border-t bg-muted/30">
         <div className="container mx-auto px-4 text-center text-foreground/60">
-            <p>&copy; {new Date().getFullYear()} AfghanAI Hub. {t('footerRights')}</p>
+          <div>&copy; {new Date().getFullYear()} AfghanAI Hub. {t('footerRights')}</div>
         </div>
       </footer>
     </div>

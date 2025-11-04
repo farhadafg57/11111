@@ -20,12 +20,12 @@ export default function AboutPage() {
               <CardTitle className="text-3xl md:text-4xl font-headline tracking-tight">
                 {t('founderMessageTitle')}
               </CardTitle>
-              <p className="text-muted-foreground mt-2 text-lg">
+              <div className="text-muted-foreground mt-2 text-lg">
                 {t('founderName')}
-              </p>
+              </div>
             </CardHeader>
             <CardContent className="p-6 md:p-8">
-              <div className="prose prose-lg max-w-none font-body text-foreground/90 leading-relaxed">
+              <div className="prose prose-lg max-w-none font-body text-foreground/90 leading-relaxed space-y-4">
                 <p>{t('founderMsgP1')}</p>
                 <p>{t('founderMsgP2')}</p>
                 <p>{t('founderMsgP3')}</p>
