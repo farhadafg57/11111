@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -52,32 +51,21 @@ export default function LandingPage() {
     offset: ["start start", "end end"]
   });
 
-  // Act I -> Act II
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.8]);
-  
-  // Orrery animation
-  const orreryY = useTransform(scrollYProgress, [0, 0.15, 0.2], [0, -150, -200]);
-  const orreryScale = useTransform(scrollYProgress, [0, 0.15, 0.2], [1, 0.5, 0.3]);
-  const orreryX = useTransform(scrollYProgress, [0.15, 0.2], [0, 150]);
-
-
-  // Act II animations
+  // Opacity transitions for each act
+  const act1Opacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
   const act2Opacity = useTransform(scrollYProgress, [0.15, 0.25, 0.35], [0, 1, 0]);
+  const act3Opacity = useTransform(scrollYProgress, [0.35, 0.45, 0.55], [0, 1, 0]);
+  const act4Opacity = useTransform(scrollYProgress, [0.55, 0.65, 0.75], [0, 1, 0]);
+  const act5Opacity = useTransform(scrollYProgress, [0.75, 0.85], [0, 1]);
+
+  // Orrery animation
+  const orreryY = useTransform(scrollYProgress, [0, 0.15], [0, -150]);
+  const orreryScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.5]);
+
+  // Act II specific animations
   const chaosOpacity = useTransform(scrollYProgress, [0.2, 0.28], [1, 0]);
   const orderedOpacity = useTransform(scrollYProgress, [0.28, 0.35], [0, 1]);
-  const textOpacity = useTransform(scrollYProgress, [0.3, 0.35], [0, 1]);
-
-  // Act III animations
-  const act3Opacity = useTransform(scrollYProgress, [0.35, 0.45, 0.55], [0, 1, 0]);
-
-  // Act IV animations
-  const act4Opacity = useTransform(scrollYProgress, [0.55, 0.65, 0.75], [0, 1, 0]);
-
-  // Act V animations
-  const act5Opacity = useTransform(scrollYProgress, [0.75, 0.85], [0, 1]);
-  const finalOrreryScale = useTransform(scrollYProgress, [0.8, 0.9], [0.5, 1]);
-  const finalOrreryY = useTransform(scrollYProgress, [0.8, 0.9], [-200, 0]);
+  const act2TextOpacity = useTransform(scrollYProgress, [0.28, 0.35], [0, 1]);
 
 
   return (
@@ -86,15 +74,18 @@ export default function LandingPage() {
       <div ref={scrollRef} className="relative z-0">
         <div className="h-[500vh]">
           <div className="sticky top-0 h-screen overflow-hidden">
-            {/* ACT I */}
-            <motion.main
-              style={{ opacity: heroOpacity, scale: heroScale, display: useTransform(scrollYProgress, v => v > 0.2 ? 'none' : 'flex') }}
-              className="w-full h-full flex flex-col items-center justify-center text-center p-4"
+            
+            {/* Common Background Elements if any */}
+            
+            {/* ACT I: The Arrival */}
+            <motion.section
+              style={{ opacity: act1Opacity }}
+              className="absolute inset-0 flex flex-col items-center justify-center text-center p-4"
             >
               <div className="max-w-4xl flex flex-col items-center">
                 <motion.div
                   className="mb-8"
-                  style={{ scale: orreryScale, y: orreryY, x: orreryX }}
+                  style={{ scale: orreryScale, y: orreryY }}
                   animate={{
                     scale: [1, 1.05, 1],
                     transition: {
@@ -155,12 +146,12 @@ export default function LandingPage() {
                   <ArrowDown className="h-6 w-6 text-muted-foreground" />
                 </motion.div>
               </div>
-            </motion.main>
+            </motion.section>
 
-            {/* ACT II */}
+            {/* ACT II: The Promise of Clarity */}
             <motion.section
-              style={{ opacity: act2Opacity, display: useTransform(scrollYProgress, v => (v > 0.15 && v < 0.4) ? 'flex' : 'none') }}
-              className="h-screen w-full flex items-center justify-center absolute inset-0"
+              style={{ opacity: act2Opacity }}
+              className="absolute inset-0 h-screen w-full flex items-center justify-center pointer-events-none"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center max-w-5xl mx-auto">
                 <div className="relative h-96 w-96">
@@ -171,16 +162,16 @@ export default function LandingPage() {
                     <OrderedMosaic />
                   </motion.div>
                 </div>
-                <motion.div style={{ opacity: textOpacity }}>
+                <motion.div style={{ opacity: act2TextOpacity }}>
                   <h2 className="text-5xl font-headline font-bold">{t('act2Title')}</h2>
                 </motion.div>
               </div>
             </motion.section>
 
-            {/* ACT III */}
+            {/* ACT III: The Pillars of Knowledge */}
             <motion.section
-              style={{ opacity: act3Opacity, display: useTransform(scrollYProgress, v => (v > 0.35 && v < 0.6) ? 'flex' : 'none') }}
-              className="h-screen w-full flex flex-col items-center justify-center absolute inset-0 text-center p-4"
+              style={{ opacity: act3Opacity }}
+              className="absolute inset-0 h-screen w-full flex flex-col items-center justify-center text-center p-4 pointer-events-none"
             >
                 <h2 className="text-4xl md:text-5xl font-headline font-bold mb-16">{t('act3Title')}</h2>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-8 w-full max-w-6xl">
@@ -200,10 +191,10 @@ export default function LandingPage() {
                 </div>
             </motion.section>
 
-            {/* ACT IV */}
+            {/* ACT IV: The Foundation of Trust */}
             <motion.section
-                style={{ opacity: act4Opacity, display: useTransform(scrollYProgress, v => (v > 0.55 && v < 0.8) ? 'flex' : 'none') }}
-                className="h-screen w-full flex flex-col items-center justify-center absolute inset-0 text-center p-4 space-y-24"
+                style={{ opacity: act4Opacity }}
+                className="absolute inset-0 h-screen w-full flex flex-col items-center justify-center text-center p-4 space-y-24 pointer-events-none"
             >
                 <div className="max-w-4xl">
                     <h2 className="text-4xl md:text-5xl font-headline font-bold mb-4">{t('act4Title1')}</h2>
@@ -215,27 +206,30 @@ export default function LandingPage() {
                 </div>
             </motion.section>
 
-            {/* ACT V */}
+            {/* ACT V: The Invitation */}
             <motion.section
-                style={{ opacity: act5Opacity, display: useTransform(scrollYProgress, v => v > 0.75 ? 'flex' : 'none') }}
-                className="h-screen w-full flex flex-col items-center justify-center absolute inset-0 text-center p-4"
+                style={{ opacity: act5Opacity }}
+                className="absolute inset-0 h-screen w-full flex flex-col items-center justify-center text-center p-4 pointer-events-none"
             >
                  <motion.div
                   className="mb-8"
-                  style={{ scale: finalOrreryScale, y: finalOrreryY }}
+                  style={{ 
+                      scale: useTransform(scrollYProgress, [0.85, 1], [0.5, 1]), 
+                      y: useTransform(scrollYProgress, [0.85, 1], [-200, 0]) 
+                  }}
                 >
                   <BrainCircuit className="w-32 h-32 text-primary mx-auto" />
                 </motion.div>
                 <h2 className="text-5xl md:text-7xl font-headline font-bold mb-8">{t('act5Title')}</h2>
-                 <Link href="/hub" passHref>
+                 <Link href="/hub" passHref className='pointer-events-auto'>
                   <Button size="lg" variant="default" className="text-xl h-14 px-12 transform hover:scale-105 transition-transform duration-300">
                     {t('enterHub')}
                   </Button>
                 </Link>
                  <div className="absolute bottom-8 flex gap-8 text-foreground/60">
-                    <Link href="#" className="hover:text-primary transition-colors">{t('theVision')}</Link>
-                    <Link href="#" className="hover:text-primary transition-colors">{t('theTechnology')}</Link>
-                    <Link href="#" className="hover:text-primary transition-colors">{t('theHeritage')}</Link>
+                    <Link href="#" className="hover:text-primary transition-colors pointer-events-auto">{t('theVision')}</Link>
+                    <Link href="#" className="hover:text-primary transition-colors pointer-events-auto">{t('theTechnology')}</Link>
+                    <Link href="#" className="hover:text-primary transition-colors pointer-events-auto">{t('theHeritage')}</Link>
                 </div>
             </motion.section>
           </div>
@@ -244,5 +238,3 @@ export default function LandingPage() {
     </div>
   );
 }
-
-    
