@@ -1,3 +1,4 @@
+
 import type { LucideIcon } from 'lucide-react';
 import { Leaf, Video, Network, BrainCircuit, Eye, Mic, Languages, Combine, Shield, Scale, Box, DollarSign, TrendingUp, Search, Cog, Target, ClipboardCheck, Cloud, ShieldCheck, Banknote, Users, Truck, Landmark, HeartHandshake, Siren, AreaChart, Scan, FileScan, Building2, Receipt, Vote, Code, PenTool, Plug, TestTube2, Rocket, Paintbrush, Clapperboard, Music, Cuboid, MicVocal, Book, Megaphone, Podcast, AudioWaveform, Film, GraduationCap, BookOpen, MessageSquare, Wrench, ClipboardPen, FileCheck, GitBranch, HelpCircle, School, BookText, Thermometer, Pill, Smile, CalendarDays, FileCode, FileHeart, Activity, MonitorSmartphone, FileText, FlaskConical, Wallet, LineChart, ShieldAlert, Bot, MessageCircle, Users2, Star, Sun, Dumbbell, Sprout, Telescope, Microscope, Globe, Blocks, Brick, Home, View, Move, DraftingCompass, Drama, Hand, Gavel, Briefcase, LandPlot, Ear } from 'lucide-react';
 
@@ -31,7 +32,7 @@ export const agents: Agent[] = [
   { name: 'Karyab', description: 'Matches talent with opportunities.', Icon: Users }, // Job-finder
   { name: 'Anbardar', description: 'Predicts supply chain disruptions.', Icon: Truck }, // Warehouse keeper
   { name: 'Edari', description: 'Automates e-governance processes.', Icon: Landmark }, // Administrative
-  { name 'Shahri', description: 'Provides support to citizens.', Icon: HeartHandshake }, // Citizenry
+  { name: 'Shahri', description: 'Provides support to citizens.', Icon: HeartHandshake }, // Citizenry
   { name: 'Qanon-Saz', description: 'Simulates policy outcomes.', Icon: Scale }, // Law-maker
   { name: 'Aafat', description: 'Aids in disaster response.', Icon: Siren }, // Disaster
   { name: 'Nofus', description: 'Provides population insights.', Icon: AreaChart }, // Population
@@ -43,7 +44,7 @@ export const agents: Agent[] = [
   { name: 'Barnama-Newis', description: 'Generates TypeScript/Node code.', Icon: Code }, // Programmer
   { name: 'Tarrah', description: 'Designs UI/UX from Figma to Next.js.', Icon: PenTool }, // Designer
   { name: 'Wassl', description: 'Builds APIs from OpenAPI to Cloud Run.', Icon: Plug }, // Connector
-  { name 'Azmayesh', description: 'Generates test suites.', Icon: TestTube2 }, // Test/Trial
+  { name: 'Azmayesh', description: 'Generates test suites.', Icon: TestTube2 }, // Test/Trial
   { name: 'Faza-Naward', description: 'Automates deployment.', Icon: Rocket }, // Astronaut
   { name: 'Logo-Saz', description: 'Generates logos.', Icon: Paintbrush },
   { name: 'Kargardan', description: 'Directs video production.', Icon: Clapperboard }, // Director
@@ -93,7 +94,7 @@ export const agents: Agent[] = [
   { name: 'Ehsas', description: 'Tracks sentiment.', Icon: Smile }, // Feeling/Sentiment
   { name: 'Morabi', description: 'Coaches dating and profiles.', Icon: Star }, // Coach
   { name: 'Ejtemai', description: 'Provides social media insights.', Icon: Sun }, // Social
-  { name 'Mohtawa', description: 'Builds content empires.', Icon: BookOpen }, // Content
+  { name: 'Mohtawa', description: 'Builds content empires.', Icon: BookOpen }, // Content
   { name: 'Warzeshkar', description: 'A personal trainer.', Icon: Dumbbell }, // Athlete
   { name: 'Taghzia', description: 'A nutritionist.', Icon: Sprout }, // Nutrition
   { name: 'Ayanda-Negar', description: 'Forecasts trends.', Icon: TrendingUp }, // Future-viewer
@@ -122,3 +123,5 @@ export const agents: Agent[] = [
   { name: 'Studio-Mosiqi', description: 'Automates music and podcast production.', Icon: AudioWaveform }, // Music-studio
   { name: 'Moneshi', description: "Generates a short description of an AI agent's capabilities.", Icon: FileScan }, // Scribe/Clerk
 ];
+
+    
