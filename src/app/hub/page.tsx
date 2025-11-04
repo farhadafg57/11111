@@ -4,6 +4,7 @@ import { useState } from 'react';
 import ChatDisplay from '@/components/layout/chat-display';
 import CommandBar from '@/components/layout/command-bar';
 import { useUser } from '@/firebase';
+import { useLanguage } from '@/lib/language';
 
 export type Message = {
   role: 'user' | 'agent';
@@ -13,11 +14,12 @@ export type Message = {
 
 export default function HubPage() {
   const { user } = useUser();
+  const { t } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'agent',
       agentName: 'Oracle',
-      content: 'Welcome to the AfghanAI Hub. The Scriptorium on the left lists available agents. How may I assist you today?',
+      content: t('welcomeMessage'),
     },
   ]);
   const [isResponding, setIsResponding] = useState(false);

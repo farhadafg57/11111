@@ -18,10 +18,12 @@ import { Skeleton } from '../ui/skeleton';
 import { Button } from '../ui/button';
 import { initiateAnonymousSignIn } from '@/firebase/non-blocking-login';
 import { LogIn } from 'lucide-react';
+import { useLanguage } from '@/lib/language';
 
 const UserStatus = () => {
     const auth = useAuth();
     const { user, isUserLoading } = useUser();
+    const { t } = useLanguage();
 
     if (isUserLoading) {
         return (
@@ -44,7 +46,7 @@ const UserStatus = () => {
                     variant="outline"
                  >
                     <LogIn className="mr-2" />
-                    <span className='group-data-[collapsible=icon]:hidden'>Sign In Anonymously</span>
+                    <span className='group-data-[collapsible=icon]:hidden'>{t('signInAnonymously')}</span>
                 </Button>
             </div>
         )
@@ -57,7 +59,7 @@ const UserStatus = () => {
                 <AvatarFallback>{user.isAnonymous ? 'A' : 'U'}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col group-data-[collapsible=icon]:hidden">
-                <span className="text-sm font-medium text-sidebar-foreground truncate">{user.isAnonymous ? 'Anonymous User' : user.email || 'User'}</span>
+                <span className="text-sm font-medium text-sidebar-foreground truncate">{user.isAnonymous ? t('anonymousUser') : user.email || t('user')}</span>
                 <span className="text-xs text-sidebar-foreground/70">{user.uid.substring(0,8)}...</span>
             </div>
         </div>
@@ -65,16 +67,17 @@ const UserStatus = () => {
 }
 
 export default function AgentList() {
+  const { t } = useLanguage();
   return (
     <>
       <SidebarHeader className="text-center p-4 border-b">
         <h2 className="text-2xl font-headline font-semibold group-data-[collapsible=icon]:hidden">
-          Scriptorium
+          {t('scriptorium')}
         </h2>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Agents</SidebarGroupLabel>
+          <SidebarGroupLabel>{t('agents')}</SidebarGroupLabel>
           <SidebarMenu>
             {agents.map((agent) => (
               <SidebarMenuItem key={agent.name}>
@@ -93,5 +96,3 @@ export default function AgentList() {
     </>
   );
 }
-
-    

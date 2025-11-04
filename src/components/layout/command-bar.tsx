@@ -5,7 +5,8 @@ import { CornerDownLeft, LoaderCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { handleCommand } from '@/app/actions';
-import type { Message } from '@/app/page';
+import type { Message } from '@/app/hub/page';
+import { useLanguage } from '@/lib/language';
 
 type CommandBarProps = {
   userId?: string;
@@ -17,6 +18,7 @@ type CommandBarProps = {
 
 export default function CommandBar({ userId, onNewMessage, onAgentResponse, onThinking, isResponding }: CommandBarProps) {
   const [inputValue, setInputValue] = useState('');
+  const { t } = useLanguage();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,7 +57,7 @@ export default function CommandBar({ userId, onNewMessage, onAgentResponse, onTh
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Oracle's Command: Enter your prompt here..."
+            placeholder={t('commandBarPlaceholder')}
             className="w-full text-base pl-4 pr-20 h-12 rounded-full bg-background transition-all duration-300 focus-visible:ring-primary focus-visible:ring-2 focus-visible:shadow-lg focus-visible:shadow-primary/20"
             disabled={isResponding}
             aria-label="User command input"
@@ -71,11 +73,7 @@ export default function CommandBar({ userId, onNewMessage, onAgentResponse, onTh
           </Button>
         </form>
         <p className="text-xs text-center text-muted-foreground mt-2">
-          Press{' '}
-          <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-            <span className="text-xs">⌘</span>B
-          </kbd>{' '}
-          to toggle the Scriptorium.
+          {t('commandBarShortcut')}
         </p>
       </div>
     </div>

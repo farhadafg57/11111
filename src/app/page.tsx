@@ -10,6 +10,7 @@ import { ChaosComponent } from '@/components/animations/chaos';
 import { OrderedMosaic } from '@/components/animations/ordered';
 import { useRef } from 'react';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/lib/language';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -57,15 +58,16 @@ const letterVariants = {
 };
 
 const pillarIcons = [
-    { Icon: Palette, title: "Creativity" },
-    { Icon: BookOpen, title: "Education" },
-    { Icon: HandCoins, title: "Business" },
-    { Icon: HeartPulse, title: "Health" },
-    { Icon: Zap, title: "Technology" },
+    { Icon: Palette, title: "creativity" },
+    { Icon: BookOpen, title: "education" },
+    { Icon: HandCoins, title: "business" },
+    { Icon: HeartPulse, title: "health" },
+    { Icon: Zap, title: "technology" },
 ]
 
 export default function LandingPage() {
-  const title = "AfghanAI Hub";
+  const { t, language } = useLanguage();
+  const title = t('hubTitle');
   const scrollRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: scrollRef,
@@ -101,7 +103,7 @@ export default function LandingPage() {
 
 
   return (
-    <div className="flex flex-col min-h-[500vh] bg-background text-foreground overflow-x-hidden" ref={scrollRef}>
+    <div className={cn("flex flex-col min-h-[500vh] bg-background text-foreground overflow-x-hidden", language === 'fa' || language === 'ps' ? 'font-arabic' : '')} ref={scrollRef}>
       <AppHeader />
 
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
@@ -150,13 +152,13 @@ export default function LandingPage() {
               initial="hidden"
               animate="visible"
             >
-              A Digital Civilization. For Everyone.
+              {t('hubSubtitle')}
             </motion.p>
 
             <motion.div variants={itemVariants} initial="hidden" animate="visible">
               <Link href="/hub" passHref>
                 <Button size="lg" className="group text-lg">
-                  Enter the Hub
+                  {t('enterHub')}
                 </Button>
               </Link>
             </motion.div>
@@ -194,7 +196,7 @@ export default function LandingPage() {
               </motion.div>
             </div>
             <motion.div style={{ opacity: textOpacity }}>
-              <h2 className="text-5xl font-headline font-bold">From Complexity to Cognition</h2>
+              <h2 className="text-5xl font-headline font-bold">{t('act2Title')}</h2>
             </motion.div>
           </div>
         </motion.section>
@@ -204,7 +206,7 @@ export default function LandingPage() {
           style={{ opacity: act3Opacity, display: useTransform(scrollYProgress, v => (v > 0.35 && v < 0.6) ? 'flex' : 'none') }}
           className="h-screen w-full flex flex-col items-center justify-center absolute inset-0 text-center p-4"
         >
-            <h2 className="text-4xl md:text-5xl font-headline font-bold mb-16">An Entire Civilization of Agents at Your Command</h2>
+            <h2 className="text-4xl md:text-5xl font-headline font-bold mb-16">{t('act3Title')}</h2>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-8 w-full max-w-6xl">
                 {pillarIcons.map((pillar, index) => (
                     <motion.div 
@@ -216,7 +218,7 @@ export default function LandingPage() {
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                     >
                         <pillar.Icon className="w-12 h-12 text-primary" />
-                        <h3 className="text-xl font-headline font-semibold">{pillar.title}</h3>
+                        <h3 className="text-xl font-headline font-semibold">{t(pillar.title)}</h3>
                     </motion.div>
                 ))}
             </div>
@@ -228,12 +230,12 @@ export default function LandingPage() {
             className="h-screen w-full flex flex-col items-center justify-center absolute inset-0 text-center p-4 space-y-24"
         >
             <div className="max-w-4xl">
-                <h2 className="text-4xl md:text-5xl font-headline font-bold mb-4">Power Without Price</h2>
-                <p className="text-xl text-foreground/80">Leveraging a serverless-to-zero architecture to deliver planetary scale on a near-zero budget.</p>
+                <h2 className="text-4xl md:text-5xl font-headline font-bold mb-4">{t('act4Title1')}</h2>
+                <p className="text-xl text-foreground/80">{t('act4Desc1')}</p>
             </div>
             <div className="max-w-4xl">
-                <h2 className="text-4xl md:text-5xl font-headline font-bold mb-4">Wisdom Without Weight</h2>
-                <p className="text-xl text-foreground/80">A static-first UI with streamed-in intelligence ensures a near-instant, fluid experience.</p>
+                <h2 className="text-4xl md:text-5xl font-headline font-bold mb-4">{t('act4Title2')}</h2>
+                <p className="text-xl text-foreground/80">{t('act4Desc2')}</p>
             </div>
         </motion.section>
 
@@ -248,16 +250,16 @@ export default function LandingPage() {
             >
               <BrainCircuit className="w-32 h-32 text-primary mx-auto" />
             </motion.div>
-            <h2 className="text-5xl md:text-7xl font-headline font-bold mb-8">Begin Your Renaissance.</h2>
+            <h2 className="text-5xl md:text-7xl font-headline font-bold mb-8">{t('act5Title')}</h2>
              <Link href="/hub" passHref>
               <Button size="lg" variant="default" className="text-xl h-14 px-12 transform hover:scale-105 transition-transform duration-300">
-                Enter the Hub
+                {t('enterHub')}
               </Button>
             </Link>
              <div className="absolute bottom-8 flex gap-8 text-foreground/60">
-                <Link href="#" className="hover:text-primary transition-colors">The Vision</Link>
-                <Link href="#" className="hover:text-primary transition-colors">The Technology</Link>
-                <Link href="#" className="hover:text-primary transition-colors">The Heritage</Link>
+                <Link href="#" className="hover:text-primary transition-colors">{t('theVision')}</Link>
+                <Link href="#" className="hover:text-primary transition-colors">{t('theTechnology')}</Link>
+                <Link href="#" className="hover:text-primary transition-colors">{t('theHeritage')}</Link>
             </div>
         </motion.section>
 
@@ -265,5 +267,3 @@ export default function LandingPage() {
     </div>
   );
 }
-
-    

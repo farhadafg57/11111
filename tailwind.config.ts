@@ -20,6 +20,7 @@ export default {
         body: ['"Source Serif 4"', 'serif'],
         headline: ['"Cormorant Garamond"', 'serif'],
         code: ['monospace'],
+        arabic: ['"Noto Naskh Arabic"', 'serif'],
       },
       colors: {
         background: 'hsl(var(--background))',
