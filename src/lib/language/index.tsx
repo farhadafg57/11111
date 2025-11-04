@@ -4,7 +4,6 @@ import React, { createContext, useContext, useState, ReactNode, useMemo } from '
 import en from './locales/en.json';
 import fa from './locales/fa.json';
 import ps from './locales/ps.json';
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 type Language = 'en' | 'fa' | 'ps';
 
@@ -29,11 +28,11 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>('en');
 
-  const t = (key: string): string => {
+  const t = useMemo(() => (key: string): string => {
     return translations[language][key] || key;
-  };
+  }, [language]);
   
-  const value = useMemo(() => ({ language, setLanguage, t }), [language]);
+  const value = useMemo(() => ({ language, setLanguage, t }), [language, t]);
 
 
   return (

@@ -16,10 +16,9 @@ import {z} from 'genkit';
 import {
   doc,
   getDoc,
-  setDoc,
   serverTimestamp,
 } from 'firebase/firestore';
-import { initializeFirebase } from '@/firebase';
+import { initializeFirebase, setDocumentNonBlocking } from '@/firebase';
 import { generateAgentDescription } from './generate-agent-description';
 import { agents } from '@/lib/agents';
 
@@ -175,18 +174,19 @@ const processUserCommandFlow = ai.defineFlow(
     }
 
 
-    // 4. Write the new response to the cache
+    // 4. Write the new response to the cache using a non-blocking operation
     if (userId) {
        const cacheKey = btoa(command + agentName + modelName);
        const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);
-       await setDoc(cacheRef, {
+       
+       setDocumentNonBlocking(cacheRef, {
         prompt: command,
         response: agentResponse,
         agentId: finalAgentName,
         userId: userId,
         timestamp: serverTimestamp(),
         ttl: 3600, // Cache for 1 hour
-      });
+      }, { merge: true });
     }
 
     return {
@@ -195,5 +195,3 @@ const processUserCommandFlow = ai.defineFlow(
     };
   }
 );
-
-    
