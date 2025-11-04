@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -105,7 +106,7 @@ const processUserCommandFlow = ai.defineFlow(
     // 1. Determine complexity to choose the model (Hafiz vs. Hakim)
     const complexity = await complexityAnalysisPrompt({ command });
     const model = complexity === 'complex' ? 'googleai/gemini-2.5-pro' : 'googleai/gemini-2.5-flash';
-    const modelName = complexity === 'complex' ? 'Hakim (Sage)' : 'Hafiz (Guardian)';
+    const modelName = complexity === 'complex' ? 'Hakim' : 'Hafiz';
 
     // For now, we will use a simple keyword-based agent router.
     // A more advanced implementation would use a prompt to select the agent.
@@ -113,11 +114,11 @@ const processUserCommandFlow = ai.defineFlow(
     const commandLower = command.toLowerCase();
 
     if (commandLower.includes('describe')) {
-        agentName = 'Moneshi'; // Scribe/Clerk
+        agentName = 'Agent Describer';
     } else if (commandLower.includes('diagnose') && commandLower.includes('plant')) {
-        agentName = 'Dehqan'; // Farmer
+        agentName = 'Plant Diagnoser';
     } else if (commandLower.includes('generate') && commandLower.includes('video')) {
-        agentName = 'Neqash'; // Painter/Illustrator
+        agentName = 'Video Generator';
     }
 
     // 2. Check for a cached response in Firestore
@@ -146,7 +147,7 @@ const processUserCommandFlow = ai.defineFlow(
     let finalAgentName = agentName;
 
     // Special handling for the description-generation agent
-    if (agentName === 'Moneshi') {
+    if (agentName === 'Agent Describer') {
         const agentToDescribe = agents.find(agent => command.toLowerCase().includes(agent.name.toLowerCase()));
         if (agentToDescribe) {
             const descriptionResult = await generateAgentDescription({
@@ -155,7 +156,7 @@ const processUserCommandFlow = ai.defineFlow(
             });
             agentResponse = descriptionResult.shortDescription;
         } else {
-            agentResponse = "I can generate a description for any agent in the Ketabkhana. Which agent would you like to know more about?";
+            agentResponse = "I can generate a description for any agent in the Scriptorium. Which agent would you like to know more about?";
         }
     } else {
         // For all other agents, wrap the command in the system prompt and call the selected model
@@ -194,3 +195,5 @@ const processUserCommandFlow = ai.defineFlow(
     };
   }
 );
+
+    

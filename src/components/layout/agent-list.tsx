@@ -1,3 +1,4 @@
+
 'use client';
 
 import { agents } from '@/lib/agents';
@@ -68,7 +69,7 @@ export default function AgentList() {
     <>
       <SidebarHeader className="text-center p-4 border-b">
         <h2 className="text-2xl font-headline font-semibold group-data-[collapsible=icon]:hidden">
-          Ketabkhana
+          Scriptorium
         </h2>
       </SidebarHeader>
       <SidebarContent>
@@ -92,3 +93,5 @@ export default function AgentList() {
     </>
   );
 }
+
+    
