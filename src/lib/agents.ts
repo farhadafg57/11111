@@ -9,6 +9,7 @@ export type Agent = {
 };
 
 export const agents: Agent[] = [
+  { name: 'Oracle', description: 'The central intelligence of the Hub. The Oracle analyzes your command, understands its complexity, and routes it to the perfect agent for the task.', Icon: BrainCircuit },
   { name: 'Plant Diagnoser', description: 'An expert botanist specializing in diagnosing plant illnesses.', Icon: Leaf },
   { name: 'Video Generator', description: 'An AI that can generate videos from text or image prompts.', Icon: Video },
   { name: 'Orchestrator', description: 'Manages agent lifecycle, scaling, and routing.', Icon: Network },
@@ -121,7 +122,4 @@ export const agents: Agent[] = [
   { name: 'Legal Researcher', description: 'Provides legal insights and research.', Icon: Gavel },
   { name: 'Financial Advisor', description: 'Offers personalized financial advice.', Icon: Briefcase },
   { name: 'Audio Producer', description: 'Automates music and podcast production.', Icon: AudioWaveform },
-  { name: 'Agent Describer', description: "Generates a short description of an AI agent's capabilities.", Icon: FileScan },
 ];
-
-    

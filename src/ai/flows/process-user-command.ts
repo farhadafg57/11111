@@ -19,7 +19,6 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 import { initializeFirebase, setDocumentNonBlocking } from '@/firebase';
-import { generateAgentDescription } from './generate-agent-description';
 import { agents } from '@/lib/agents';
 
 const ProcessUserCommandInputSchema = z.object({
@@ -56,6 +55,38 @@ const complexityAnalysisPrompt = ai.definePrompt({
     Command: {{{command}}}
 
     Based on this, is the command "simple" or "complex"?`,
+});
+
+// New prompt to select the best agent
+const agentSelectionPrompt = ai.definePrompt({
+  name: 'agentSelectionPrompt',
+  input: {
+    schema: z.object({
+      command: z.string(),
+      agentNames: z.array(z.string()),
+    }),
+  },
+  output: {
+    schema: z.object({
+      agentName: z
+        .string()
+        .describe(
+          'The name of the most suitable agent to handle the command.'
+        ),
+    }),
+  },
+  prompt: `You are the Oracle, a master at routing user requests to the correct AI agent.
+Given the user's command and a list of available agents, select the single best agent for the task.
+The default agent is "Oracle" if no other agent is a clear match.
+
+Available Agents:
+{{#each agentNames}}
+- {{{this}}}
+{{/each}}
+
+User Command: "{{{command}}}"
+
+Which agent should handle this command?`,
 });
 
 
@@ -107,20 +138,14 @@ const processUserCommandFlow = ai.defineFlow(
     const model = complexity === 'complex' ? 'googleai/gemini-2.5-pro' : 'googleai/gemini-2.5-flash';
     const modelName = complexity === 'complex' ? 'Hakim' : 'Hafiz';
 
-    // A more advanced implementation would use a prompt to select the agent.
-    let agentName = 'Oracle'; // Default agent
-    const commandLower = command.toLowerCase();
+    // 2. Intelligently select the best agent for the command
+    const agentNames = agents.map(a => a.name);
+    const { output: agentSelection } = await agentSelectionPrompt({ command, agentNames });
+    const agentName = agentSelection?.agentName || 'Oracle'; // Default to Oracle
 
-    // Find the first agent whose name is mentioned in the command
-    const matchedAgent = agents.find(agent => commandLower.includes(agent.name.toLowerCase()));
-    if (matchedAgent) {
-        agentName = matchedAgent.name;
-    }
-
-
-    // 2. Check for a cached response in Firestore
+    // 3. Check for a cached response in Firestore
     if (userId) {
-      const cacheKey = btoa(command + agentName + modelName); // Add model to cache key
+      const cacheKey = btoa(command + agentName + modelName); // Add model and selected agent to cache key
       const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);
       const cacheSnap = await getDoc(cacheRef);
 
@@ -139,40 +164,18 @@ const processUserCommandFlow = ai.defineFlow(
       }
     }
 
-    // 3. If no cache, execute the logic
-    let agentResponse = '';
-    let finalAgentName = agentName;
-
-    // Special handling for the description-generation agent
-    if (agentName === 'Agent Describer') {
-        const agentToDescribe = agents.find(agent => command.toLowerCase().includes(agent.name.toLowerCase()));
-        if (agentToDescribe) {
-            const descriptionResult = await generateAgentDescription({
-                agentName: agentToDescribe.name,
-                agentCapabilities: agentToDescribe.description
-            });
-            agentResponse = descriptionResult.shortDescription;
-        } else {
-            agentResponse = "I can generate a description for any agent in the Scriptorium. Which agent would you like to know more about?";
-        }
-    } else {
-        // For all other agents, wrap the command in the system prompt and call the selected model
-        const wrappedPrompt = systemPrompt(command);
-        const { output } = await ai.generate({
-            model: model,
-            prompt: wrappedPrompt,
-        });
-
-        if (output) {
-            agentResponse = output;
-        } else {
-            agentResponse = "I apologize, but I was unable to process your command.";
-        }
-        finalAgentName = `${agentName} (${modelName})`;
-    }
+    // 4. If no cache, execute the main logic
+    const wrappedPrompt = systemPrompt(command);
+    const { output } = await ai.generate({
+        model: model,
+        prompt: wrappedPrompt,
+    });
+    
+    const agentResponse = output || "I apologize, but I was unable to process your command.";
+    const finalAgentName = `${agentName} (${modelName})`;
 
 
-    // 4. Write the new response to the cache using a non-blocking operation
+    // 5. Write the new response to the cache using a non-blocking operation
     if (userId) {
        const cacheKey = btoa(command + agentName + modelName);
        const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);
