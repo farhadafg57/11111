@@ -6,6 +6,7 @@ import AppHeader from '@/components/layout/header';
 import ChatDisplay from '@/components/layout/chat-display';
 import CommandBar from '@/components/layout/command-bar';
 import { Sidebar, SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { useUser } from '@/firebase';
 
 export type Message = {
   role: 'user' | 'agent';
@@ -14,6 +15,7 @@ export type Message = {
 };
 
 export default function Home() {
+  const { user } = useUser();
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'agent',
@@ -54,6 +56,7 @@ export default function Home() {
         <AppHeader />
         <ChatDisplay messages={messages} />
         <CommandBar
+          userId={user?.uid}
           onNewMessage={handleNewMessage}
           onAgentResponse={handleAgentResponse}
           onThinking={handleThinking}

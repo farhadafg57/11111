@@ -8,13 +8,14 @@ import { handleCommand } from '@/app/actions';
 import type { Message } from '@/app/page';
 
 type CommandBarProps = {
+  userId?: string;
   onNewMessage: (message: Message) => void;
   onAgentResponse: (message: Message) => void;
   onThinking: () => void;
   isResponding: boolean;
 };
 
-export default function CommandBar({ onNewMessage, onAgentResponse, onThinking, isResponding }: CommandBarProps) {
+export default function CommandBar({ userId, onNewMessage, onAgentResponse, onThinking, isResponding }: CommandBarProps) {
   const [inputValue, setInputValue] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,7 +29,7 @@ export default function CommandBar({ onNewMessage, onAgentResponse, onThinking, 
     const commandToSubmit = inputValue;
     setInputValue('');
 
-    const result = await handleCommand(commandToSubmit);
+    const result = await handleCommand(commandToSubmit, userId);
 
     if (result.success && result.data) {
       const agentResponse: Message = {
