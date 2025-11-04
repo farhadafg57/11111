@@ -12,7 +12,7 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import {z} from 'zod';
 import {
   doc,
   getDoc,
@@ -43,23 +43,9 @@ export async function processUserCommand(
   return processUserCommandFlow(input);
 }
 
-// Prompt to determine the complexity of the user's request
-const complexityAnalysisPrompt = ai.definePrompt({
-    name: 'complexityAnalysisPrompt',
-    input: { schema: z.object({ command: z.string() }) },
-    output: { schema: z.enum(["simple", "complex"]) },
-    prompt: `Analyze the user's command to determine its complexity.
-    - "simple" tasks include: factual recall, summarization, simple translations, direct questions.
-    - "complex" tasks include: tasks requiring deep reasoning, creativity, multi-step thought processes like writing poetry, generating a business plan, or deep theological explanations.
-
-    Command: {{{command}}}
-
-    Based on this, is the command "simple" or "complex"?`,
-});
-
-// New prompt to select the best agent
-const agentSelectionPrompt = ai.definePrompt({
-  name: 'agentSelectionPrompt',
+// New prompt to select the best agent and determine model complexity
+const agentAndModelSelectionPrompt = ai.definePrompt({
+  name: 'agentAndModelSelectionPrompt',
   input: {
     schema: z.object({
       command: z.string(),
@@ -70,23 +56,27 @@ const agentSelectionPrompt = ai.definePrompt({
     schema: z.object({
       agentName: z
         .string()
+        .describe('The name of the most suitable agent to handle the command.'),
+      complexity: z
+        .enum(['simple', 'complex'])
         .describe(
-          'The name of the most suitable agent to handle the command.'
+          'The complexity of the command. "simple" for factual recall, "complex" for deep reasoning.'
         ),
     }),
   },
-  prompt: `You are the Oracle, a master at routing user requests to the correct AI agent.
-Given the user's command and a list of available agents, select the single best agent for the task.
-The default agent is "Oracle" if no other agent is a clear match.
+  prompt: `You are the Oracle, a master at routing user requests. Analyze the command to select the single best agent and determine its complexity.
+- "simple" tasks: factual recall, summarization, direct questions.
+- "complex" tasks: deep reasoning, creativity, multi-step thought processes (e.g., writing poetry, business plans, theological explanations).
 
 Available Agents:
 {{#each agentNames}}
 - {{{this}}}
 {{/each}}
+If no other agent is a clear match, choose "Oracle".
 
 User Command: "{{{command}}}"
 
-Which agent should handle this command?`,
+Based on the command and agents, select the best agent and classify the complexity.`,
 });
 
 
@@ -133,19 +123,19 @@ const processUserCommandFlow = ai.defineFlow(
     const {firestore} = initializeFirebase();
     const {userId, command} = input;
     
-    // 1. Determine complexity to choose the model (Hafiz vs. Hakim)
-    const complexity = await complexityAnalysisPrompt({ command });
+    // 1. Intelligently select agent and determine model in a single step
+    const agentNames = agents.map(a => a.name);
+    const { output: selection } = await agentAndModelSelectionPrompt({ command, agentNames });
+    
+    const agentName = selection?.agentName || 'Oracle'; // Default to Oracle
+    const complexity = selection?.complexity || 'simple';
     const model = complexity === 'complex' ? 'googleai/gemini-2.5-pro' : 'googleai/gemini-2.5-flash';
     const modelName = complexity === 'complex' ? 'Hakim' : 'Hafiz';
 
-    // 2. Intelligently select the best agent for the command
-    const agentNames = agents.map(a => a.name);
-    const { output: agentSelection } = await agentSelectionPrompt({ command, agentNames });
-    const agentName = agentSelection?.agentName || 'Oracle'; // Default to Oracle
 
-    // 3. Check for a cached response in Firestore
+    // 2. Check for a cached response in Firestore
     if (userId) {
-      const cacheKey = btoa(command + agentName + modelName); // Add model and selected agent to cache key
+      const cacheKey = btoa(command + agentName + modelName);
       const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);
       const cacheSnap = await getDoc(cacheRef);
 
@@ -164,7 +154,7 @@ const processUserCommandFlow = ai.defineFlow(
       }
     }
 
-    // 4. If no cache, execute the main logic
+    // 3. If no cache, execute the main logic
     const wrappedPrompt = systemPrompt(command);
     const { output } = await ai.generate({
         model: model,
@@ -175,7 +165,7 @@ const processUserCommandFlow = ai.defineFlow(
     const finalAgentName = `${agentName} (${modelName})`;
 
 
-    // 5. Write the new response to the cache using a non-blocking operation
+    // 4. Write the new response to the cache using a non-blocking operation
     if (userId) {
        const cacheKey = btoa(command + agentName + modelName);
        const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);

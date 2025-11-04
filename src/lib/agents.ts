@@ -76,7 +76,7 @@ export const agents: Agent[] = [
   { name: 'Insurance Processor', description: 'Processes insurance claims.', Icon: FileHeart },
   { name: 'Disease Predictor', description: 'Predicts diseases.', Icon: Activity },
   { name: 'Telehealth Provider', description: 'Provides telehealth services.', Icon: MonitorSmartphone },
-  { name: 'Patient Record Manager', description: 'Manages patient records.', Icon: FileText },
+  { name: a: 'Patient Record Manager', description: 'Manages patient records.', Icon: FileText },
   { name: 'Lab Report Analyzer', description: 'Analyzes lab reports.', Icon: FlaskConical },
   { name: 'Expense Tracker', description: 'Tracks expenses.', Icon: Wallet },
   { name: 'Investment Planner', description: 'Plans investments.', Icon: LineChart },

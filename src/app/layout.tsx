@@ -29,7 +29,7 @@ const notoNaskhArabic = Noto_Naskh_Arabic({
   subsets: ['arabic'],
   display: 'swap',
   variable: '--font-arabic',
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '700'],
 });
 
 

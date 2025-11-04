@@ -46,9 +46,9 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
               )}
               <div className="flex flex-col gap-1 max-w-xl">
                  {!isUser && (
-                    <p className="font-bold text-sm font-headline text-foreground/80">
+                    <div className="font-bold text-sm font-headline text-foreground/80">
                       {agentName}
-                    </p>
+                    </div>
                   )}
                 <Card
                   className={cn(
