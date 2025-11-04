@@ -88,10 +88,10 @@ export default function AgentList() {
               <SidebarMenuItem key={agent.slug}>
                 <Link href={`/hub/${agent.slug}`} passHref>
                   <SidebarMenuButton asChild tooltip={agent.name} isActive={agentId === agent.slug} className="justify-start">
-                    <>
+                    <a>
                       <agent.Icon />
                       <span className="font-body">{agent.name}</span>
-                    </>
+                    </a>
                   </SidebarMenuButton>
                 </Link>
               </SidebarMenuItem>
