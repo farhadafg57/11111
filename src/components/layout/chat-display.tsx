@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { agents } from '@/lib/agents';
-import { BrainCircuit } from 'lucide-react';
+import { Bird } from 'lucide-react';
 import { Skeleton } from '../ui/skeleton';
 
 const ChatBubbleSkeleton = () => (
@@ -16,9 +16,9 @@ const ChatBubbleSkeleton = () => (
 
 export default function ChatDisplay({ messages }: { messages: Message[] }) {
   const getAgentInfo = (agentName?: string) => {
-    if (!agentName) return { Icon: BrainCircuit, name: 'System' };
+    if (!agentName) return { Icon: Bird, name: 'System' };
     const agent = agents.find(a => a.name === agentName);
-    return agent ? { Icon: agent.Icon, name: agent.name } : { Icon: BrainCircuit, name: agentName };
+    return agent ? { Icon: agent.Icon, name: agent.name } : { Icon: Bird, name: agentName };
   };
   
   return (

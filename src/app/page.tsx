@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import AppHeader from '@/components/layout/header';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, BrainCircuit, Zap, BookOpen, HandCoins, HeartPulse, Palette } from 'lucide-react';
+import { ArrowDown, Bird, Zap, BookOpen, HandCoins, HeartPulse, Palette } from 'lucide-react';
 import { ChaosComponent } from '@/components/animations/chaos';
 import { OrderedMosaic } from '@/components/animations/ordered';
 import { useRef } from 'react';
@@ -125,7 +125,7 @@ export default function LandingPage() {
                 },
               }}
             >
-              <BrainCircuit className="w-24 h-24 text-primary mx-auto" />
+              <Bird className="w-24 h-24 text-primary mx-auto" />
             </motion.div>
 
             <motion.h1
@@ -248,7 +248,7 @@ export default function LandingPage() {
               className="mb-8"
               style={{ scale: finalOrreryScale, y: finalOrreryY }}
             >
-              <BrainCircuit className="w-32 h-32 text-primary mx-auto" />
+              <Bird className="w-32 h-32 text-primary mx-auto" />
             </motion.div>
             <h2 className="text-5xl md:text-7xl font-headline font-bold mb-8">{t('act5Title')}</h2>
              <Link href="/hub" passHref>
