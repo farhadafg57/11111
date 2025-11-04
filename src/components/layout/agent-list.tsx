@@ -1,5 +1,3 @@
-
-
 'use client';
 
 import { agents } from '@/lib/agents';
@@ -22,11 +20,13 @@ import { LogIn } from 'lucide-react';
 import { useLanguage } from '@/lib/language';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import placeholderData from '@/lib/placeholder-images.json';
 
 const UserStatus = () => {
     const auth = useAuth();
     const { user, isUserLoading } = useUser();
     const { t } = useLanguage();
+    const userAvatarImage = placeholderData.images.find(img => img.id === 'user-avatar-sidebar');
 
     if (isUserLoading) {
         return (
@@ -55,10 +55,14 @@ const UserStatus = () => {
         )
     }
 
+    const avatarSrc = userAvatarImage ? userAvatarImage.src.replace('{{id}}', user.uid) : '';
+
     return (
          <div className="flex items-center gap-3 p-3 group-data-[collapsible=icon]:justify-center">
             <Avatar className="size-9">
-                <AvatarImage src={`https://picsum.photos/seed/${user.uid}/100/100`} alt="User" width={100} height={100} data-ai-hint="portrait person" />
+                {userAvatarImage && (
+                    <AvatarImage src={avatarSrc} alt="User" width={userAvatarImage.width} height={userAvatarImage.height} data-ai-hint={userAvatarImage.hint} />
+                )}
                 <AvatarFallback>{user.isAnonymous ? 'A' : 'U'}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col group-data-[collapsible=icon]:hidden">
@@ -87,10 +91,12 @@ export default function AgentList() {
           <SidebarMenu>
             {agents.map((agent) => (
               <SidebarMenuItem key={agent.slug}>
-                <Link href={`/hub/${agent.slug}`}>
-                  <SidebarMenuButton tooltip={agent.name} isActive={agentId === agent.slug} className="justify-start">
+                <Link href={`/hub/${agent.slug}`} legacyBehavior={false} passHref>
+                  <SidebarMenuButton asChild tooltip={agent.name} isActive={agentId === agent.slug} className="justify-start">
+                    <a>
                       <agent.Icon />
                       <span className="font-body">{agent.name}</span>
+                    </a>
                   </SidebarMenuButton>
                 </Link>
               </SidebarMenuItem>

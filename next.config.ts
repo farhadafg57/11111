@@ -8,6 +8,16 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  reactCompiler: true,
+  experimental: {
+    turbopack: {
+      rsc: {
+        transform: {
+          memory: false,
+        },
+      },
+    },
+  },
   images: {
     remotePatterns: [
       {

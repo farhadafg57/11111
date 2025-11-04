@@ -4,9 +4,11 @@ import AppHeader from '@/components/layout/header';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useLanguage } from '@/lib/language';
+import placeholderData from '@/lib/placeholder-images.json';
 
 export default function AboutPage() {
   const { t } = useLanguage();
+  const founderImage = placeholderData.images.find(img => img.id === 'founder-about');
 
   return (
     <div className="bg-background min-h-screen">
@@ -16,7 +18,9 @@ export default function AboutPage() {
           <Card className="overflow-hidden shadow-lg">
             <CardHeader className="bg-muted/30 p-6 md:p-8 text-center">
               <Avatar className="mx-auto h-24 w-24 mb-4 border-4 border-background shadow-md">
-                <AvatarImage src="https://picsum.photos/seed/founder/200/200" alt="Founder" width={200} height={200} data-ai-hint="portrait man" />
+                {founderImage && (
+                    <AvatarImage src={founderImage.src} alt="Founder" width={founderImage.width} height={founderImage.height} data-ai-hint={founderImage.hint} />
+                )}
                 <AvatarFallback>FM</AvatarFallback>
               </Avatar>
               <CardTitle className="text-3xl md:text-4xl font-headline tracking-tight">

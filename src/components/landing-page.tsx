@@ -19,6 +19,8 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '@/lib/language';
 import Image from 'next/image';
+import placeholderData from '@/lib/placeholder-images.json';
+
 
 const featureIcons = [
   {
@@ -73,6 +75,7 @@ const howToSteps = [
 
 export default function LandingPage() {
   const { t, language } = useLanguage();
+  const founderImage = placeholderData.images.find(img => img.id === 'founder-landing');
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -236,14 +239,16 @@ export default function LandingPage() {
                 variants={itemVariants}
                 className="max-w-4xl mx-auto text-center"
               >
-                 <Image
-                    src="https://picsum.photos/seed/founder/128/128"
-                    alt="Founder"
-                    width={128}
-                    height={128}
-                    className="rounded-full mx-auto mb-6 border-4 border-background shadow-md"
-                    data-ai-hint="portrait man"
-                 />
+                {founderImage && (
+                    <Image
+                        src={founderImage.src}
+                        alt="Founder"
+                        width={founderImage.width}
+                        height={founderImage.height}
+                        className="rounded-full mx-auto mb-6 border-4 border-background shadow-md"
+                        data-ai-hint={founderImage.hint}
+                    />
+                )}
                 <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
                   {t('founderMessageTitle')}
                 </h2>

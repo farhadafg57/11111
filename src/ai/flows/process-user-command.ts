@@ -133,7 +133,7 @@ const processUserCommandFlow = ai.defineFlow(
 
     // 2. Check for a cached response in Firestore
     if (userId) {
-      const cacheKey = Buffer.from(command + agentName + model).toString('base64');
+      const cacheKey = Buffer.from(command + agentName).toString('base64');
       const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);
       const cacheSnap = await getDoc(cacheRef);
 
@@ -163,7 +163,7 @@ const processUserCommandFlow = ai.defineFlow(
 
     // 4. Write the new response to the cache using a non-blocking operation
     if (userId) {
-       const cacheKey = Buffer.from(command + agentName + model).toString('base64');
+       const cacheKey = Buffer.from(command + agentName).toString('base64');
        const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);
        
        setDocumentNonBlocking(cacheRef, {

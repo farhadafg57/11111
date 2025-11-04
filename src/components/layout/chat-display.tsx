@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { agents } from '@/lib/agents';
 import { BrainCircuit } from 'lucide-react';
 import { motion } from 'framer-motion';
+import placeholderData from '@/lib/placeholder-images.json';
 
 const ChatBubbleSkeleton = () => (
     <motion.div 
@@ -21,6 +22,8 @@ const ChatBubbleSkeleton = () => (
 
 
 export default function ChatDisplay({ messages }: { messages: Message[] }) {
+  const userAvatarImage = placeholderData.images.find(img => img.id === 'user-avatar-chat');
+
   const getAgentInfo = (agentName?: string) => {
     if (!agentName) return { Icon: BrainCircuit, name: 'System' };
     const agent = agents.find(a => a.name === agentName || a.name === agentName.split('(')[0].trim());
@@ -71,7 +74,9 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
               </div>
               {isUser && (
                 <Avatar className="size-10">
-                   <AvatarImage src="https://picsum.photos/seed/user/100/100" alt="User" width={100} height={100} data-ai-hint="portrait person" />
+                  {userAvatarImage && (
+                    <AvatarImage src={userAvatarImage.src} alt="User" width={userAvatarImage.width} height={userAvatarImage.height} data-ai-hint={userAvatarImage.hint} />
+                  )}
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
               )}
