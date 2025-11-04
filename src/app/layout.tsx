@@ -4,6 +4,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Providers } from './providers';
 import { Cormorant_Garamond, Source_Serif_4, Noto_Naskh_Arabic } from 'next/font/google';
 import { cn } from '@/lib/utils';
+import { SidebarProvider } from '@/components/ui/sidebar';
 
 export const metadata: Metadata = {
   title: 'AfghanAI Hub',
@@ -46,7 +47,11 @@ export default function RootLayout({
         sourceSerif4.variable,
         notoNaskhArabic.variable
       )}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <SidebarProvider>
+            {children}
+          </SidebarProvider>
+        </Providers>
         <Toaster />
       </body>
     </html>
