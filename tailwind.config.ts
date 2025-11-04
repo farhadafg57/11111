@@ -17,10 +17,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['"Source Serif 4"', 'serif'],
-        headline: ['"Cormorant Garamond"', 'serif'],
+        body: ['var(--font-body)', 'serif'],
+        headline: ['var(--font-headline)', 'serif'],
         code: ['monospace'],
-        arabic: ['"Noto Naskh Arabic"', 'serif'],
+        arabic: ['var(--font-arabic)', 'serif'],
       },
       colors: {
         background: 'hsl(var(--background))',

@@ -88,13 +88,8 @@ export default function LandingPage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <Image
-                src="/logo.png"
-                alt="AfghanAI Hub Logo"
-                width={160}
-                height={160}
-                className="mx-auto mb-6"
-                priority
+            <BrainCircuit
+                className="w-40 h-40 text-primary mx-auto mb-6"
             />
           </motion.div>
           <motion.h1
@@ -239,8 +234,8 @@ export default function LandingPage() {
             </Link>
              <div className="mt-12 flex gap-8 justify-center text-foreground/60">
                 <Link href="/vision" className="hover:text-primary transition-colors pointer-events-auto">{t('theVision')}</Link>
-                <Link href="#" className="hover:text-primary transition-colors pointer-events-auto">{t('theTechnology')}</Link>
-                <Link href="#" className="hover:text-primary transition-colors pointer-events-auto">{t('theHeritage')}</Link>
+                <Link href="#features" className="hover:text-primary transition-colors pointer-events-auto">{t('theTechnology')}</Link>
+                <Link href="/about" className="hover:text-primary transition-colors pointer-events-auto">{t('theHeritage')}</Link>
             </div>
           </motion.div>
         </div>

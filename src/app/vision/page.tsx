@@ -2,10 +2,12 @@
 
 import React, { useRef, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { BrainCircuit, BookOpenCheck, ShieldCheck, HeartHandshake } from 'lucide-react';
+import { BrainCircuit, BookOpenCheck, ShieldCheck, HeartHandshake, ArrowRight } from 'lucide-react';
 import { ChaosComponent } from '@/components/animations/chaos';
 import { OrderedMosaic } from '@/components/animations/ordered';
-import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+
 
 const acts = [
   {
@@ -28,7 +30,7 @@ const acts = [
           transition={{ duration: 1, delay: 1, ease: "easeOut" }}
           className="relative flex flex-col items-center"
         >
-          <Image src="/logo.png" alt="AfghanAI Hub Logo" width={200} height={200} className="drop-shadow-2xl" priority />
+          <BrainCircuit className="w-48 h-48 text-primary drop-shadow-2xl" />
         </motion.div>
       </div>
     ),
@@ -112,9 +114,9 @@ const acts = [
                   </Button>
                 </Link>
                  <div className="mt-12 flex gap-8 justify-center text-foreground/60">
-                    <Link href="#" className="hover:text-primary transition-colors pointer-events-auto">The Vision</Link>
-                    <Link href="#" className="hover:text-primary transition-colors pointer-events-auto">The Technology</Link>
-                    <Link href="#" className="hover:text-primary transition-colors pointer-events-auto">The Heritage</Link>
+                    <Link href="/vision" className="hover:text-primary transition-colors pointer-events-auto">The Vision</Link>
+                    <Link href="/#features" className="hover:text-primary transition-colors pointer-events-auto">The Technology</Link>
+                    <Link href="/about" className="hover:text-primary transition-colors pointer-events-auto">The Heritage</Link>
                 </div>
             </div>
         </div>
