@@ -14,11 +14,11 @@ export type Message = {
   content: string;
 };
 
-export default function AgentChatPage({ params }: { params: { agentId: string } }) {
+export default function AgentChatPage({ params: { agentId } }: { params: { agentId: string } }) {
   const { user } = useUser();
   const { t } = useLanguage();
   
-  const agent = useMemo(() => agents.find(a => a.slug === params.agentId), [params.agentId]);
+  const agent = useMemo(() => agents.find(a => a.slug === agentId), [agentId]);
 
   if (!agent) {
     notFound();
