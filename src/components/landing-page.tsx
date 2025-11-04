@@ -238,7 +238,7 @@ export default function LandingPage() {
               </Button>
             </Link>
              <div className="mt-12 flex gap-8 justify-center text-foreground/60">
-                <Link href="#" className="hover:text-primary transition-colors pointer-events-auto">{t('theVision')}</Link>
+                <Link href="/vision" className="hover:text-primary transition-colors pointer-events-auto">{t('theVision')}</Link>
                 <Link href="#" className="hover:text-primary transition-colors pointer-events-auto">{t('theTechnology')}</Link>
                 <Link href="#" className="hover:text-primary transition-colors pointer-events-auto">{t('theHeritage')}</Link>
             </div>
