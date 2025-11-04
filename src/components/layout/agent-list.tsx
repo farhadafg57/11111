@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { agents } from '@/lib/agents';
@@ -86,7 +87,7 @@ export default function AgentList() {
           <SidebarMenu>
             {agents.map((agent) => (
               <SidebarMenuItem key={agent.slug}>
-                <Link href={`/hub/${agent.slug}`} passHref>
+                <Link href={`/hub/${agent.slug}`} legacyBehavior={false}>
                   <SidebarMenuButton asChild tooltip={agent.name} isActive={agentId === agent.slug} className="justify-start">
                     <a>
                       <agent.Icon />
