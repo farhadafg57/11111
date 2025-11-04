@@ -14,7 +14,8 @@ export type Message = {
   content: string;
 };
 
-export default function AgentChatPage({ params: { agentId } }: { params: { agentId: string } }) {
+export default function AgentChatPage({ params }: { params: { agentId: string } }) {
+  const { agentId } = params;
   const { user } = useUser();
   const { t } = useLanguage();
   
