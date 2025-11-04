@@ -19,6 +19,8 @@ import { Button } from '../ui/button';
 import { initiateAnonymousSignIn } from '@/firebase/non-blocking-login';
 import { LogIn } from 'lucide-react';
 import { useLanguage } from '@/lib/language';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 const UserStatus = () => {
     const auth = useAuth();
@@ -68,6 +70,9 @@ const UserStatus = () => {
 
 export default function AgentList() {
   const { t } = useLanguage();
+  const params = useParams();
+  const { agentId } = params;
+
   return (
     <>
       <SidebarHeader className="text-center p-4 border-b">
@@ -80,11 +85,15 @@ export default function AgentList() {
           <SidebarGroupLabel>{t('agents')}</SidebarGroupLabel>
           <SidebarMenu>
             {agents.map((agent) => (
-              <SidebarMenuItem key={agent.name}>
-                <SidebarMenuButton tooltip={agent.name} isActive={false} className="justify-start">
-                  <agent.Icon />
-                  <span className="font-body">{agent.name}</span>
-                </SidebarMenuButton>
+              <SidebarMenuItem key={agent.slug}>
+                <Link href={`/hub/${agent.slug}`} passHref legacyBehavior>
+                  <SidebarMenuButton asChild tooltip={agent.name} isActive={agentId === agent.slug} className="justify-start">
+                    <a>
+                      <agent.Icon />
+                      <span className="font-body">{agent.name}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </Link>
               </SidebarMenuItem>
             ))}
           </SidebarMenu>

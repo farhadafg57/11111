@@ -11,7 +11,7 @@
     "anonymousUser": "Anonymous User",
     "user": "User",
     "welcomeMessage": "Welcome to the AfghanAI Hub. The Scriptorium on the left lists available agents. How may I assist you today?",
-    "commandBarPlaceholder": "Oracle's Command: Enter your prompt here...",
+    "commandBarPlaceholder": "Enter your prompt here...",
     "commandBarShortcut": "Press ⌘B to toggle the Scriptorium.",
     "featuresTitle": "An Entire Civilization of Agents",
     "featuresSubtitle": "From poetry to business plans, ancient history to modern science. A collective of specialized AI agents at your command.",
@@ -45,5 +45,7 @@
     "founderMsgP4": "We built this with two core principles: 'Power Without Price' and 'Wisdom Without Weight'. By using a state-of-the-art, cost-optimized architecture, we can deliver this immense capability to everyone, on any device, without the heavy cost. It is a digital civilization that is accessible to all.",
     "founderMsgP5": "This is just the beginning. Join us in this renaissance. Let us build, learn, and dream together. Your journey starts now.",
     "act5Title": "Begin Your Renaissance.",
-    "footerRights": "All Rights Reserved."
+    "footerRights": "All Rights Reserved.",
+    "welcomeToTheHub": "Welcome to the Scriptorium",
+    "selectAgentPrompt": "Select an agent from the list on the left to begin your interaction."
 }
