@@ -155,7 +155,7 @@ export default function LandingPage() {
             <motion.div variants={itemVariants} initial="hidden" animate="visible">
               <Link href="/hub" passHref>
                 <Button size="lg" className="group text-lg">
-                  Enter the Hub
+                  Dakhel shodan ba Markaz
                 </Button>
               </Link>
             </motion.div>
@@ -250,7 +250,7 @@ export default function LandingPage() {
             <h2 className="text-5xl md:text-7xl font-headline font-bold mb-8">Begin Your Renaissance.</h2>
              <Link href="/hub" passHref>
               <Button size="lg" variant="default" className="text-xl h-14 px-12 transform hover:scale-105 transition-transform duration-300">
-                Enter the Hub
+                Dakhel shodan ba Markaz
               </Button>
             </Link>
              <div className="absolute bottom-8 flex gap-8 text-foreground/60">

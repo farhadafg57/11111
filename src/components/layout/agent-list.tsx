@@ -68,7 +68,7 @@ export default function AgentList() {
     <>
       <SidebarHeader className="text-center p-4 border-b">
         <h2 className="text-2xl font-headline font-semibold group-data-[collapsible=icon]:hidden">
-          Scriptorium
+          Ketabkhana
         </h2>
       </SidebarHeader>
       <SidebarContent>

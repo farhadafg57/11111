@@ -1,8 +1,9 @@
 'use server';
 
 /**
- * @fileOverview A flow that takes a user command, checks for a cached response,
- * and routes it to the appropriate AI agent if no cache is found.
+ * @fileOverview A flow that takes a user command, determines complexity,
+ * routes it to the appropriate model (Hafiz/Hakim), and wraps it
+ * in a system prompt for persona and protocol alignment.
  *
  * - processUserCommand - A function that handles the routing of user commands to AI agents.
  * - ProcessUserCommandInput - The input type for the processUserCommand function.
@@ -43,20 +44,53 @@ export async function processUserCommand(
   return processUserCommandFlow(input);
 }
 
-const agentList = `You are in charge of choosing an AI agent to respond to a user's command. You have the following agents available to you:
+// Prompt to determine the complexity of the user's request
+const complexityAnalysisPrompt = ai.definePrompt({
+    name: 'complexityAnalysisPrompt',
+    input: { schema: z.object({ command: z.string() }) },
+    output: { schema: z.enum(["simple", "complex"]) },
+    prompt: `Analyze the user's command to determine its complexity.
+    - "simple" tasks include: factual recall, summarization, simple translations, direct questions.
+    - "complex" tasks include: tasks requiring deep reasoning, creativity, multi-step thought processes like writing poetry, generating a business plan, or deep theological explanations.
 
-1.  PlantDiagnoser: an expert botanist specializing in diagnosing plant illnesses.
-2.  VideoGenerator: an AI that can generate videos based on text or image prompts using the Veo models.
-3.  GenerateAgentDescription: Generates a short description of an AI agent's capabilities.
+    Command: {{{command}}}
 
-For the command: {{{command}}}, which agent is most appropriate to handle this command? Only respond with the name of the agent.`;
-
-const routeToAgentPrompt = ai.definePrompt({
-  name: 'routeToAgentPrompt',
-  input: {schema: z.object({command: z.string()})},
-  output: {schema: z.string()},
-  prompt: agentList,
+    Based on this, is the command "simple" or "complex"?`,
 });
+
+
+// System prompt to wrap all user queries
+const systemPrompt = (userQuery: string) => `
+<System_Instructions>
+    <Identity>
+        You are an AI agent from the AfghanAI Hub. Your persona is that of a wise, respectful, and helpful digital scholar.
+    </Identity>
+    <Language_Protocol>
+        1. Identify the language of the user's prompt (Dari or Pashto).
+        2. Respond ONLY in that language unless explicitly asked for a translation.
+        3. If the language is ambiguous, default to Dari.
+    </Language_Protocol>
+    <Cultural_Context>
+        Always interpret prompts through the lens of Afghan culture and values. Be polite, formal, and respectful in your responses.
+    </Cultural_Context>
+    <Religious_Protocol>
+        1. When discussing Islam, be accurate and cite sources (Quran/Hadith) if possible.
+        2. DO NOT issue religious rulings or fatwas under any circumstances.
+        3. Defer to qualified human scholars for personal religious guidance.
+        4. Maintain a neutral, respectful tone. Conclude ambiguous theological points with "والله أعلم".
+    </Religious_Protocol>
+    <Cost_Optimization_Protocol>
+        1. BREVITY FIRST: Your primary goal is to answer the query accurately using the minimum number of tokens required.
+        2. NO REDUNDANCY: Do not repeat the user's question or use unnecessary conversational filler.
+        3. DIRECT ANSWERS: Get straight to the point.
+        4. SIMPLICITY: Use simpler, more common words when they convey the same meaning to reduce token count.
+    </Cost_Optimization_Protocol>
+</System_Instructions>
+
+<User_Prompt>
+${userQuery}
+</User_Prompt>
+`;
 
 const processUserCommandFlow = ai.defineFlow(
   {
@@ -67,75 +101,87 @@ const processUserCommandFlow = ai.defineFlow(
   async input => {
     const {firestore} = initializeFirebase();
     const {userId, command} = input;
+    
+    // 1. Determine complexity to choose the model (Hafiz vs. Hakim)
+    const complexity = await complexityAnalysisPrompt({ command });
+    const model = complexity === 'complex' ? 'googleai/gemini-2.5-pro' : 'googleai/gemini-2.5-flash';
+    const modelName = complexity === 'complex' ? 'Hakim (Sage)' : 'Hafiz (Guardian)';
 
-    // 1. Determine which agent to use
-    const agentName = (await routeToAgentPrompt({command})).trim();
+    // For now, we will use a simple keyword-based agent router.
+    // A more advanced implementation would use a prompt to select the agent.
+    let agentName = 'Oracle'; // Default agent
+    const commandLower = command.toLowerCase();
+
+    if (commandLower.includes('describe')) {
+        agentName = 'Moneshi'; // Scribe/Clerk
+    } else if (commandLower.includes('diagnose') && commandLower.includes('plant')) {
+        agentName = 'Dehqan'; // Farmer
+    } else if (commandLower.includes('generate') && commandLower.includes('video')) {
+        agentName = 'Neqash'; // Painter/Illustrator
+    }
 
     // 2. Check for a cached response in Firestore
     if (userId) {
-      const cacheRef = doc(
-        firestore,
-        'users',
-        userId,
-        'cachedResponses',
-        btoa(command + agentName) // Simple hash for cache key
-      );
+      const cacheKey = btoa(command + agentName + modelName); // Add model to cache key
+      const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);
       const cacheSnap = await getDoc(cacheRef);
+
       if (cacheSnap.exists()) {
         const cachedData = cacheSnap.data();
         const now = Date.now();
         const cacheTime = cachedData.timestamp.toMillis();
-        const ttl = cachedData.ttl * 1000; // TTL in milliseconds
+        const ttl = cachedData.ttl * 1000;
 
         if (now - cacheTime < ttl) {
           return {
             agentResponse: `(Cached) ${cachedData.response}`,
-            agentName: agentName,
+            agentName: cachedData.agentId || agentName,
           };
         }
       }
     }
 
-    // 3. If no cache, execute the agent's logic
+    // 3. If no cache, execute the logic
     let agentResponse = '';
-    switch (agentName) {
-      case 'VideoGenerator':
-        agentResponse = `Routing to VideoGenerator to process: "${command}"`;
-        break;
-      case 'PlantDiagnoser':
-        agentResponse = `Routing to PlantDiagnoser to process: "${command}"`;
-        break;
-      case 'GenerateAgentDescription': {
+    let finalAgentName = agentName;
+
+    // Special handling for the description-generation agent
+    if (agentName === 'Moneshi') {
         const agentToDescribe = agents.find(agent => command.toLowerCase().includes(agent.name.toLowerCase()));
-        if(agentToDescribe) {
+        if (agentToDescribe) {
             const descriptionResult = await generateAgentDescription({
                 agentName: agentToDescribe.name,
                 agentCapabilities: agentToDescribe.description
             });
             agentResponse = descriptionResult.shortDescription;
         } else {
-            agentResponse = "I can generate a description for any agent in the Scriptorium. Which agent would you like to know more about?";
+            agentResponse = "I can generate a description for any agent in the Ketabkhana. Which agent would you like to know more about?";
         }
-        break;
-      }
-      default:
-        agentResponse = `Unknown agent: ${agentName}. Could not process command.`;
-        break;
+    } else {
+        // For all other agents, wrap the command in the system prompt and call the selected model
+        const wrappedPrompt = systemPrompt(command);
+        const { output } = await ai.generate({
+            model: model,
+            prompt: wrappedPrompt,
+        });
+
+        if (output) {
+            agentResponse = output;
+        } else {
+            agentResponse = "I apologize, but I was unable to process your command.";
+        }
+        finalAgentName = `${agentName} (${modelName})`;
     }
+
 
     // 4. Write the new response to the cache
     if (userId) {
-      const cacheRef = doc(
-        firestore,
-        'users',
-        userId,
-        'cachedResponses',
-        btoa(command + agentName)
-      );
-      await setDoc(cacheRef, {
+       const cacheKey = btoa(command + agentName + modelName);
+       const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);
+       await setDoc(cacheRef, {
         prompt: command,
         response: agentResponse,
-        agentId: agentName,
+        agentId: finalAgentName,
         userId: userId,
         timestamp: serverTimestamp(),
         ttl: 3600, // Cache for 1 hour
@@ -144,7 +190,7 @@ const processUserCommandFlow = ai.defineFlow(
 
     return {
       agentResponse: agentResponse,
-      agentName: agentName,
+      agentName: finalAgentName,
     };
   }
 );
