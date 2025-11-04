@@ -87,7 +87,7 @@ export default function AgentList() {
           <SidebarMenu>
             {agents.map((agent) => (
               <SidebarMenuItem key={agent.slug}>
-                <Link href={`/hub/${agent.slug}`} legacyBehavior={false}>
+                <Link href={`/hub/${agent.slug}`} passHref legacyBehavior>
                   <SidebarMenuButton asChild tooltip={agent.name} isActive={agentId === agent.slug} className="justify-start">
                     <a>
                       <agent.Icon />
