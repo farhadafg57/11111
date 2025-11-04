@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { Leaf, Video, Network, BrainCircuit, Eye, Mic, Languages, Combine, Shield, Scale, Box, DollarSign, TrendingUp, Search, Cog, Target, ClipboardCheck, Cloud, ShieldCheck, Banknote, Users, Truck, Landmark, HeartHandshake, Siren, AreaChart, Scan, FileScan, Building2, Receipt, Vote, Code, PenTool, Plug, TestTube2, Rocket, Paintbrush, Clapperboard, Music, Cuboid, MicVocal, Book, Megaphone, Podcast, AudioWaveform, Film, GraduationCap, BookOpen, MessageSquare, Wrench, ClipboardPen, FileCheck, GitBranch, HelpCircle, School, BookText, Thermometer, Pill, Smile, CalendarDays, FileCode, FileHeart, Activity, MonitorSmartphone, FileText, FlaskConical, Wallet, LineChart, ShieldAlert, Bot, MessageCircle, Users2, Star, Sun, Dumbbell, Sprout, Telescope, Microscope, Globe, Blocks, Brick, Home } from 'lucide-react';
+import { Leaf, Video, Network, BrainCircuit, Eye, Mic, Languages, Combine, Shield, Scale, Box, DollarSign, TrendingUp, Search, Cog, Target, ClipboardCheck, Cloud, ShieldCheck, Banknote, Users, Truck, Landmark, HeartHandshake, Siren, AreaChart, Scan, FileScan, Building2, Receipt, Vote, Code, PenTool, Plug, TestTube2, Rocket, Paintbrush, Clapperboard, Music, Cuboid, MicVocal, Book, Megaphone, Podcast, AudioWaveform, Film, GraduationCap, BookOpen, MessageSquare, Wrench, ClipboardPen, FileCheck, GitBranch, HelpCircle, School, BookText, Thermometer, Pill, Smile, CalendarDays, FileCode, FileHeart, Activity, MonitorSmartphone, FileText, FlaskConical, Wallet, LineChart, ShieldAlert, Bot, MessageCircle, Users2, Star, Sun, Dumbbell, Sprout, Telescope, Microscope, Globe, Blocks, Brick, Home, View, Move, DraftingCompass, Drama, Hand, Gavel, Briefcase, LandPlot, Ear } from 'lucide-react';
 
 export type Agent = {
   name: string;
@@ -101,7 +101,7 @@ export const agents: Agent[] = [
   { name: 'BrandVoice AI', description: 'Develops brand voice.', Icon: MicVocal },
   { name: 'Script Writer AI', description: 'Writes scripts.', Icon: Book },
   { name: 'AdCampaign AI', description: 'Manages ad campaigns.', Icon: Megaphone },
-  { name: 'StoryTeller AI', description: 'Tells stories.', Icon: Book },
+  { name: 'StoryTeller AI', description: 'Tells stories.', Icon: Film },
   { name: 'Video Podcast Studio AI', description: 'Produces video podcasts.', Icon: Podcast },
   { name: 'Music Production Studio AI', description: 'Produces music.', Icon: AudioWaveform },
   { name: 'Kankor Tutor AI', description: 'Kankor exam tutoring.', Icon: GraduationCap },
@@ -156,4 +156,17 @@ export const agents: Agent[] = [
   { name: 'Localization AI', description: 'Localizes content.', Icon: Languages },
   { name: 'Partner Ecosystem AI', description: 'Manages partner ecosystems.', Icon: Blocks },
   { name: 'Real Estate Command Center AI', description: 'A real estate command center.', Icon: Home },
+  { name: 'Virtual World AI', description: 'Builds and manages virtual worlds.', Icon: Blocks },
+  { name: 'Avatar Gen AI', description: 'Generates realistic avatars.', Icon: Users2 },
+  { name: 'Voice Clone AI', description: 'Clones voices with high fidelity.', Icon: MicVocal },
+  { name: 'Motion Capture AI', description: 'Captures and analyzes motion data.', Icon: Move },
+  { name: 'Immersive Trainer AI', description: 'Creates immersive training simulations.', Icon: View },
+  { name: 'AR Architect AI', description: 'Designs augmented reality experiences.', Icon: DraftingCompass },
+  { name: 'VR Event AI', description: 'Organizes and hosts virtual reality events.', Icon: Drama },
+  { name: 'Holo Chat AI', description: 'Enables holographic communication.', Icon: MessageCircle },
+  { name: 'Emotion Synthesis AI', description: 'Synthesizes realistic emotions in avatars.', Icon: Hand },
+  { name: 'Consciousness Simulator AI', description: 'Simulates aspects of consciousness.', Icon: BrainCircuit },
+  { name: 'Legal Intelligence AI', description: 'Provides legal insights and research.', Icon: Gavel },
+  { name: 'Financial Advisor AI (Personal)', description: 'Offers personalized financial advice.', Icon: Briefcase },
+  { name: 'Music & Podcast Production AI', description: 'Automates music and podcast production.', Icon: AudioWaveform },
 ];
