@@ -6,7 +6,7 @@ import CommandBar from '@/components/layout/command-bar';
 import { useUser } from '@/firebase';
 import { useLanguage } from '@/lib/language';
 import { agents } from '@/lib/agents';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 
 export type Message = {
   role: 'user' | 'agent';
