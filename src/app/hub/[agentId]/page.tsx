@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, use } from 'react';
 import ChatDisplay from '@/components/layout/chat-display';
 import CommandBar from '@/components/layout/command-bar';
 import { useUser } from '@/firebase';
@@ -14,7 +14,8 @@ export type Message = {
   content: string;
 };
 
-export default function AgentChatPage({ params: { agentId } }: { params: { agentId: string } }) {
+export default function AgentChatPage({ params }: { params: { agentId: string } }) {
+  const { agentId } = use(params);
   const { user } = useUser();
   const { t } = useLanguage();
   
