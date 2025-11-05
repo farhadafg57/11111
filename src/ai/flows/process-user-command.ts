@@ -74,7 +74,7 @@ Available Agents:
 {{#each agentNames}}
 - {{{this}}}
 {{/each}}
-If no other agent is a clear match, choose "Oracle".
+If no other agent is a clear match, choose "Oracle AI".
 
 User Command: "{{{command}}}"
 
@@ -135,7 +135,7 @@ const processUserCommandFlow = ai.defineFlow(
     const agentNames = agents.map(a => a.name);
     const { output: selection } = await agentAndModelSelectionPrompt({ command, agentNames });
     
-    const agentName = (selection?.agentName && agentNames.includes(selection.agentName)) ? selection.agentName : 'Oracle';
+    const agentName = (selection?.agentName && agentNames.includes(selection.agentName)) ? selection.agentName : 'Oracle AI';
     const complexity = selection?.complexity || 'simple';
     const model = complexity === 'complex' ? 'googleai/gemini-2.5-pro' : 'googleai/gemini-2.5-flash';
 

@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useMemo, use } from 'react';
+import { useState, useMemo } from 'react';
 import ChatDisplay from '@/components/layout/chat-display';
 import CommandBar from '@/components/layout/command-bar';
 import { useUser } from '@/firebase';
-import { useLanguage } from '@/lib/language';
 import { agents } from '@/lib/agents';
 import { notFound } from 'next/navigation';
 
@@ -17,7 +16,6 @@ export type Message = {
 export default function AgentChatPage({ params }: { params: { agentId: string } }) {
   const { agentId } = params;
   const { user } = useUser();
-  const { t } = useLanguage();
   
   const agent = useMemo(() => agents.find(a => a.slug === agentId), [agentId]);
 
@@ -32,11 +30,9 @@ export default function AgentChatPage({ params }: { params: { agentId: string } 
       content: agent.description,
     },
   ]);
-  const [isResponding, setIsResponding] = useState(false);
-
-  const handleNewMessage = (newMessage: Message) => {
-    setMessages(prev => [...prev, newMessage]);
-    setIsResponding(true);
+  
+  const handleNewMessage = (newMessage: Message, thinkingMessage?: Message) => {
+    setMessages(prev => [...prev, newMessage, ...(thinkingMessage ? [thinkingMessage] : [])]);
   };
 
   const handleAgentResponse = (response: Message) => {
@@ -45,23 +41,16 @@ export default function AgentChatPage({ params }: { params: { agentId: string } 
       const newMessages = prev.filter(msg => msg.content !== '...');
       return [...newMessages, response];
     });
-    setIsResponding(false);
   };
-  
-  const handleThinking = () => {
-     setMessages(prev => [...prev, {role: 'agent', agentName: agent.name, content: '...'}]);
-  }
 
   return (
     <>
       <ChatDisplay messages={messages} />
       <CommandBar
         userId={user?.uid}
-        agentId={agentId}
+        agent={agent}
         onNewMessage={handleNewMessage}
         onAgentResponse={handleAgentResponse}
-        onThinking={handleThinking}
-        isResponding={isResponding}
       />
     </>
   );
