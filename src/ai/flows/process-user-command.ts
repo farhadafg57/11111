@@ -128,7 +128,7 @@ const processUserCommandFlow = ai.defineFlow(
     const agentNames = agents.map(a => a.name);
     const { output: selection } = await agentAndModelSelectionPrompt({ command, agentNames });
     
-    const agentName = selection?.agentName || 'Oracle'; // Default to Oracle
+    const agentName = selection?.agentName && agentNames.includes(selection.agentName) ? selection.agentName : 'Oracle';
     const complexity = selection?.complexity || 'simple';
     const model = complexity === 'complex' ? 'googleai/gemini-2.5-pro' : 'googleai/gemini-2.5-flash';
 
