@@ -39,8 +39,11 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
           const isThinking = message.content === '...';
 
           return (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
               className={cn(
                 'flex items-start gap-4',
                 isUser ? 'justify-end' : 'justify-start'
@@ -80,7 +83,7 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
               )}
-            </div>
+            </motion.div>
           );
         })}
       </div>

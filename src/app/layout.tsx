@@ -13,14 +13,12 @@ export const metadata: Metadata = {
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ['latin'],
-  display: 'swap',
   variable: '--font-headline',
   weight: ['400', '600', '700'],
 });
 
 const sourceSerif4 = Source_Serif_4({
   subsets: ['latin'],
-  display: 'swap',
   variable: '--font-body',
   style: ['normal', 'italic'],
   axes: ['opsz']
@@ -28,7 +26,6 @@ const sourceSerif4 = Source_Serif_4({
 
 const notoNaskhArabic = Noto_Naskh_Arabic({
   subsets: ['arabic'],
-  display: 'swap',
   variable: '--font-arabic',
   weight: ['400', '700'],
 });

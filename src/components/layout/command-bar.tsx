@@ -36,7 +36,7 @@ export default function CommandBar({ userId, onNewMessage, onAgentResponse, onTh
     if (result.success && result.data) {
       const agentResponse: Message = {
         role: 'agent',
-        agentName: result.data.agentName,
+        agentName: result.data.isCached ? `${result.data.agentName} (Cached)` : result.data.agentName,
         content: result.data.agentResponse,
       };
       onAgentResponse(agentResponse);

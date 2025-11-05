@@ -32,6 +32,7 @@ export type ProcessUserCommandInput = z.infer<
 const ProcessUserCommandOutputSchema = z.object({
   agentResponse: z.string().describe('The response from the AI agent.'),
   agentName: z.string().describe('The name of the AI agent that handled the command.'),
+  isCached: z.boolean().describe('Whether the response was from the cache.')
 });
 export type ProcessUserCommandOutput = z.infer<
   typeof ProcessUserCommandOutputSchema
@@ -145,8 +146,9 @@ const processUserCommandFlow = ai.defineFlow(
 
         if (now - cacheTime < ttl) {
           return {
-            agentResponse: `(Cached) ${cachedData.response}`,
+            agentResponse: cachedData.response,
             agentName: cachedData.agentId || agentName,
+            isCached: true
           };
         }
       }
@@ -179,6 +181,7 @@ const processUserCommandFlow = ai.defineFlow(
     return {
       agentResponse: agentResponse,
       agentName: agentName,
+      isCached: false,
     };
   }
 );
