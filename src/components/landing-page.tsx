@@ -8,7 +8,6 @@ import {
   ArrowRight,
   BookOpen,
   HandCoins,
-  HeartPulse,
   Palette,
   Feather,
   Code,
@@ -25,6 +24,8 @@ import {
   Rocket,
   Cpu,
   LayoutPanelLeft,
+  Siren,
+  Pill,
 } from 'lucide-react';
 import { useLanguage } from '@/lib/language';
 import Image from 'next/image';
@@ -51,7 +52,7 @@ const featureIcons = [
     description: 'featureBusiness',
   },
   {
-    Icon: HeartPulse,
+    Icon: Pill,
     title: 'health',
     description: 'featureHealth',
   },
@@ -212,6 +213,40 @@ export default function LandingPage() {
               </Button>
             </Link>
           </motion.div>
+           <motion.div 
+            style={{ y: buttonY, opacity: buttonOpacity }}
+            className="mt-12 text-center"
+           >
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-4xl mx-auto text-left">
+                     <div className="flex items-start gap-3">
+                        <div className="flex items-center justify-center bg-primary/10 text-primary rounded-full size-10 shrink-0">
+                            <div className="text-lg font-bold font-headline">1</div>
+                        </div>
+                        <div>
+                             <h3 className="text-base font-headline font-semibold">{t('howToStep1Title')}</h3>
+                             <p className="text-foreground/80 font-body text-sm">{t('howToStep1Desc')}</p>
+                        </div>
+                     </div>
+                     <div className="flex items-start gap-3">
+                        <div className="flex items-center justify-center bg-primary/10 text-primary rounded-full size-10 shrink-0">
+                            <div className="text-lg font-bold font-headline">2</div>
+                        </div>
+                        <div>
+                             <h3 className="text-base font-headline font-semibold">{t('howToStep2Title')}</h3>
+                             <p className="text-foreground/80 font-body text-sm">{t('howToStep2Desc')}</p>
+                        </div>
+                     </div>
+                     <div className="flex items-start gap-3">
+                        <div className="flex items-center justify-center bg-primary/10 text-primary rounded-full size-10 shrink-0">
+                            <div className="text-lg font-bold font-headline">3</div>
+                        </div>
+                        <div>
+                             <h3 className="text-base font-headline font-semibold">{t('howToStep3Title')}</h3>
+                             <p className="text-foreground/80 font-body text-sm">{t('howToStep3Desc')}</p>
+                        </div>
+                     </div>
+                </div>
+           </motion.div>
         </div>
       </section>
       
@@ -319,7 +354,7 @@ export default function LandingPage() {
                         className="flex flex-col items-center"
                      >
                         <div className="flex items-center justify-center bg-primary/10 text-primary rounded-full size-16 mb-4">
-                            <div className="text-xl font-bold font-headline">{index + 1}</div>
+                            <step.Icon className="size-8" />
                         </div>
                          <h3 className="text-xl font-headline font-semibold mb-2">{t(step.title)}</h3>
                          <p className="text-foreground/80 font-body max-w-xs">{t(step.description)}</p>

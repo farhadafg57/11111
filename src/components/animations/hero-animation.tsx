@@ -6,6 +6,7 @@ import { agents } from '@/lib/agents';
 const useWindowSize = () => {
     const [size, setSize] = useState([0, 0]);
     useEffect(() => {
+      if (typeof window === 'undefined') return;
       function updateSize() {
         setSize([window.innerWidth, window.innerHeight]);
       }
@@ -18,10 +19,16 @@ const useWindowSize = () => {
 
 const InteractiveHeroClient = () => {
   const [width, height] = useWindowSize();
-  const numNodes = width > 768 ? 40 : 20;
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const numNodes = useMemo(() => (width > 768 ? 40 : 20), [width]);
 
   const nodes = useMemo(() => {
-    if (width === 0) return []; // Ensure we don't generate nodes until we have a width
+    if (!isClient || width === 0) return [];
     return Array.from({ length: numNodes }).map((_, i) => ({
       id: i,
       x: Math.random() * width,
@@ -29,10 +36,10 @@ const InteractiveHeroClient = () => {
       size: Math.random() * 2 + 1,
       opacity: Math.random() * 0.3 + 0.1,
     }));
-  }, [numNodes, width, height]);
+  }, [numNodes, width, height, isClient]);
   
   const orbitingAgents = useMemo(() => {
-      if (width === 0) return [];
+      if (!isClient || width === 0) return [];
       const coreAgents = agents.filter(a => a.Icon && !['Oracle', 'Plant Diagnoser', 'Video Generator'].includes(a.name)).slice(0, 10);
       return coreAgents.map((agent, i) => {
         const angle = (i / coreAgents.length) * 2 * Math.PI;
@@ -44,8 +51,11 @@ const InteractiveHeroClient = () => {
           size: width > 768 ? 32 : 24,
         };
       });
-  }, [width]);
+  }, [width, isClient]);
 
+  if (!isClient) {
+    return <div className="absolute inset-0 z-0" />;
+  }
 
   return (
     <div className="absolute inset-0 z-0">
@@ -72,19 +82,17 @@ const InteractiveHeroClient = () => {
                 }
                 return null;
               })}
+               <motion.circle
+                key={node.id}
+                cx={node.x}
+                cy={node.y}
+                r={node.size}
+                className="fill-primary/80"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: node.opacity, scale: 1 }}
+                transition={{ duration: 1.5, delay: Math.random() * 1 }}
+              />
             </React.Fragment>
-          ))}
-           {nodes.map(node => (
-            <motion.circle
-              key={node.id}
-              cx={node.x}
-              cy={node.y}
-              r={node.size}
-              className="fill-primary/80"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: node.opacity, scale: 1 }}
-              transition={{ duration: 1.5, delay: Math.random() * 1 }}
-            />
           ))}
         </g>
       </svg>
