@@ -15,19 +15,22 @@ const cormorantGaramond = Cormorant_Garamond({
   subsets: ['latin'],
   variable: '--font-headline',
   weight: ['400', '600', '700'],
+  display: 'swap',
 });
 
 const sourceSerif4 = Source_Serif_4({
   subsets: ['latin'],
   variable: '--font-body',
   style: ['normal', 'italic'],
-  axes: ['opsz']
+  axes: ['opsz'],
+  display: 'swap',
 });
 
 const notoNaskhArabic = Noto_Naskh_Arabic({
   subsets: ['arabic'],
   variable: '--font-arabic',
   weight: ['400', '700'],
+  display: 'swap',
 });
 
 
@@ -38,6 +41,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preload" href="/_next/static/media/0289ba911e8000e3-s.p.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/_next/static/media/7b89a4fd5e90ede0-s.p.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/_next/static/media/d6f3920df5a15b13-s.p.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/_next/static/media/f35bab321b697722-s.p.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+      </head>
       <body className={cn(
         'font-body antialiased',
         cormorantGaramond.variable,
