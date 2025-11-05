@@ -1,6 +1,6 @@
 
 import type { LucideIcon } from 'lucide-react';
-import { Leaf, Video, Network, BrainCircuit, Eye, Mic, Languages, Combine, Shield, Scale, Box, DollarSign, TrendingUp, Search, Cog, Target, ClipboardCheck, Cloud, ShieldCheck, Banknote, Users, Truck, Landmark, HeartHandshake, Siren, AreaChart, Scan, FileScan, Building2, Receipt, Vote, Code, PenTool, Plug, TestTube2, Rocket, Paintbrush, Clapperboard, Music, Cuboid, MicVocal, Book, Megaphone, Podcast, AudioWaveform, Film, GraduationCap, BookOpen, MessageSquare, Wrench, ClipboardPen, FileCheck, GitBranch, HelpCircle, School, BookText, Thermometer, Pill, Smile, CalendarDays, FileCode, FileHeart, Activity, MonitorSmartphone, FileText, FlaskConical, Wallet, LineChart, ShieldAlert, Bot, MessageCircle, Users2, Star, Sun, Dumbbell, Sprout, Telescope, Microscope, Globe, Blocks, Brick, Home, View, Move, DraftingCompass, Drama, Hand, Gavel, Briefcase, LandPlot, Ear, Factory, Brain, BotMessageSquare, Workflow, GitGraph, Database, HardDrive, Cpu, ScanSearch, KeyRound, CloudCog, Sigma, BarChart, Dna, BotIcon, Atom, Coins, CreditCard, UserCheck, PersonStanding, Lightbulb, MapPin, Handshake, HeartPulse, User, Gamepad2, UserCog, ShieldQuestion, UserRoundCog, Settings, ShoppingCart, Drama as Theater, SunSnow, Award, Newspaper, Anchor, Wind, BrainCog, Briefcase as BriefcaseBusiness, Mail, HandCoins } from 'lucide-react';
+import { Leaf, Video, Network, BrainCircuit, Eye, Mic, Languages, Combine, Shield, Scale, Box, DollarSign, TrendingUp, Search, Cog, Target, ClipboardCheck, Cloud, ShieldCheck, Banknote, Users, Truck, Landmark, HeartHandshake, Siren, AreaChart, Scan, FileScan, Building2, Receipt, Vote, Code, PenTool, Plug, TestTube2, Rocket, Paintbrush, Clapperboard, Music, Cuboid, MicVocal, Book, Megaphone, Podcast, AudioWaveform, Film, GraduationCap, BookOpen, MessageSquare, Wrench, ClipboardPen, FileCheck, GitBranch, HelpCircle, School, BookText, Thermometer, Pill, Smile, CalendarDays, FileCode, FileHeart, Activity, MonitorSmartphone, FileText, FlaskConical, Wallet, LineChart, ShieldAlert, Bot, MessageCircle, Users2, Star, Sun, Dumbbell, Sprout, Telescope, Microscope, Globe, Blocks, Brick, Home, View, Move, DraftingCompass, Drama, Hand, Gavel, Briefcase, LandPlot, Ear, Factory, Brain, BotMessageSquare, Workflow, GitGraph, Database, HardDrive, Cpu, ScanSearch, KeyRound, CloudCog, Sigma, BarChart, Dna, BotIcon, Atom, Coins, CreditCard, UserCheck, PersonStanding, Lightbulb, MapPin, Handshake, HeartPulse, User, Gamepad2, UserCog, ShieldQuestion, UserRoundCog, Settings, ShoppingCart, Drama as Theater, SunSnow, Award, Newspaper, Anchor, Wind, BrainCog, Briefcase as BriefcaseBusiness, Mail, HandCoins, FileSignature, Presentation } from 'lucide-react';
 
 export type Agent = {
   name: string;
@@ -53,6 +53,9 @@ export const agents: Agent[] = [
   { name: 'LanguageExchange AI', slug: 'languageexchange-ai', description: 'Facilitates language practice with AI conversation partners.', Icon: Languages },
   { name: 'PublicSpeaker AI', slug: 'publicspeaker-ai', description: 'Helps users practice and improve their public speaking skills.', Icon: Megaphone },
   { name: 'TranslatorPro AI', slug: 'translatorpro-ai', description: 'Provides advanced, context-aware translations for professional use.', Icon: Languages },
+  { name: 'CV Generator', slug: 'cv-generator', description: 'Creates professional CVs and resumes from your information.', Icon: FileSignature },
+  { name: 'Proposal Writer', slug: 'proposal-writer', description: 'Generates persuasive proposals for business, grants, or projects.', Icon: Presentation },
+
 
   // HealthTech & Wellness
   { name: 'SymptomChecker AI', slug: 'symptomchecker-ai', description: 'Provides information based on reported medical symptoms.', Icon: Thermometer },
@@ -106,7 +109,6 @@ export const agents: Agent[] = [
   // Real-World Grounding
   { name: 'Fact-Checker Agent', slug: 'fact-checker-agent', description: 'Verifies and fact-checks information from various sources.', Icon: ClipboardCheck },
   { name: 'Local Guide AI', slug: 'local-guide-ai', description: 'Provides local information, directions, and recommendations.', Icon: MapPin },
-  { name: 'MarketIntel AI', slug: 'marketintel-ai-real', description: 'Provides real-time market intelligence and analysis.', Icon: Search },
   { name: 'ResearchAssistant AI', slug: 'researchassistant-ai', description: 'Assists with academic and scientific research tasks.', Icon: BookText },
   { name: 'Disaster Response AI', slug: 'disaster-response-ai', description: 'Coordinates and assists in disaster response efforts.', Icon: Siren },
   { name: 'EmergencyResponder AI', slug: 'emergencyresponder-ai', description: 'Provides immediate information and guidance in emergencies.', Icon: ShieldQuestion },
