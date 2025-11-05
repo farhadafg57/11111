@@ -26,6 +26,8 @@ import {
   LayoutPanelLeft,
   Siren,
   Pill,
+  Combine,
+  Sigma,
 } from 'lucide-react';
 import { useLanguage } from '@/lib/language';
 import Image from 'next/image';
@@ -104,6 +106,24 @@ const techStack = [
     }
 ];
 
+const hubExcellency = [
+    {
+        Icon: Combine,
+        title: 'hubExcellencyOrchestrationTitle',
+        description: 'hubExcellencyOrchestrationDesc'
+    },
+    {
+        Icon: Cpu,
+        title: 'hubExcellencyDualTitle',
+        description: 'hubExcellencyDualDesc'
+    },
+    {
+        Icon: Rocket,
+        title: 'hubExcellencyOptimizationTitle',
+        description: 'hubExcellencyOptimizationDesc'
+    }
+];
+
 const principles = [
     {
         Icon: ShieldCheck,
@@ -138,8 +158,16 @@ const faqItems = [
     {
         q: 'faq4q',
         a: 'faq4a'
+    },
+    {
+        q: 'faq5q',
+        a: 'faq5a'
+    },
+    {
+        q: 'faq6q',
+        a: 'faq6a'
     }
-]
+];
 
 
 export default function LandingPage() {
@@ -197,6 +225,12 @@ export default function LandingPage() {
           >
             AfghanAI
           </motion.h1>
+           <motion.p
+            style={{ y: subtitleY, opacity: subtitleOpacity }}
+            className="text-lg md:text-2xl text-foreground/70 max-w-2xl mx-auto mb-10"
+          >
+            {t('hubSubtitle')}
+          </motion.p>
           <motion.div
             style={{ y: buttonY, opacity: buttonOpacity }}
           >
@@ -240,6 +274,66 @@ export default function LandingPage() {
              </div>
           </div>
       </section>
+
+      {/* Global AI Synthesis Section */}
+      <section id="synthesis" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
+          <div className="container mx-auto px-4 text-center">
+              <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  variants={itemVariants}
+                  className="max-w-3xl mx-auto"
+              >
+                  <Sigma className="w-16 h-16 text-primary mx-auto mb-4" />
+                  <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
+                      {t('synthesisTitle')}
+                  </h2>
+                  <p className="text-lg text-foreground/70">
+                      {t('synthesisSubtitle')}
+                  </p>
+              </motion.div>
+          </div>
+      </section>
+
+      {/* Hub Excellency Section */}
+        <section id="hub-excellency" className="py-20 lg:py-24 bg-background overflow-hidden">
+            <div className="container mx-auto px-4">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={itemVariants}
+                    className="text-center max-w-3xl mx-auto">
+                    <Rocket className="w-16 h-16 text-primary mx-auto mb-4" />
+                    <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
+                        {t('hubExcellencyTitle')}
+                    </h2>
+                    <p className="text-lg text-foreground/70 mb-12">
+                        {t('hubExcellencySubtitle')}
+                    </p>
+                </motion.div>
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={containerVariants}
+                >
+                    {hubExcellency.map((tech) => (
+                        <motion.div
+                            key={tech.title}
+                            variants={itemVariants}
+                            className="bg-background p-6 rounded-lg border shadow-sm"
+                        >
+                            <tech.Icon className="w-10 h-10 text-primary mb-4 mx-auto" />
+                            <h3 className="text-xl font-headline font-semibold mb-2">{t(tech.title)}</h3>
+                            <p className="text-foreground/80 font-body">{t(tech.description)}</p>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </div>
+        </section>
 
       {/* Features Section */}
       <section id="features" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
@@ -333,7 +427,7 @@ export default function LandingPage() {
                     viewport={{ once: true, amount: 0.3 }}
                     variants={itemVariants}
                     className="text-center max-w-3xl mx-auto">
-                    <Rocket className="w-16 h-16 text-primary mx-auto mb-4" />
+                    <Server className="w-16 h-16 text-primary mx-auto mb-4" />
                     <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
                         {t('techTitle')}
                     </h2>
