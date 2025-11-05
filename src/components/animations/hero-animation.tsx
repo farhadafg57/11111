@@ -74,20 +74,20 @@ const InteractiveHeroClient = () => {
               })}
             </React.Fragment>
           ))}
+           {nodes.map(node => (
+            <motion.circle
+              key={node.id}
+              cx={node.x}
+              cy={node.y}
+              r={node.size}
+              className="fill-primary/80"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: node.opacity, scale: 1 }}
+              transition={{ duration: 1.5, delay: Math.random() * 1 }}
+            />
+          ))}
         </g>
       </svg>
-      {nodes.map(node => (
-        <motion.circle
-          key={node.id}
-          cx={node.x}
-          cy={node.y}
-          r={node.size}
-          className="fill-primary/80"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: node.opacity, scale: 1 }}
-          transition={{ duration: 1.5, delay: Math.random() * 1 }}
-        />
-      ))}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ transformStyle: 'preserve-3d' }}>
          {orbitingAgents.map((agent, i) => {
              const x = agent.radius * Math.cos(agent.angle);
