@@ -10,13 +10,14 @@ import { useLanguage } from '@/lib/language';
 
 type CommandBarProps = {
   userId?: string;
+  agentId: string;
   onNewMessage: (message: Message) => void;
   onAgentResponse: (message: Message) => void;
   onThinking: () => void;
   isResponding: boolean;
 };
 
-export default function CommandBar({ userId, onNewMessage, onAgentResponse, onThinking, isResponding }: CommandBarProps) {
+export default function CommandBar({ userId, agentId, onNewMessage, onAgentResponse, onThinking, isResponding }: CommandBarProps) {
   const [inputValue, setInputValue] = useState('');
   const { t } = useLanguage();
 

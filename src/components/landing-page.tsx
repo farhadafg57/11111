@@ -106,15 +106,6 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="text-center py-20 lg:py-32 bg-background overflow-hidden">
         <div className="container mx-auto px-4">
-        <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          >
-            <BrainCircuit
-                className="w-40 h-40 text-primary mx-auto mb-6"
-            />
-          </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

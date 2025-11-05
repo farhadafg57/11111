@@ -57,6 +57,7 @@ export default function AgentChatPage({ params }: { params: { agentId: string } 
       <ChatDisplay messages={messages} />
       <CommandBar
         userId={user?.uid}
+        agentId={agentId}
         onNewMessage={handleNewMessage}
         onAgentResponse={handleAgentResponse}
         onThinking={handleThinking}
