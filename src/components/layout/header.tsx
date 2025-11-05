@@ -8,7 +8,6 @@ export default function AppHeader() {
       <div className="container mx-auto flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
            <SidebarTrigger className="md:hidden" />
-          <BrainCircuit className="w-8 h-8 text-primary" />
           <h1 className="text-3xl font-headline font-bold text-foreground tracking-tight">
             AfghanAI
           </h1>
