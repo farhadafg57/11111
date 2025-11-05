@@ -1,6 +1,6 @@
 
 import type { LucideIcon } from 'lucide-react';
-import { Leaf, Video, Network, BrainCircuit, Eye, Mic, Languages, Combine, Shield, Scale, Box, DollarSign, TrendingUp, Search, Cog, Target, ClipboardCheck, Cloud, ShieldCheck, Banknote, Users, Truck, Landmark, HeartHandshake, Siren, AreaChart, Scan, FileScan, Building2, Receipt, Vote, Code, PenTool, Plug, TestTube2, Rocket, Paintbrush, Clapperboard, Music, Cuboid, MicVocal, Book, Megaphone, Podcast, AudioWaveform, Film, GraduationCap, BookOpen, MessageSquare, Wrench, ClipboardPen, FileCheck, GitBranch, HelpCircle, School, BookText, Thermometer, Pill, Smile, CalendarDays, FileCode, FileHeart, Activity, MonitorSmartphone, FileText, FlaskConical, Wallet, LineChart, ShieldAlert, Bot, MessageCircle, Users2, Star, Sun, Dumbbell, Sprout, Telescope, Microscope, Globe, Blocks, Brick, Home, View, Move, DraftingCompass, Drama, Hand, Gavel, Briefcase, LandPlot, Ear, Factory, Brain, BotMessageSquare, Workflow, GitGraph, Database, HardDrive, Cpu, ScanSearch, KeyRound, CloudCog, Sigma, BarChart, Dna, BotIcon, Atom, Coins, CreditCard, UserCheck, PersonStanding, Lightbulb, MapPin, Handshake, HeartPulse, User, GraduationCap as UserCog, ShieldQuestion, UserRoundCog, Settings, ShoppingCart, Drama as Theater, SunSnow, Award, Newspaper, Anchor, Wind, BrainCog, Briefcase as BriefcaseBusiness, Mail, HandCoins } from 'lucide-react';
+import { Leaf, Video, Network, BrainCircuit, Eye, Mic, Languages, Combine, Shield, Scale, Box, DollarSign, TrendingUp, Search, Cog, Target, ClipboardCheck, Cloud, ShieldCheck, Banknote, Users, Truck, Landmark, HeartHandshake, Siren, AreaChart, Scan, FileScan, Building2, Receipt, Vote, Code, PenTool, Plug, TestTube2, Rocket, Paintbrush, Clapperboard, Music, Cuboid, MicVocal, Book, Megaphone, Podcast, AudioWaveform, Film, GraduationCap, BookOpen, MessageSquare, Wrench, ClipboardPen, FileCheck, GitBranch, HelpCircle, School, BookText, Thermometer, Pill, Smile, CalendarDays, FileCode, FileHeart, Activity, MonitorSmartphone, FileText, FlaskConical, Wallet, LineChart, ShieldAlert, Bot, MessageCircle, Users2, Star, Sun, Dumbbell, Sprout, Telescope, Microscope, Globe, Blocks, Brick, Home, View, Move, DraftingCompass, Drama, Hand, Gavel, Briefcase, LandPlot, Ear, Factory, Brain, BotMessageSquare, Workflow, GitGraph, Database, HardDrive, Cpu, ScanSearch, KeyRound, CloudCog, Sigma, BarChart, Dna, BotIcon, Atom, Coins, CreditCard, UserCheck, PersonStanding, Lightbulb, MapPin, Handshake, HeartPulse, User, Gamepad2, UserCog, ShieldQuestion, UserRoundCog, Settings, ShoppingCart, Drama as Theater, SunSnow, Award, Newspaper, Anchor, Wind, BrainCog, Briefcase as BriefcaseBusiness, Mail, HandCoins } from 'lucide-react';
 
 export type Agent = {
   name: string;
@@ -25,7 +25,7 @@ export const agents: Agent[] = [
   { name: 'ROI Predictor AI', slug: 'roi-predictor-ai', description: 'Predicts the potential return on investment for business decisions.', Icon: Target },
   { name: 'HRManager AI', slug: 'hrmanager-ai', description: 'Assists with human resources tasks, from recruitment to employee engagement.', Icon: Users },
   { name: 'Compliance Auditor AI', slug: 'compliance-auditor-ai', description: 'Audits business operations for regulatory compliance.', Icon: ShieldCheck },
-  { name'Legal Advisor', slug: 'legal-advisor', description: 'Provides research and analysis for legal questions.', Icon: Gavel },
+  { name: 'Legal Advisor', slug: 'legal-advisor', description: 'Provides research and analysis for legal questions.', Icon: Gavel },
   { name: 'E-Gov Automation AI', slug: 'egov-automation-ai', description: 'Automates and streamlines e-governance services and workflows.', Icon: Landmark },
   { name: 'Citizen Support AI', slug: 'citizen-support-ai', description: 'Provides automated, 24/7 support for citizen inquiries.', Icon: HeartHandshake },
   { name: 'Policy Simulator AI', slug: 'policy-simulator-ai', description: 'Simulates the potential impact of public policies before implementation.', Icon: Scale },
@@ -40,7 +40,7 @@ export const agents: Agent[] = [
   { name: 'TestSuite AI', slug: 'testsuite-ai', description: 'Generates comprehensive test suites for your applications.', Icon: TestTube2 },
   { name: 'DevOpsAuto AI', slug: 'devopsauto-ai', description: 'Automates DevOps tasks like CI/CD, monitoring, and deployment.', Icon: Rocket },
   { name: 'CyberSecurity Analyst AI', slug: 'cybersecurity-analyst-ai', description: 'Analyzes and defends against cybersecurity threats.', Icon: ShieldAlert },
-  { name:severi'DataScientistAid AI', slug: 'datascientistaid-ai', description: 'Assists data scientists with analysis, modeling, and visualization.', Icon: Sigma },
+  { name: 'DataScientistAid AI', slug: 'datascientistaid-ai', description: 'Assists data scientists with analysis, modeling, and visualization.', Icon: Sigma },
 
   // Education & Learning
   { name: 'Kankor Tutor AI', slug: 'kankor-tutor-ai', description: 'Provides personalized tutoring for the Kankor exam.', Icon: GraduationCap },
@@ -61,25 +61,25 @@ export const agents: Agent[] = [
   { name: 'LabReport Analyzer AI', slug: 'labreport-analyzer-ai', description: 'Analyzes and explains medical lab reports.', Icon: FlaskConical },
   { name: 'TeleHealth AI', slug: 'telehealth-ai', description: 'Facilitates remote telehealth consultations and services.', Icon: MonitorSmartphone },
   { name: 'Dietitian AI', slug: 'dietitian-ai', description: 'Provides personalized dietary advice and meal planning.', Icon: HandCoins },
-  { name'Nutritionist AI', slug: 'nutritionist-ai', description: 'Provides nutritional advice and meal planning.', Icon: Sprout },
+  { name: 'Nutritionist AI', slug: 'nutritionist-ai', description: 'Provides nutritional advice and meal planning.', Icon: Sprout },
   { name: 'Personal Trainer AI', slug: 'personal-trainer-ai', description: 'Creates personalized workout and fitness plans.', Icon: Dumbbell },
   { name: 'FitnessCoach AI', slug: 'fitnesscoach-ai', description: 'Guides users through workouts and fitness routines.', Icon: Activity },
 
   // FinTech & E-Commerce
   { name: 'Expense Tracker AI', slug: 'expense-tracker-ai', description: 'Tracks and categorizes personal or business expenses.', Icon: Wallet },
   { name: 'Investment Planner AI', slug: 'investment-planner-ai', description: 'Assists in creating and managing investment portfolios.', Icon: LineChart },
-  { name'FinancialPlanner AI', slug: 'financialplanner-ai', description: 'Provides comprehensive financial planning and advice.', Icon: Banknote },
+  { name: 'FinancialPlanner AI', slug: 'financialplanner-ai', description: 'Provides comprehensive financial planning and advice.', Icon: Banknote },
   { name: 'Fraud Detector AI', slug: 'fraud-detector-ai', description: 'Detects and flags fraudulent financial transactions.', Icon: ShieldAlert },
   { name: 'E-Commerce Optimizer', slug: 'ecommerce-optimizer', description: 'Optimizes e-commerce stores for sales and performance.', Icon: Factory },
   { name: 'TaxAdvisor AI', slug: 'taxadvisor-ai', description: 'Provides advice and assistance with tax-related queries.', Icon: Receipt },
-  { name'GrantWriter AI', slug: 'grantwriter-ai', description: 'Assists in writing and preparing grant proposals.', Icon: Award },
+  { name: 'GrantWriter AI', slug: 'grantwriter-ai', description: 'Assists in writing and preparing grant proposals.', Icon: Award },
 
   // Communication & Social
   { name: 'WhatsApp Responder AI', slug: 'whatsapp-responder-ai', description: 'Automates responses for WhatsApp Business accounts.', Icon: MessageCircle },
   { name: 'Community Moderator AI', slug: 'community-moderator-ai', description: 'Moderates online communities and forums.', Icon: Users2 },
   { name: 'Dating Coach AI', slug: 'dating-coach-ai', description: 'Provides advice on dating and profile optimization.', Icon: Star },
   { name: 'SentimentAnalyzer AI', slug: 'sentimentanalyzer-ai', description: 'Analyzes and reports on sentiment in text and social media.', Icon: HeartPulse },
-  { name'SocialMediaManager AI', slug: 'socialmediamanager-ai', description: 'Manages social media accounts, from posting to analytics.', Icon: Mail },
+  { name: 'SocialMediaManager AI', slug: 'socialmediamanager-ai', description: 'Manages social media accounts, from posting to analytics.', Icon: Mail },
 
   // Sensory & Data Intelligence
   { name: 'Vision AI', slug: 'vision-ai', description: 'Analyzes and understands the content of images and videos.', Icon: Eye },
@@ -87,7 +87,7 @@ export const agents: Agent[] = [
   { name: 'DataViz AI', slug: 'dataviz-ai', description: 'Creates insightful data visualizations from raw data.', Icon: BarChart },
   { name: 'AdCampaign AI', slug: 'adcampaign-ai', description: 'Designs, manages, and optimizes advertising campaigns.', Icon: Megaphone },
   { name: 'AR Designer AI', slug: 'ar-designer-ai', description: 'Designs and develops augmented reality experiences.', Icon: View },
-ci'Avatar Gen AI', slug: 'avatar-gen-ai', description: 'Generates realistic and stylized user avatars.', Icon: User },
+  { name: 'Avatar Gen AI', slug: 'avatar-gen-ai', description: 'Generates realistic and stylized user avatars.', Icon: User },
   { name: 'LogoGen AI', slug: 'logogen-ai', description: 'Generates unique and professional logos for your brand.', Icon: Paintbrush },
   { name: 'StoryTeller AI', slug: 'storyteller-ai', description: 'Crafts compelling narratives and stories for any medium.', Icon: BookOpen },
   { name: 'Video Director AI', slug: 'video-director-ai', description: 'Directs and helps create professional-quality videos.', Icon: Clapperboard },
@@ -97,10 +97,10 @@ ci'Avatar Gen AI', slug: 'avatar-gen-ai', description: 'Generates realistic and 
   { name: 'Speech-to-Text AI', slug: 'speech-to-text-ai', description: 'Transcribes spoken language into written text.', Icon: Mic },
   { name: 'AdaptiveLearning AI', slug: 'adaptivelearning-ai', description: 'Adapts educational content to individual learning styles.', Icon: GitBranch },
   { name: 'Emotion Synthesis AI', slug: 'emotion-synthesis-ai', description: 'Synthesizes realistic emotions for digital avatars.', Icon: Smile },
-  { name'Medical Scribe', slug: 'medical-scribe', description: 'Automates the process of taking medical notes during consultations.', Icon: ClipboardPen },
+  { name: 'Medical Scribe', slug: 'medical-scribe', description: 'Automates the process of taking medical notes during consultations.', Icon: ClipboardPen },
   { name: 'Music Composer AI', slug: 'music-composer-ai', description: 'Composes original music tracks in various styles.', Icon: Music },
   { name: 'MusicGen AI', slug: 'musicgen-ai', description: 'Generates novel musical compositions from prompts.', Icon: AudioWaveform },
-  { name'Sohbat Companion', slug: 'sohbat-companion', description: 'An AI companion for conversation and friendship.', Icon: Ear },
+  { name: 'Sohbat Companion', slug: 'sohbat-companion', description: 'An AI companion for conversation and friendship.', Icon: Ear },
   { name: 'Voice Clone AI', slug: 'voice-clone-ai', description: 'Clones a voice from a short audio sample.', Icon: MicVocal },
 
   // Real-World Grounding
@@ -121,7 +121,7 @@ ci'Avatar Gen AI', slug: 'avatar-gen-ai', description: 'Generates realistic and 
   { name: 'MetaverseArchitect AI', slug: 'metaversearchitect-ai', description: 'Designs and constructs environments and experiences for the metaverse.', Icon: Cuboid },
   { name: 'RoboticsControl AI', slug: 'roboticscontrol-ai', description: 'Designs and controls the behavior of robotic systems.', Icon: Bot },
   { name: 'Green Tech AI', slug: 'green-tech-ai', description: 'Advises on green technology and sustainable practices.', Icon: Leaf },
-ci'Patent Scout AI', slug: 'patent-scout-ai', description: 'Scouts for new and relevant patents in any industry.', Icon: ScanSearch },
+  { name: 'Patent Scout AI', slug: 'patent-scout-ai', description: 'Scouts for new and relevant patents in any industry.', Icon: ScanSearch },
   { name: 'Real Estate Command Center AI', slug: 'real-estate-command-center-ai', description: 'Analyzes real estate markets and opportunities.', Icon: Building2 },
   { name: 'Trend Forecaster AI', slug: 'trend-forecaster-ai', description: 'Forecasts emerging trends in technology and culture.', Icon: TrendingUp },
 ];
