@@ -186,11 +186,11 @@ export default function LandingPage() {
       <AppHeader />
 
       {/* Hero Section */}
-      <section ref={targetRef} className="relative text-center h-[120svh] py-20 lg:py-32 bg-background overflow-hidden">
+      <section ref={targetRef} className="relative text-center h-[100svh] py-20 lg:py-32 bg-background overflow-hidden">
         <motion.div style={{ opacity: animationOpacity }} className="absolute inset-0">
             <HeroAnimation />
         </motion.div>
-        <div className="relative container mx-auto px-4 z-10">
+        <div className="relative container mx-auto px-4 z-10 flex flex-col items-center justify-center h-full">
           <motion.h1
             style={{ y: titleY, opacity: titleOpacity }}
             className="text-4xl md:text-7xl font-headline font-bold tracking-tight mb-6"
@@ -213,40 +213,6 @@ export default function LandingPage() {
               </Button>
             </Link>
           </motion.div>
-           <motion.div 
-            style={{ y: buttonY, opacity: buttonOpacity }}
-            className="mt-12 text-center"
-           >
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-4xl mx-auto text-left">
-                     <div className="flex items-start gap-3">
-                        <div className="flex items-center justify-center bg-primary/10 text-primary rounded-full size-10 shrink-0">
-                            <div className="text-lg font-bold font-headline">1</div>
-                        </div>
-                        <div>
-                             <h3 className="text-base font-headline font-semibold">{t('howToStep1Title')}</h3>
-                             <p className="text-foreground/80 font-body text-sm">{t('howToStep1Desc')}</p>
-                        </div>
-                     </div>
-                     <div className="flex items-start gap-3">
-                        <div className="flex items-center justify-center bg-primary/10 text-primary rounded-full size-10 shrink-0">
-                            <div className="text-lg font-bold font-headline">2</div>
-                        </div>
-                        <div>
-                             <h3 className="text-base font-headline font-semibold">{t('howToStep2Title')}</h3>
-                             <p className="text-foreground/80 font-body text-sm">{t('howToStep2Desc')}</p>
-                        </div>
-                     </div>
-                     <div className="flex items-start gap-3">
-                        <div className="flex items-center justify-center bg-primary/10 text-primary rounded-full size-10 shrink-0">
-                            <div className="text-lg font-bold font-headline">3</div>
-                        </div>
-                        <div>
-                             <h3 className="text-base font-headline font-semibold">{t('howToStep3Title')}</h3>
-                             <p className="text-foreground/80 font-body text-sm">{t('howToStep3Desc')}</p>
-                        </div>
-                     </div>
-                </div>
-           </motion.div>
         </div>
       </section>
       

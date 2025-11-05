@@ -1,6 +1,6 @@
 'use client';
-import { motion, useTransform, useScroll } from 'framer-motion';
-import React, { useRef, useMemo, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import React, { useMemo, useEffect, useState } from 'react';
 import { agents } from '@/lib/agents';
 
 const useWindowSize = () => {
@@ -18,25 +18,12 @@ const useWindowSize = () => {
 };
 
 const InteractiveHeroClient = () => {
-  const [width, height] = useWindowSize();
+  const [width] = useWindowSize();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-  const numNodes = useMemo(() => (width > 768 ? 40 : 20), [width]);
-
-  const nodes = useMemo(() => {
-    if (!isClient || width === 0) return [];
-    return Array.from({ length: numNodes }).map((_, i) => ({
-      id: i,
-      x: Math.random() * width,
-      y: Math.random() * height * 1.2,
-      size: Math.random() * 2 + 1,
-      opacity: Math.random() * 0.3 + 0.1,
-    }));
-  }, [numNodes, width, height, isClient]);
   
   const orbitingAgents = useMemo(() => {
       if (!isClient || width === 0) return [];
@@ -59,43 +46,7 @@ const InteractiveHeroClient = () => {
 
   return (
     <div className="absolute inset-0 z-0">
-      <svg className="absolute inset-0">
-        <g>
-          {nodes.map((node, i) => (
-            <React.Fragment key={`frag-${i}`}>
-              {nodes.slice(i + 1).map((otherNode) => {
-                const distance = Math.hypot(node.x - otherNode.x, node.y - otherNode.y);
-                if (distance < 200) {
-                  return (
-                    <motion.line
-                      key={`${node.id}-${otherNode.id}`}
-                      x1={node.x}
-                      y1={node.y}
-                      x2={otherNode.x}
-                      y2={otherNode.y}
-                      className="stroke-primary/20"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 - distance / 200 }}
-                      transition={{ duration: 1 }}
-                    />
-                  );
-                }
-                return null;
-              })}
-               <motion.circle
-                key={node.id}
-                cx={node.x}
-                cy={node.y}
-                r={node.size}
-                className="fill-primary/80"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: node.opacity, scale: 1 }}
-                transition={{ duration: 1.5, delay: Math.random() * 1 }}
-              />
-            </React.Fragment>
-          ))}
-        </g>
-      </svg>
+        <div className="absolute inset-0 bg-grid-primary/10 [mask-image:radial-gradient(ellipse_at_center,white_20%,transparent_80%)]"></div>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ transformStyle: 'preserve-3d' }}>
          {orbitingAgents.map((agent, i) => {
              const x = agent.radius * Math.cos(agent.angle);
