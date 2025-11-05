@@ -15,7 +15,7 @@ export type Message = {
 };
 
 export default function AgentChatPage({ params }: { params: { agentId: string } }) {
-  const { agentId } = use(params);
+  const { agentId } = params;
   const { user } = useUser();
   const { t } = useLanguage();
   
@@ -53,7 +53,7 @@ export default function AgentChatPage({ params }: { params: { agentId: string } 
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <>
       <ChatDisplay messages={messages} />
       <CommandBar
         userId={user?.uid}
@@ -63,6 +63,6 @@ export default function AgentChatPage({ params }: { params: { agentId: string } 
         onThinking={handleThinking}
         isResponding={isResponding}
       />
-    </div>
+    </>
   );
 }

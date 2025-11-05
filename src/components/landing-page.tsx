@@ -195,7 +195,7 @@ export default function LandingPage() {
             style={{ y: titleY, opacity: titleOpacity }}
             className="text-4xl md:text-7xl font-headline font-bold tracking-tight mb-6"
           >
-            {t('hubTitle')}
+            AfghanAI
           </motion.h1>
           <motion.div
             style={{ y: buttonY, opacity: buttonOpacity }}
@@ -520,7 +520,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="py-6 border-t bg-muted/30">
         <div className="container mx-auto px-4 text-center text-foreground/60">
-          <div>&copy; {new Date().getFullYear()} AfghanAI Hub. {t('footerRights')}</div>
+          <div>&copy; {new Date().getFullYear()} AfghanAI. {t('footerRights')}</div>
         </div>
       </footer>
     </div>

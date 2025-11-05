@@ -14,7 +14,7 @@ export default function HubLayout({
                 <Sidebar collapsible="icon" className="border-r">
                     <AgentList />
                 </Sidebar>
-                <SidebarInset className="flex flex-col flex-1">
+                <SidebarInset>
                     {children}
                 </SidebarInset>
             </div>

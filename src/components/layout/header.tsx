@@ -10,7 +10,7 @@ export default function AppHeader() {
            <SidebarTrigger className="md:hidden" />
           <BrainCircuit className="w-8 h-8 text-primary" />
           <h1 className="text-3xl font-headline font-bold text-foreground tracking-tight">
-            AfghanAI Hub
+            AfghanAI
           </h1>
         </div>
         <LanguageSwitcher />
