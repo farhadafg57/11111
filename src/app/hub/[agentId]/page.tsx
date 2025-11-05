@@ -6,7 +6,7 @@ import CommandBar from '@/components/layout/command-bar';
 import { useUser } from '@/firebase';
 import { useLanguage } from '@/lib/language';
 import { agents } from '@/lib/agents';
-import { notFound, useParams } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
 export type Message = {
   role: 'user' | 'agent';
@@ -14,8 +14,7 @@ export type Message = {
   content: string;
 };
 
-export default function AgentChatPage({ params }: { params: { agentId: string } }) {
-  const { agentId } = params;
+export default function AgentChatPage({ params: { agentId } }: { params: { agentId: string } }) {
   const { user } = useUser();
   const { t } = useLanguage();
   
