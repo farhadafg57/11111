@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import AppHeader from '@/components/layout/header';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowRight,
   BookOpen,
@@ -30,6 +30,8 @@ import { useLanguage } from '@/lib/language';
 import Image from 'next/image';
 import placeholderData from '@/lib/placeholder-images.json';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
+import HeroAnimation from './animations/hero-animation';
+import React from 'react';
 
 
 const featureIcons = [
@@ -142,6 +144,19 @@ const faqItems = [
 export default function LandingPage() {
   const { t, language } = useLanguage();
   const founderImage = placeholderData.images.find(img => img.id === 'founder-landing');
+  const targetRef = React.useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.2, 0.4], [1, 0.5, 0]);
+  const titleY = useTransform(scrollYProgress, [0, 0.4], ['0%', '-50%']);
+  const subtitleOpacity = useTransform(scrollYProgress, [0, 0.3, 0.5], [1, 0.5, 0]);
+  const subtitleY = useTransform(scrollYProgress, [0, 0.5], ['0%', '-100%']);
+  const buttonOpacity = useTransform(scrollYProgress, [0, 0.4, 0.6], [1, 0.5, 0]);
+  const buttonY = useTransform(scrollYProgress, [0, 0.6], ['0%', '-150%']);
+  const animationOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -170,31 +185,28 @@ export default function LandingPage() {
       <AppHeader />
 
       {/* Hero Section */}
-      <section className="text-center py-20 lg:py-32 bg-background overflow-hidden">
-        <div className="container mx-auto px-4">
+      <section ref={targetRef} className="relative text-center h-[120svh] py-20 lg:py-32 bg-background overflow-hidden">
+        <motion.div style={{ opacity: animationOpacity }} className="absolute inset-0">
+            <HeroAnimation />
+        </motion.div>
+        <div className="relative container mx-auto px-4 z-10">
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
-            className="text-4xl md:text-6xl font-headline font-bold tracking-tight mb-4"
+            style={{ y: titleY, opacity: titleOpacity }}
+            className="text-4xl md:text-7xl font-headline font-bold tracking-tight mb-6"
           >
             {t('hubTitle')}
           </motion.h1>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
-            className="text-lg md:text-xl text-foreground/80 font-body max-w-3xl mx-auto mb-8"
+            style={{ y: subtitleY, opacity: subtitleOpacity }}
+            className="text-lg md:text-2xl text-foreground/80 font-body max-w-3xl mx-auto mb-10"
           >
             {t('hubSubtitle')}
           </motion.p>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.6, ease: 'easeOut' }}
+            style={{ y: buttonY, opacity: buttonOpacity }}
           >
             <Link href="/hub" passHref>
-              <Button size="lg" className="group text-lg h-12 px-8">
+              <Button size="lg" className="group text-lg h-14 px-10 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-shadow duration-300">
                 {t('enterHub')}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
