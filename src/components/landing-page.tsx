@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -221,16 +222,10 @@ export default function LandingPage() {
         <div className="relative container mx-auto px-4 z-10 flex flex-col items-center justify-center h-full">
           <motion.h1
             style={{ y: titleY, opacity: titleOpacity }}
-            className="text-4xl md:text-7xl font-headline font-bold tracking-tight mb-6"
+            className="text-5xl md:text-8xl font-headline font-bold tracking-tight mb-8"
           >
             AfghanAI
           </motion.h1>
-           <motion.p
-            style={{ y: subtitleY, opacity: subtitleOpacity }}
-            className="text-lg md:text-2xl text-foreground/70 max-w-2xl mx-auto mb-10"
-          >
-            {t('hubSubtitle')}
-          </motion.p>
           <motion.div
             style={{ y: buttonY, opacity: buttonOpacity }}
           >
@@ -620,3 +615,5 @@ export default function LandingPage() {
     </div>
   );
 }
+
+    
