@@ -5,7 +5,7 @@ import ChatDisplay from '@/components/layout/chat-display';
 import CommandBar from '@/components/layout/command-bar';
 import { useUser } from '@/firebase';
 import { agents } from '@/lib/agents';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 
 export type Message = {
   role: 'user' | 'agent';
@@ -13,8 +13,9 @@ export type Message = {
   content: string;
 };
 
-export default function AgentChatPage({ params }: { params: { agentId: string } }) {
-  const { agentId } = params;
+export default function AgentChatPage() {
+  const params = useParams();
+  const agentId = params.agentId as string;
   const { user } = useUser();
   
   const agent = useMemo(() => agents.find(a => a.slug === agentId), [agentId]);
