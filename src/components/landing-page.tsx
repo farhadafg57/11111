@@ -6,7 +6,6 @@ import AppHeader from '@/components/layout/header';
 import { motion } from 'framer-motion';
 import {
   ArrowRight,
-  BrainCircuit,
   BookOpen,
   HandCoins,
   HeartPulse,
@@ -16,10 +15,21 @@ import {
   MousePointerClick,
   Bot,
   MessageSquare,
+  Server,
+  Database,
+  ShieldCheck,
+  Globe,
+  HeartHandshake,
+  Lightbulb,
+  Eye,
+  Rocket,
+  Cpu,
+  LayoutPanelLeft,
 } from 'lucide-react';
 import { useLanguage } from '@/lib/language';
 import Image from 'next/image';
 import placeholderData from '@/lib/placeholder-images.json';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 
 
 const featureIcons = [
@@ -71,7 +81,63 @@ const howToSteps = [
         title: 'howToStep3Title',
         description: 'howToStep3Desc'
     }
+];
+
+const techStack = [
+    {
+        Icon: LayoutPanelLeft,
+        title: 'techNextJs',
+        description: 'techNextJsDesc'
+    },
+    {
+        Icon: Cpu,
+        title: 'techGenkit',
+        description: 'techGenkitDesc'
+    },
+    {
+        Icon: Database,
+        title: 'techFirebase',
+        description: 'techFirebaseDesc'
+    }
+];
+
+const principles = [
+    {
+        Icon: ShieldCheck,
+        title: 'principlePrivacy',
+        description: 'principlePrivacyDesc'
+    },
+    {
+        Icon: Globe,
+        title: 'principleCulture',
+        description: 'principleCultureDesc'
+    },
+    {
+        Icon: HeartHandshake,
+        title: 'principleAccessibility',
+        description: 'principleAccessibilityDesc'
+    }
+];
+
+const faqItems = [
+    {
+        q: 'faq1q',
+        a: 'faq1a'
+    },
+    {
+        q: 'faq2q',
+        a: 'faq2a'
+    },
+    {
+        q: 'faq3q',
+        a: 'faq3a'
+    },
+    {
+        q: 'faq4q',
+        a: 'faq4a'
+    }
 ]
+
 
 export default function LandingPage() {
   const { t, language } = useLanguage();
@@ -135,6 +201,37 @@ export default function LandingPage() {
             </Link>
           </motion.div>
         </div>
+      </section>
+      
+       {/* Vision Section */}
+      <section id="vision" className="py-20 lg:py-24 bg-background overflow-hidden">
+          <div className="container mx-auto px-4">
+             <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.5 }}
+                    variants={itemVariants}
+                  >
+                      <Eye className="w-16 h-16 text-primary mb-4" />
+                      <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">{t('visionTitle')}</h2>
+                      <p className="text-lg text-foreground/70 mb-6">{t('visionSubtitle')}</p>
+                       <Button asChild variant="outline">
+                          <Link href="/vision">{t('visionButton')}</Link>
+                      </Button>
+                  </motion.div>
+                   <motion.div 
+                     initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true, amount: 0.5 }}
+                      transition={{ duration: 0.6, ease: 'easeOut' }}
+                     className="relative h-64 md:h-80 bg-muted rounded-lg p-8 flex items-center justify-center overflow-hidden"
+                   >
+                     <p className="text-2xl md:text-3xl font-headline font-semibold text-center z-10">"{t('visionQuote')}"</p>
+                     <div className="absolute inset-0 bg-grid-primary/10 [mask-image:linear-gradient(to_bottom,white_20%,transparent_100%)]"></div>
+                   </motion.div>
+             </div>
+          </div>
       </section>
 
       {/* Features Section */}
@@ -203,14 +300,14 @@ export default function LandingPage() {
               viewport={{ once: true, amount: 0.2 }}
               variants={containerVariants}
             >
-                 {howToSteps.map((step) => (
+                 {howToSteps.map((step, index) => (
                      <motion.div 
                         key={step.title}
                         variants={itemVariants}
                         className="flex flex-col items-center"
                      >
-                        <div className="bg-primary/10 text-primary rounded-full p-4 mb-4">
-                            <step.Icon className="w-10 h-10" />
+                        <div className="flex items-center justify-center bg-primary/10 text-primary rounded-full size-16 mb-4">
+                            <div className="text-xl font-bold font-headline">{index + 1}</div>
                         </div>
                          <h3 className="text-xl font-headline font-semibold mb-2">{t(step.title)}</h3>
                          <p className="text-foreground/80 font-body max-w-xs">{t(step.description)}</p>
@@ -219,6 +316,84 @@ export default function LandingPage() {
             </motion.div>
          </div>
       </section>
+      
+       {/* Tech Stack Section */}
+        <section id="tech-stack" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
+            <div className="container mx-auto px-4">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={itemVariants}
+                    className="text-center max-w-3xl mx-auto">
+                    <Rocket className="w-16 h-16 text-primary mx-auto mb-4" />
+                    <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
+                        {t('techTitle')}
+                    </h2>
+                    <p className="text-lg text-foreground/70 mb-12">
+                        {t('techSubtitle')}
+                    </p>
+                </motion.div>
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={containerVariants}
+                >
+                    {techStack.map((tech) => (
+                        <motion.div
+                            key={tech.title}
+                            variants={itemVariants}
+                            className="bg-background p-6 rounded-lg border shadow-sm"
+                        >
+                            <tech.Icon className="w-10 h-10 text-primary mb-4 mx-auto" />
+                            <h3 className="text-xl font-headline font-semibold mb-2">{t(tech.title)}</h3>
+                            <p className="text-foreground/80 font-body">{t(tech.description)}</p>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </div>
+        </section>
+        
+        {/* Principles Section */}
+        <section id="principles" className="py-20 lg:py-24 bg-background overflow-hidden">
+            <div className="container mx-auto px-4">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={itemVariants}
+                    className="text-center max-w-3xl mx-auto">
+                    <Lightbulb className="w-16 h-16 text-primary mx-auto mb-4" />
+                    <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
+                        {t('principlesTitle')}
+                    </h2>
+                    <p className="text-lg text-foreground/70 mb-12">
+                        {t('principlesSubtitle')}
+                    </p>
+                </motion.div>
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={containerVariants}
+                >
+                    {principles.map((principle) => (
+                        <motion.div
+                            key={principle.title}
+                            variants={itemVariants}
+                            className="bg-background p-6 rounded-lg"
+                        >
+                            <principle.Icon className="w-10 h-10 text-primary mb-4" />
+                            <h3 className="text-xl font-headline font-semibold mb-2">{t(principle.title)}</h3>
+                            <p className="text-foreground/80 font-body">{t(principle.description)}</p>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </div>
+        </section>
 
       {/* Founder Message Section */}
        <section id="founder" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
@@ -252,6 +427,61 @@ export default function LandingPage() {
               </motion.div>
           </div>
        </section>
+       
+       {/* Community Section */}
+        <section id="community" className="py-20 lg:py-24 bg-background overflow-hidden">
+            <div className="container mx-auto px-4 text-center">
+                 <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={itemVariants}
+                >
+                    <HeartHandshake className="w-16 h-16 text-primary mx-auto mb-4" />
+                    <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
+                        {t('communityTitle')}
+                    </h2>
+                    <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
+                        {t('communitySubtitle')}
+                    </p>
+                </motion.div>
+            </div>
+        </section>
+        
+        {/* FAQ Section */}
+        <section id="faq" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
+            <div className="container mx-auto px-4">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={itemVariants}
+                    className="text-center max-w-3xl mx-auto">
+                    <h2 className="text-3xl md:text-4xl font-headline font-bold mb-12">
+                        {t('faqTitle')}
+                    </h2>
+                </motion.div>
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={itemVariants}
+                    className="max-w-3xl mx-auto"
+                >
+                    <Accordion type="single" collapsible className="w-full">
+                        {faqItems.map((item, index) => (
+                            <AccordionItem key={index} value={`item-${index}`}>
+                                <AccordionTrigger className="text-lg font-headline font-semibold text-left">{t(item.q)}</AccordionTrigger>
+                                <AccordionContent className="font-body text-foreground/80">
+                                    {t(item.a)}
+                                </AccordionContent>
+                            </AccordionItem>
+                        ))}
+                    </Accordion>
+                </motion.div>
+            </div>
+        </section>
+
 
       {/* Final CTA Section */}
       <section id="cta" className="py-20 lg:py-32 bg-background overflow-hidden">

@@ -3,9 +3,10 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { agents } from '@/lib/agents';
-import { BrainCircuit } from 'lucide-react';
+import { BrainCircuit, User } from 'lucide-react';
 import { motion } from 'framer-motion';
 import placeholderData from '@/lib/placeholder-images.json';
+import { useUser } from '@/firebase';
 
 const ChatBubbleSkeleton = () => (
     <motion.div 
@@ -22,6 +23,7 @@ const ChatBubbleSkeleton = () => (
 
 
 export default function ChatDisplay({ messages }: { messages: Message[] }) {
+  const { user } = useUser();
   const userAvatarImage = placeholderData.images.find(img => img.id === 'user-avatar-chat');
 
   const getAgentInfo = (agentName?: string) => {
@@ -34,9 +36,10 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
     <div className="flex-1 overflow-y-auto p-4">
       <div className="container mx-auto max-w-3xl space-y-8">
         {messages.map((message, index) => {
-          const isUser = message.role === 'user';
+          const isUserMessage = message.role === 'user';
           const { Icon: AgentIcon, name: agentName } = getAgentInfo(message.agentName);
           const isThinking = message.content === '...';
+          const showUserAvatar = isUserMessage && user && !user.isAnonymous && userAvatarImage;
 
           return (
             <motion.div
@@ -46,10 +49,10 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
               transition={{ duration: 0.3, ease: 'easeOut' }}
               className={cn(
                 'flex items-start gap-4',
-                isUser ? 'justify-end' : 'justify-start'
+                isUserMessage ? 'justify-end' : 'justify-start'
               )}
             >
-              {!isUser && (
+              {!isUserMessage && (
                 <Avatar className="bg-accent text-accent-foreground border size-10">
                   <AvatarFallback asChild>
                     <AgentIcon className="size-5" />
@@ -57,7 +60,7 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
                 </Avatar>
               )}
               <div className="flex flex-col gap-1 max-w-[calc(100%-4rem-1rem)] md:max-w-xl">
-                 {!isUser && (
+                 {!isUserMessage && (
                     <div className="font-bold text-sm font-headline text-foreground/80">
                       {message.agentName}
                     </div>
@@ -65,7 +68,7 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
                 <Card
                   className={cn(
                     'shadow-md',
-                    isUser
+                    isUserMessage
                       ? 'bg-primary text-primary-foreground rounded-br-none'
                       : 'bg-card rounded-bl-none'
                   )}
@@ -75,12 +78,14 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
                   </CardContent>
                 </Card>
               </div>
-              {isUser && (
-                <Avatar className="size-10">
-                  {userAvatarImage && (
+              {isUserMessage && (
+                <Avatar className="size-10 bg-muted">
+                  {showUserAvatar ? (
                     <AvatarImage src={userAvatarImage.src} alt="User" width={userAvatarImage.width} height={userAvatarImage.height} data-ai-hint={userAvatarImage.hint} />
-                  )}
-                  <AvatarFallback>U</AvatarFallback>
+                  ) : null}
+                  <AvatarFallback>
+                    <User className="size-5" />
+                  </AvatarFallback>
                 </Avatar>
               )}
             </motion.div>

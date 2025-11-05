@@ -29,7 +29,7 @@ export default function AgentChatPage({ params }: { params: { agentId: string } 
     {
       role: 'agent',
       agentName: agent.name,
-      content: t('welcomeMessage'),
+      content: agent.description,
     },
   ]);
   const [isResponding, setIsResponding] = useState(false);
