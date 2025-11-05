@@ -197,12 +197,6 @@ export default function LandingPage() {
           >
             {t('hubTitle')}
           </motion.h1>
-          <motion.p
-            style={{ y: subtitleY, opacity: subtitleOpacity }}
-            className="text-lg md:text-2xl text-foreground/80 font-body max-w-3xl mx-auto mb-10"
-          >
-            {t('hubSubtitle')}
-          </motion.p>
           <motion.div
             style={{ y: buttonY, opacity: buttonOpacity }}
           >
