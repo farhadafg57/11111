@@ -1,6 +1,6 @@
 
 import type { LucideIcon } from 'lucide-react';
-import { Leaf, Video, Network, BrainCircuit, Eye, Mic, Languages, Combine, Shield, Scale, Box, DollarSign, TrendingUp, Search, Cog, Target, ClipboardCheck, Cloud, ShieldCheck, Banknote, Users, Truck, Landmark, HeartHandshake, Siren, AreaChart, Scan, FileScan, Building2, Receipt, Vote, Code, PenTool, Plug, TestTube2, Rocket, Paintbrush, Clapperboard, Music, Cuboid, MicVocal, Book, Megaphone, Podcast, AudioWaveform, Film, GraduationCap, BookOpen, MessageSquare, Wrench, ClipboardPen, FileCheck, GitBranch, HelpCircle, School, BookText, Thermometer, Pill, Smile, CalendarDays, FileCode, FileHeart, Activity, MonitorSmartphone, FileText, FlaskConical, Wallet, LineChart, ShieldAlert, Bot, MessageCircle, Users2, Star, Sun, Dumbbell, Sprout, Telescope, Microscope, Globe, Blocks, Brick, Home, View, Move, DraftingCompass, Drama, Hand, Gavel, Briefcase, LandPlot, Ear, Factory, Brain, BotMessageSquare, Workflow, GitGraph, Database, HardDrive, Cpu, ScanSearch, KeyRound, CloudCog, Sigma, BarChart, Dna, BotIcon, Atom, Coins, CreditCard, UserCheck, PersonStanding, Lightbulb, Handshake, MapPin } from 'lucide-react';
+import { Leaf, Video, Network, BrainCircuit, Eye, Mic, Languages, Combine, Shield, Scale, Box, DollarSign, TrendingUp, Search, Cog, Target, ClipboardCheck, Cloud, ShieldCheck, Banknote, Users, Truck, Landmark, HeartHandshake, Siren, AreaChart, Scan, FileScan, Building2, Receipt, Vote, Code, PenTool, Plug, TestTube2, Rocket, Paintbrush, Clapperboard, Music, Cuboid, MicVocal, Book, Megaphone, Podcast, AudioWaveform, Film, GraduationCap, BookOpen, MessageSquare, Wrench, ClipboardPen, FileCheck, GitBranch, HelpCircle, School, BookText, Thermometer, Pill, Smile, CalendarDays, FileCode, FileHeart, Activity, MonitorSmartphone, FileText, FlaskConical, Wallet, LineChart, ShieldAlert, Bot, MessageCircle, Users2, Star, Sun, Dumbbell, Sprout, Telescope, Microscope, Globe, Blocks, Brick, Home, View, Move, DraftingCompass, Drama, Hand, Gavel, Briefcase, LandPlot, Ear, Factory, Brain, BotMessageSquare, Workflow, GitGraph, Database, HardDrive, Cpu, ScanSearch, KeyRound, CloudCog, Sigma, BarChart, Dna, BotIcon, Atom, Coins, CreditCard, UserCheck, PersonStanding, Lightbulb, Handshake, MapPin, HeartPulse } from 'lucide-react';
 
 export type Agent = {
   name: string;
@@ -133,7 +133,7 @@ export const agents: Agent[] = [
   { name: 'Research Summarizer AI', slug: 'research-summarizer-ai', description: 'Summarizes long research papers, articles, and documents.', Icon: BookText },
 
   // Health & Agriculture
-  { name: 'Plant Diagnoser AI', slug: 'plant-diagnoser', description: 'An expert botanist specializing in diagnosing plant illnesses.', Icon: Leaf },
+  { name: 'Plant Diagnoser', slug: 'plant-diagnoser', description: 'An expert botanist specializing in diagnosing plant illnesses.', Icon: Leaf },
   { name: 'Appointment Manager AI', slug: 'appointment-manager-ai', description: 'Schedules and manages medical appointments.', Icon: CalendarDays },
   { name: 'Medical Coder AI', slug: 'medical-coder-ai', description: 'Translates medical reports into standardized codes for billing.', Icon: FileCode },
   { name: 'Insurance Processor AI', slug: 'insurance-processor-ai', description: 'Automates the processing of health insurance claims.', Icon: FileHeart },
