@@ -52,7 +52,7 @@ export interface InternalQuery extends Query<DocumentData> {
  * @returns {UseCollectionResult<T>} Object with data, isLoading, error.
  */
 export function useCollection<T = any>(
-    memoizedTargetRefOrQuery: ((CollectionReference<DocumentData> | Query<DocumentData>) & {__memo?: boolean})  | null | undefined,
+    targetRefOrQuery: ((CollectionReference<DocumentData> | Query<DocumentData>))  | null | undefined,
 ): UseCollectionResult<T> {
   type ResultItemType = WithId<T>;
   type StateDataType = ResultItemType[] | null;
@@ -61,7 +61,7 @@ export function useCollection<T = any>(
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<FirestoreError | Error | null>(null);
 
-  const stableQuery = useMemoFirebase(() => memoizedTargetRefOrQuery, [memoizedTargetRefOrQuery]);
+  const stableQuery = useMemoFirebase(() => targetRefOrQuery, [targetRefOrQuery]);
 
   useEffect(() => {
     if (!stableQuery) {

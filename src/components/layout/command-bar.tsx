@@ -26,7 +26,7 @@ export default function CommandBar({ userId, agentId, onNewMessage, onAgentRespo
     if (!inputValue.trim() || isResponding) return;
 
     const userMessage: Message = { role: 'user', content: inputValue };
-    onNewMessage(userMessage);
+    onNewMessage(userMessage); // Optimistic UI update
     onThinking();
     
     const commandToSubmit = inputValue;

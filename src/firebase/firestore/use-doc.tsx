@@ -39,7 +39,7 @@ export interface UseDocResult<T> {
  * @returns {UseDocResult<T>} Object with data, isLoading, error.
  */
 export function useDoc<T = any>(
-  memoizedDocRef: DocumentReference<DocumentData> | null | undefined,
+  docRef: DocumentReference<DocumentData> | null | undefined,
 ): UseDocResult<T> {
   type StateDataType = WithId<T> | null;
 
@@ -47,7 +47,7 @@ export function useDoc<T = any>(
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<FirestoreError | Error | null>(null);
 
-  const stableDocRef = useMemoFirebase(() => memoizedDocRef, [memoizedDocRef]);
+  const stableDocRef = useMemoFirebase(() => docRef, [docRef]);
 
   useEffect(() => {
     if (!stableDocRef) {

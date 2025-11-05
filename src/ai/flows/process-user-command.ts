@@ -20,6 +20,7 @@ import {
 } from 'firebase/firestore';
 import { initializeFirebase, setDocumentNonBlocking } from '@/firebase';
 import { agents } from '@/lib/agents';
+import { createHash } from 'crypto';
 
 const ProcessUserCommandInputSchema = z.object({
   command: z.string().describe('The command entered by the user.'),
@@ -128,13 +129,13 @@ const processUserCommandFlow = ai.defineFlow(
     const agentNames = agents.map(a => a.name);
     const { output: selection } = await agentAndModelSelectionPrompt({ command, agentNames });
     
-    const agentName = selection?.agentName && agentNames.includes(selection.agentName) ? selection.agentName : 'Oracle';
+    const agentName = (selection?.agentName && agentNames.includes(selection.agentName)) ? selection.agentName : 'Oracle';
     const complexity = selection?.complexity || 'simple';
     const model = complexity === 'complex' ? 'googleai/gemini-2.5-pro' : 'googleai/gemini-2.5-flash';
 
     // 2. Check for a cached response in Firestore
     if (userId) {
-      const cacheKey = Buffer.from(command + agentName).toString('base64');
+      const cacheKey = createHash('sha256').update(command + agentName).digest('hex');
       const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);
       const cacheSnap = await getDoc(cacheRef);
 
@@ -165,7 +166,7 @@ const processUserCommandFlow = ai.defineFlow(
 
     // 4. Write the new response to the cache using a non-blocking operation
     if (userId) {
-       const cacheKey = Buffer.from(command + agentName).toString('base64');
+       const cacheKey = createHash('sha256').update(command + agentName).digest('hex');
        const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);
        
        setDocumentNonBlocking(cacheRef, {

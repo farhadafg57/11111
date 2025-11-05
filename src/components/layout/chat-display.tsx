@@ -28,8 +28,9 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
 
   const getAgentInfo = (agentName?: string) => {
     if (!agentName) return { Icon: BrainCircuit, name: 'System' };
-    const agent = agents.find(a => a.name === agentName || a.name === agentName.split('(')[0].trim());
-    return agent ? { Icon: agent.Icon, name: agent.name } : { Icon: BrainCircuit, name: agentName };
+    const cleanAgentName = agentName.split('(')[0].trim();
+    const agent = agents.find(a => a.name === cleanAgentName);
+    return agent ? { Icon: agent.Icon, name: agentName } : { Icon: BrainCircuit, name: agentName };
   };
   
   return (
@@ -62,7 +63,7 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
               <div className="flex flex-col gap-1 max-w-[calc(100%-4rem-1rem)] md:max-w-xl">
                  {!isUserMessage && (
                     <div className="font-bold text-sm font-headline text-foreground/80">
-                      {message.agentName}
+                      {agentName}
                     </div>
                   )}
                 <Card
