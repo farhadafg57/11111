@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import Link from 'next/link';
@@ -8,11 +9,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowRight,
   BookOpen,
-  HandCoins,
-  Palette,
   Feather,
-  Code,
-  MousePointerClick,
   Bot,
   MessageSquare,
   Server,
@@ -25,10 +22,25 @@ import {
   Rocket,
   Cpu,
   LayoutPanelLeft,
-  Siren,
   Pill,
   Combine,
   Sigma,
+  GitBranch,
+  Layers,
+  Container,
+  Goal,
+  Wand2,
+  Users,
+  BadgeDollarSign,
+  Recycle,
+  BrainCircuit,
+  Languages as LanguageIcon,
+  Search,
+  Map,
+  Sparkles,
+  Blocks,
+  Settings,
+  AppWindow
 } from 'lucide-react';
 import { useLanguage } from '@/lib/language';
 import Image from 'next/image';
@@ -37,111 +49,108 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './
 import HeroAnimation from './animations/hero-animation';
 import React from 'react';
 
-
-const featureIcons = [
-  {
-    Icon: Palette,
-    title: 'creativity',
-    description: 'featureCreativity',
-  },
-  {
-    Icon: BookOpen,
-    title: 'education',
-    description: 'featureEducation',
-  },
-  {
-    Icon: HandCoins,
-    title: 'business',
-    description: 'featureBusiness',
-  },
-  {
-    Icon: Pill,
-    title: 'health',
-    description: 'featureHealth',
-  },
-  {
-    Icon: Code,
-    title: 'technology',
-    description: 'featureTechnology',
-  },
-  {
-    Icon: Feather,
-    title: 'contentCreation',
-    description: 'featureContentCreation',
-  },
-];
-
-const howToSteps = [
+const richFeatures = [
     {
-        Icon: MousePointerClick,
-        title: 'howToStep1Title',
-        description: 'howToStep1Desc'
+        Icon: Combine,
+        title: 'featureCognitiveCoreTitle',
+        description: 'featureCognitiveCoreDesc',
     },
     {
-        Icon: MessageSquare,
-        title: 'howToStep2Title',
-        description: 'howToStep2Desc'
+        Icon: Eye,
+        title: 'featureSensoryIntelTitle',
+        description: 'featureSensoryIntelDesc',
     },
     {
-        Icon: Bot,
-        title: 'howToStep3Title',
-        description: 'howToStep3Desc'
+        Icon: BrainCircuit,
+        title: 'featureMemoryCoreTitle',
+        description: 'featureMemoryCoreDesc',
+    },
+    {
+        Icon: Search,
+        title: 'featureRealWorldTitle',
+        description: 'featureRealWorldDesc',
+    },
+    {
+        Icon: LanguageIcon,
+        title: 'featureCulturalSoulTitle',
+        description: 'featureCulturalSoulDesc',
+    },
+    {
+        Icon: BadgeDollarSign,
+        title: 'featureCostEffectiveTitle',
+        description: 'featureCostEffectiveDesc',
     }
 ];
 
-const techStack = [
+const agenticCoreFeatures = [
     {
-        Icon: LayoutPanelLeft,
-        title: 'techNextJs',
-        description: 'techNextJsDesc'
+        Icon: Goal,
+        title: 'agenticGoalTitle',
+        description: 'agenticGoalDesc'
     },
     {
-        Icon: Cpu,
-        title: 'techGenkit',
-        description: 'techGenkitDesc'
+        Icon: Wand2,
+        title: 'agenticToolTitle',
+        description: 'agenticToolDesc'
+    },
+    {
+        Icon: Users,
+        title: 'agenticCollaborationTitle',
+        description: 'agenticCollaborationDesc'
+    },
+    {
+        Icon: GitBranch,
+        title: 'agenticLearningTitle',
+        description: 'agenticLearningDesc'
+    }
+];
+
+const modularityFeatures = [
+    {
+        Icon: Layers,
+        title: 'modularityAgentsTitle',
+        description: 'modularityAgentsDesc'
+    },
+    {
+        Icon: Blocks,
+        title: 'modularityIntegrationTitle',
+        description: 'modularityIntegrationDesc'
+    },
+    {
+        Icon: AppWindow,
+        title: 'modularityManagementTitle',
+        description: 'modularityManagementDesc'
+    },
+    {
+        Icon: Settings,
+        title: 'modularityCustomizationTitle',
+        description: 'modularityCustomizationDesc'
+    }
+];
+
+const costFeatures = [
+    {
+        Icon: Container,
+        title: 'costAllocationTitle',
+        description: 'costAllocationDesc'
     },
     {
         Icon: Database,
-        title: 'techFirebase',
-        description: 'techFirebaseDesc'
+        title: 'costCachingTitle',
+        description: 'costCachingDesc'
+    },
+    {
+        Icon: Sparkles,
+        title: 'costModelTitle',
+        description: 'costModelDesc'
+    },
+    {
+        Icon: Recycle,
+        title: 'costToolUsageTitle',
+        description: 'costToolUsageDesc'
     }
 ];
 
-const hubExcellency = [
-    {
-        Icon: Combine,
-        title: 'hubExcellencyOrchestrationTitle',
-        description: 'hubExcellencyOrchestrationDesc'
-    },
-    {
-        Icon: Cpu,
-        title: 'hubExcellencyDualTitle',
-        description: 'hubExcellencyDualDesc'
-    },
-    {
-        Icon: Rocket,
-        title: 'hubExcellencyOptimizationTitle',
-        description: 'hubExcellencyOptimizationDesc'
-    }
-];
-
-const principles = [
-    {
-        Icon: ShieldCheck,
-        title: 'principlePrivacy',
-        description: 'principlePrivacyDesc'
-    },
-    {
-        Icon: Globe,
-        title: 'principleCulture',
-        description: 'principleCultureDesc'
-    },
-    {
-        Icon: HeartHandshake,
-        title: 'principleAccessibility',
-        description: 'principleAccessibilityDesc'
-    }
-];
 
 const faqItems = [
     {
@@ -270,67 +279,7 @@ export default function LandingPage() {
           </div>
       </section>
 
-      {/* Global AI Synthesis Section */}
-      <section id="synthesis" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
-          <div className="container mx-auto px-4 text-center">
-              <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.3 }}
-                  variants={itemVariants}
-                  className="max-w-3xl mx-auto"
-              >
-                  <Sigma className="w-16 h-16 text-primary mx-auto mb-4" />
-                  <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
-                      {t('synthesisTitle')}
-                  </h2>
-                  <p className="text-lg text-foreground/70">
-                      {t('synthesisSubtitle')}
-                  </p>
-              </motion.div>
-          </div>
-      </section>
-
-      {/* Hub Excellency Section */}
-        <section id="hub-excellency" className="py-20 lg:py-24 bg-background overflow-hidden">
-            <div className="container mx-auto px-4">
-                <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={itemVariants}
-                    className="text-center max-w-3xl mx-auto">
-                    <Rocket className="w-16 h-16 text-primary mx-auto mb-4" />
-                    <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
-                        {t('hubExcellencyTitle')}
-                    </h2>
-                    <p className="text-lg text-foreground/70 mb-12">
-                        {t('hubExcellencySubtitle')}
-                    </p>
-                </motion.div>
-                <motion.div
-                    className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.2 }}
-                    variants={containerVariants}
-                >
-                    {hubExcellency.map((tech) => (
-                        <motion.div
-                            key={tech.title}
-                            variants={itemVariants}
-                            className="bg-background p-6 rounded-lg border shadow-sm"
-                        >
-                            <tech.Icon className="w-10 h-10 text-primary mb-4 mx-auto" />
-                            <h3 className="text-xl font-headline font-semibold mb-2">{t(tech.title)}</h3>
-                            <p className="text-foreground/80 font-body">{t(tech.description)}</p>
-                        </motion.div>
-                    ))}
-                </motion.div>
-            </div>
-        </section>
-
-      {/* Features Section */}
+      {/* Rich Features Section */}
       <section id="features" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div 
@@ -341,20 +290,17 @@ export default function LandingPage() {
             className="text-center max-w-3xl mx-auto"
           >
             <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
-              {t('featuresTitle')}
+              {t('richFeaturesTitle')}
             </h2>
-            <p className="text-lg text-foreground/70 mb-12">
-              {t('featuresSubtitle')}
-            </p>
           </motion.div>
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
             variants={containerVariants}
           >
-            {featureIcons.map((feature) => (
+            {richFeatures.map((feature) => (
               <motion.div
                 key={feature.title}
                 variants={itemVariants}
@@ -372,127 +318,150 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
-      
-      {/* How to Use Section */}
-      <section id="how-to-use" className="py-20 lg:py-24 bg-background overflow-hidden">
-         <div className="container mx-auto px-4">
-             <motion.div 
+
+      {/* Agentic Core Section */}
+      <section id="agentic-core" className="py-20 lg:py-24 bg-background overflow-hidden">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={itemVariants}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <Bot className="w-16 h-16 text-primary mx-auto mb-4" />
+            <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
+              {t('agenticCoreTitle')}
+            </h2>
+            <p className="text-lg text-foreground/70 mb-12">
+              {t('agenticCoreDesc')}
+            </p>
+          </motion.div>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={containerVariants}
+          >
+            {agenticCoreFeatures.map((feature) => (
+              <motion.div
+                key={feature.title}
+                variants={itemVariants}
+                className="bg-background p-6 rounded-lg border shadow-sm"
+              >
+                <feature.Icon className="w-10 h-10 text-primary mb-4" />
+                <h3 className="text-xl font-headline font-semibold mb-2">{t(feature.title)}</h3>
+                <p className="text-foreground/80 font-body">{t(feature.description)}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Modularity Section */}
+      <section id="modularity" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={itemVariants}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <Cpu className="w-16 h-16 text-primary mx-auto mb-4" />
+            <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
+              {t('modularityTitle')}
+            </h2>
+            <p className="text-lg text-foreground/70 mb-12">
+              {t('modularityDesc')}
+            </p>
+          </motion.div>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={containerVariants}
+          >
+            {modularityFeatures.map((feature) => (
+              <motion.div
+                key={feature.title}
+                variants={itemVariants}
+                className="bg-background p-6 rounded-lg border shadow-sm"
+              >
+                <feature.Icon className="w-10 h-10 text-primary mb-4" />
+                <h3 className="text-xl font-headline font-semibold mb-2">{t(feature.title)}</h3>
+                <p className="text-foreground/80 font-body">{t(feature.description)}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Cost-Effectiveness Section */}
+      <section id="cost-effectiveness" className="py-20 lg:py-24 bg-background overflow-hidden">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={itemVariants}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <Rocket className="w-16 h-16 text-primary mx-auto mb-4" />
+            <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
+              {t('costTitle')}
+            </h2>
+            <p className="text-lg text-foreground/70 mb-12">
+              {t('costDesc')}
+            </p>
+          </motion.div>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={containerVariants}
+          >
+            {costFeatures.map((feature) => (
+              <motion.div
+                key={feature.title}
+                variants={itemVariants}
+                className="bg-background p-6 rounded-lg border shadow-sm"
+              >
+                <feature.Icon className="w-10 h-10 text-primary mb-4" />
+                <h3 className="text-xl font-headline font-semibold mb-2">{t(feature.title)}</h3>
+                <p className="text-foreground/80 font-body">{t(feature.description)}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+        
+      {/* Mission Section */}
+      <section id="mission" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
+        <div className="container mx-auto px-4 text-center">
+             <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 variants={itemVariants}
-                className="text-center max-w-3xl mx-auto">
+                className="max-w-3xl mx-auto"
+            >
+                <Lightbulb className="w-16 h-16 text-primary mx-auto mb-4" />
                 <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
-                {t('howToUseTitle')}
+                    {t('missionTitle')}
                 </h2>
-                <p className="text-lg text-foreground/70 mb-12">
-                {t('howToUseSubtitle')}
+                <p className="text-lg text-foreground/70">
+                    {t('missionDesc')}
                 </p>
             </motion.div>
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={containerVariants}
-            >
-                 {howToSteps.map((step, index) => (
-                     <motion.div 
-                        key={step.title}
-                        variants={itemVariants}
-                        className="flex flex-col items-center"
-                     >
-                        <div className="flex items-center justify-center bg-primary/10 text-primary rounded-full size-16 mb-4">
-                            <step.Icon className="size-8" />
-                        </div>
-                         <h3 className="text-xl font-headline font-semibold mb-2">{t(step.title)}</h3>
-                         <p className="text-foreground/80 font-body max-w-xs">{t(step.description)}</p>
-                     </motion.div>
-                 ))}
-            </motion.div>
-         </div>
+        </div>
       </section>
-      
-       {/* Tech Stack Section */}
-        <section id="tech-stack" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
-            <div className="container mx-auto px-4">
-                <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={itemVariants}
-                    className="text-center max-w-3xl mx-auto">
-                    <Server className="w-16 h-16 text-primary mx-auto mb-4" />
-                    <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
-                        {t('techTitle')}
-                    </h2>
-                    <p className="text-lg text-foreground/70 mb-12">
-                        {t('techSubtitle')}
-                    </p>
-                </motion.div>
-                <motion.div
-                    className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.2 }}
-                    variants={containerVariants}
-                >
-                    {techStack.map((tech) => (
-                        <motion.div
-                            key={tech.title}
-                            variants={itemVariants}
-                            className="bg-background p-6 rounded-lg border shadow-sm"
-                        >
-                            <tech.Icon className="w-10 h-10 text-primary mb-4 mx-auto" />
-                            <h3 className="text-xl font-headline font-semibold mb-2">{t(tech.title)}</h3>
-                            <p className="text-foreground/80 font-body">{t(tech.description)}</p>
-                        </motion.div>
-                    ))}
-                </motion.div>
-            </div>
-        </section>
-        
-        {/* Principles Section */}
-        <section id="principles" className="py-20 lg:py-24 bg-background overflow-hidden">
-            <div className="container mx-auto px-4">
-                <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={itemVariants}
-                    className="text-center max-w-3xl mx-auto">
-                    <Lightbulb className="w-16 h-16 text-primary mx-auto mb-4" />
-                    <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
-                        {t('principlesTitle')}
-                    </h2>
-                    <p className="text-lg text-foreground/70 mb-12">
-                        {t('principlesSubtitle')}
-                    </p>
-                </motion.div>
-                <motion.div
-                    className="grid grid-cols-1 md:grid-cols-3 gap-8"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.2 }}
-                    variants={containerVariants}
-                >
-                    {principles.map((principle) => (
-                        <motion.div
-                            key={principle.title}
-                            variants={itemVariants}
-                            className="bg-background p-6 rounded-lg"
-                        >
-                            <principle.Icon className="w-10 h-10 text-primary mb-4" />
-                            <h3 className="text-xl font-headline font-semibold mb-2">{t(principle.title)}</h3>
-                            <p className="text-foreground/80 font-body">{t(principle.description)}</p>
-                        </motion.div>
-                    ))}
-                </motion.div>
-            </div>
-        </section>
 
       {/* Founder Message Section */}
-       <section id="founder" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
+       <section id="founder" className="py-20 lg:py-24 bg-background overflow-hidden">
           <div className="container mx-auto px-4">
               <motion.div 
                 initial="hidden"
@@ -523,26 +492,6 @@ export default function LandingPage() {
               </motion.div>
           </div>
        </section>
-       
-       {/* Community Section */}
-        <section id="community" className="py-20 lg:py-24 bg-background overflow-hidden">
-            <div className="container mx-auto px-4 text-center">
-                 <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={itemVariants}
-                >
-                    <HeartHandshake className="w-16 h-16 text-primary mx-auto mb-4" />
-                    <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
-                        {t('communityTitle')}
-                    </h2>
-                    <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-                        {t('communitySubtitle')}
-                    </p>
-                </motion.div>
-            </div>
-        </section>
         
         {/* FAQ Section */}
         <section id="faq" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
