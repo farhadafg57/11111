@@ -1,7 +1,11 @@
+
 'use client';
 import { motion } from 'framer-motion';
 import React, { useMemo, useEffect, useState } from 'react';
 import { agents } from '@/lib/agents';
+import type { LucideIcon } from 'lucide-react';
+import { GanttChartSquare, BotMessageSquare, Repeat, Flag, Gamepad, Feather, Brush, Footprints, ChefHat, Scissors, Medal, FilePen, Zap, Mountain, Utensils, ThumbsUp } from 'lucide-react';
+
 
 const useWindowSize = () => {
     const [size, setSize] = useState([0, 0]);
@@ -17,6 +21,18 @@ const useWindowSize = () => {
     return size;
 };
 
+// A simple hash function to get a deterministic but unique-looking value
+const simpleHash = (str: string) => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = (hash << 5) - hash + char;
+        hash |= 0; // Convert to 32bit integer
+    }
+    return Math.abs(hash);
+};
+
+
 const InteractiveHeroClient = () => {
   const [width] = useWindowSize();
   const [isClient, setIsClient] = useState(false);
@@ -27,15 +43,23 @@ const InteractiveHeroClient = () => {
   
   const orbitingAgents = useMemo(() => {
       if (!isClient) return [];
-      const coreAgents = agents.filter(a => a.Icon && !['Oracle', 'Plant Diagnoser', 'Video Generator'].includes(a.name)).slice(0, 10);
+      
+      // Add a few more interesting and visually distinct icons to the exclusion list if needed
+      const excludedIcons: LucideIcon[] = [GanttChartSquare, BotMessageSquare, Repeat, Flag, Gamepad, Feather, Brush, Footprints, ChefHat, Scissors, Medal, FilePen, Zap, Mountain, Utensils, ThumbsUp];
+      
+      const coreAgents = agents
+        .filter(a => a.Icon && !excludedIcons.includes(a.Icon))
+        .sort((a, b) => simpleHash(a.slug) - simpleHash(b.slug)) // Deterministic shuffle
+        .slice(0, 10);
+
       return coreAgents.map((agent, i) => {
         const angle = (i / coreAgents.length) * 2 * Math.PI;
-        const radius = width > 0 ? Math.min(width * 0.35, 250) : 250;
+        const radius = width > 768 ? Math.min(width * 0.35, 300) : Math.min(width * 0.4, 150);
         return {
           ...agent,
           angle,
           radius,
-          size: width > 768 ? 32 : 24,
+          size: width > 768 ? 40 : 32,
         };
       });
   }, [width, isClient]);
