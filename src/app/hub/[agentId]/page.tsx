@@ -16,7 +16,6 @@ export type Message = {
 export default function AgentChatPage() {
   const params = useParams();
   const agentId = params.agentId as string;
-  const { user } = useUser();
   
   const agent = useMemo(() => agents.find(a => a.slug === agentId), [agentId]);
 
@@ -48,7 +47,6 @@ export default function AgentChatPage() {
     <>
       <ChatDisplay messages={messages} />
       <CommandBar
-        userId={user?.uid}
         agent={agent}
         onNewMessage={handleNewMessage}
         onAgentResponse={handleAgentResponse}

@@ -8,18 +8,19 @@ import type { Message } from '@/app/hub/[agentId]/page';
 import { useLanguage } from '@/lib/language';
 import { Textarea } from '../ui/textarea';
 import type { Agent } from '@/lib/agents';
+import { useUser } from '@/firebase';
 
 type CommandBarProps = {
-  userId?: string;
   agent: Agent;
   onNewMessage: (userMessage: Message, thinkingMessage: Message) => void;
   onAgentResponse: (message: Message) => void;
 };
 
-export default function CommandBar({ userId, agent, onNewMessage, onAgentResponse }: CommandBarProps) {
+export default function CommandBar({ agent, onNewMessage, onAgentResponse }: CommandBarProps) {
   const [inputValue, setInputValue] = useState('');
   const [isResponding, setIsResponding] = useState(false);
   const { t } = useLanguage();
+  const { user } = useUser();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -47,7 +48,7 @@ export default function CommandBar({ userId, agent, onNewMessage, onAgentRespons
     const thinkingMessage: Message = {role: 'agent', agentName: agent.name, content: '...'};
     onNewMessage(userMessage, thinkingMessage);
 
-    const result = await handleCommand(commandToSubmit, userId);
+    const result = await handleCommand(commandToSubmit, user?.uid);
 
     if (result.success && result.data) {
       const agentResponse: Message = {

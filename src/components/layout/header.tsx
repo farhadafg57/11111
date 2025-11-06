@@ -1,6 +1,26 @@
-import { BrainCircuit } from 'lucide-react';
+import { BrainCircuit, LogIn } from 'lucide-react';
 import LanguageSwitcher from './language-switcher';
 import { SidebarTrigger } from '../ui/sidebar';
+import { useUser } from '@/firebase';
+import { Button } from '../ui/button';
+import Link from 'next/link';
+
+const AuthButton = () => {
+    const { user, isUserLoading } = useUser();
+
+    if (isUserLoading) return null;
+    if (user) return null;
+
+    return (
+        <Button asChild variant="ghost" size="sm">
+            <Link href="/login">
+                <LogIn className="mr-2 h-4 w-4" />
+                Login
+            </Link>
+        </Button>
+    )
+}
+
 
 export default function AppHeader() {
   return (
@@ -12,7 +32,10 @@ export default function AppHeader() {
             AfghanAI
           </h1>
         </div>
-        <LanguageSwitcher />
+        <div className="flex items-center gap-2">
+            <AuthButton />
+            <LanguageSwitcher />
+        </div>
       </div>
     </header>
   );
