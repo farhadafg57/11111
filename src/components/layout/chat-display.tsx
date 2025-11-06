@@ -39,12 +39,12 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
         {messages.map((message, index) => {
           const isUserMessage = message.role === 'user';
           const { Icon: AgentIcon, name: agentName } = getAgentInfo(message.agentName);
-          const isThinking = message.content === '...';
+          const isThinking = message.isThinking;
           const showUserAvatar = isUserMessage && user && !user.isAnonymous && userAvatarImage;
 
           return (
             <motion.div
-              key={index}
+              key={message.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}

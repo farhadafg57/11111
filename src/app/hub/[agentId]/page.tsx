@@ -1,16 +1,17 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import ChatDisplay from '@/components/layout/chat-display';
 import CommandBar from '@/components/layout/command-bar';
-import { useUser } from '@/firebase';
 import { agents } from '@/lib/agents';
 import { notFound, useParams } from 'next/navigation';
 
 export type Message = {
+  id: string;
   role: 'user' | 'agent';
   agentName?: string;
   content: string;
+  isThinking?: boolean;
 };
 
 export default function AgentChatPage() {
@@ -25,23 +26,24 @@ export default function AgentChatPage() {
 
   const [messages, setMessages] = useState<Message[]>([
     {
+      id: 'initial-message',
       role: 'agent',
       agentName: agent.name,
       content: agent.description,
     },
   ]);
   
-  const handleNewMessage = (newMessage: Message, thinkingMessage?: Message) => {
-    setMessages(prev => [...prev, newMessage, ...(thinkingMessage ? [thinkingMessage] : [])]);
-  };
+  const handleNewMessage = useCallback((userMessage: Message, thinkingMessage: Message) => {
+    setMessages(prev => [...prev, userMessage, thinkingMessage]);
+  }, []);
 
-  const handleAgentResponse = (response: Message) => {
-    setMessages(prev => {
-      // Replace the "thinking" message with the actual response
-      const newMessages = prev.filter(msg => msg.content !== '...');
-      return [...newMessages, response];
-    });
-  };
+  const handleAgentResponse = useCallback((response: Message) => {
+    setMessages(prev => 
+        prev.map(msg => 
+            msg.id === response.id ? response : msg
+        )
+    );
+  }, []);
 
   return (
     <>

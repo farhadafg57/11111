@@ -4,8 +4,6 @@ import {processUserCommand} from '@/ai/flows/process-user-command';
 
 export async function handleCommand(command: string, userId?: string) {
   try {
-    // Artificial delay to simulate network latency
-    await new Promise(resolve => setTimeout(resolve, 1000));
     const result = await processUserCommand({command, userId});
     return {
       success: true,

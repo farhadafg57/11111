@@ -26,11 +26,11 @@ const InteractiveHeroClient = () => {
   }, []);
   
   const orbitingAgents = useMemo(() => {
-      if (!isClient || width === 0) return [];
+      if (!isClient) return [];
       const coreAgents = agents.filter(a => a.Icon && !['Oracle', 'Plant Diagnoser', 'Video Generator'].includes(a.name)).slice(0, 10);
       return coreAgents.map((agent, i) => {
         const angle = (i / coreAgents.length) * 2 * Math.PI;
-        const radius = Math.min(width * 0.35, 250);
+        const radius = width > 0 ? Math.min(width * 0.35, 250) : 250;
         return {
           ...agent,
           angle,
