@@ -22,6 +22,7 @@ export default function CommandBar({ agent, onNewMessage, onAgentResponse }: Com
   const { t } = useLanguage();
   const { user } = useUser();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
@@ -35,8 +36,7 @@ export default function CommandBar({ agent, onNewMessage, onAgentResponse }: Com
   }, [inputValue]);
 
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     if (!inputValue.trim() || isResponding) return;
 
     const commandToSubmit = inputValue;
@@ -66,19 +66,25 @@ export default function CommandBar({ agent, onNewMessage, onAgentResponse }: Com
       onAgentResponse(errorResponse);
     }
     setIsResponding(false);
+    textareaRef.current?.focus();
   };
   
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
-        handleSubmit(e as any);
+        formRef.current?.requestSubmit();
     }
+  }
+  
+  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleSubmit();
   }
 
   return (
     <div className="mt-auto p-4 bg-background/80 backdrop-blur-sm border-t z-10">
       <div className="container mx-auto max-w-3xl">
-        <form onSubmit={handleSubmit} className="relative group flex items-start gap-2">
+        <form ref={formRef} onSubmit={onFormSubmit} className="relative group flex items-start gap-2">
           <Textarea
             ref={textareaRef}
             value={inputValue}

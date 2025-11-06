@@ -81,8 +81,8 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
               </div>
               {isUserMessage && (
                 <Avatar className="size-10 bg-muted">
-                  {showUserAvatar ? (
-                    <AvatarImage src={userAvatarImage.src.replace('{{id}}', user?.uid || 'user')} alt="User" width={userAvatarImage.width} height={userAvatarImage.height} data-ai-hint={userAvatarImage.hint} />
+                  {showUserAvatar && user?.uid ? (
+                    <AvatarImage src={userAvatarImage.src.replace('{{id}}', user.uid)} alt="User" width={userAvatarImage.width} height={userAvatarImage.height} data-ai-hint={userAvatarImage.hint} />
                   ) : null}
                   <AvatarFallback>
                     <User className="size-5" />

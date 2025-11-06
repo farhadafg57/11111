@@ -20,7 +20,7 @@ export function ChaosComponent() {
   const [shapes, setShapes] = useState<ShapeInfo[] | null>(null);
 
   useEffect(() => {
-    // Generate shapes only on the client-side
+    // Generate shapes only on the client-side to avoid hydration mismatch
     const generatedShapes = Array.from({ length: 50 }).map(() => ({
       isShape: Math.random() > 0.3,
       size: Math.random() * 30 + 5,
