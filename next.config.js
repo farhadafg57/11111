@@ -8,9 +8,6 @@ const nextConfig = {
       },
     ],
   },
-  compiler: {
-    styledComponents: true,
-  },
   experimental: {
     serverActions: {
       bodySizeLimit: '4mb',

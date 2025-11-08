@@ -17,8 +17,9 @@ import {
   doc,
   getDoc,
   serverTimestamp,
+  setDoc,
 } from 'firebase/firestore';
-import { initializeFirebase, setDocumentNonBlocking } from '@/firebase';
+import { initializeFirebase } from '@/firebase';
 import { agents } from '@/lib/agents';
 import { createHash } from 'crypto';
 
@@ -175,14 +176,16 @@ const processUserCommandFlow = ai.defineFlow(
        const cacheKey = createHash('sha256').update(command + agentName).digest('hex');
        const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);
        
-       setDocumentNonBlocking(cacheRef, {
+       setDoc(cacheRef, {
         prompt: command,
         response: agentResponse,
         agentId: agentName,
         userId: userId,
         timestamp: serverTimestamp(),
         ttl: 3600, // Cache for 1 hour
-      }, { merge: true });
+      }, { merge: true }).catch(err => {
+        console.error("Failed to cache response:", err);
+      });
     }
 
     return {
