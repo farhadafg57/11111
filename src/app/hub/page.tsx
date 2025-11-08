@@ -1,22 +1,26 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { LoaderCircle } from 'lucide-react';
+import { useMemo } from 'react';
+import { agents } from '@/lib/agents';
+import AgentChatPage from './[agentId]/page';
 
-export default function HubPage() {
+// This page now serves as the entry point to the hub,
+// automatically selecting the 'Oracle' as the default agent.
+export default function HubEntryPoint() {
   const router = useRouter();
+  const defaultAgent = useMemo(() => agents.find(a => a.slug === 'oracle'), []);
 
-  useEffect(() => {
-    router.replace('/canvas');
-  }, [router]);
-
-  return (
-    <div className="flex flex-col items-center justify-center h-full text-center p-8 bg-background">
-      <div className="flex items-center gap-4">
-        <LoaderCircle className="animate-spin text-primary" />
-        <p className="text-lg text-foreground/60">Initializing Kael Interface...</p>
+  if (!defaultAgent) {
+    // Fallback in case 'oracle' agent is not found
+    return (
+      <div className="flex items-center justify-center h-full text-foreground">
+        Error: Default agent not found.
       </div>
-    </div>
-  );
+    );
+  }
+
+  // We are now rendering the AgentChatPage directly
+  // This removes the need for a redirect and keeps the URL clean at /hub
+  return <AgentChatPage />;
 }

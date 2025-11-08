@@ -4,7 +4,7 @@ export default function HubLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="flex flex-col h-screen bg-background">
+        <div className="flex flex-col h-screen bg-background relative">
             {children}
         </div>
     );

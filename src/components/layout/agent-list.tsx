@@ -19,8 +19,9 @@ import { initiateAnonymousSignIn } from '@/firebase/non-blocking-login';
 import { LogIn } from 'lucide-react';
 import { useLanguage } from '@/lib/language';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import placeholderData from '@/lib/placeholder-images.json';
+import { useCallback } from 'react';
 
 const UserStatus = () => {
     const auth = useAuth();
@@ -75,8 +76,17 @@ const UserStatus = () => {
 
 export default function AgentList() {
   const { t } = useLanguage();
-  const params = useParams();
-  const { agentId } = params;
+  const router = useRouter();
+
+  // This function is a placeholder for future canvas interaction.
+  // Instead of navigating, it will eventually send a message to the 3D canvas
+  // to focus, select, or interact with the corresponding agent node.
+  const handleAgentSelect = useCallback((agentSlug: string) => {
+    console.log(`Agent selected: ${agentSlug}. Implement canvas interaction here.`);
+    // For now, we'll navigate to keep some functionality.
+    // This will be removed once the canvas is fully interactive.
+    router.push(`/hub/${agentSlug}`);
+  }, [router]);
 
   return (
     <>
@@ -91,11 +101,13 @@ export default function AgentList() {
           <SidebarMenu>
             {agents.map((agent) => (
               <SidebarMenuItem key={agent.slug}>
-                <SidebarMenuButton asChild tooltip={agent.name} isActive={agentId === agent.slug} className="justify-start">
-                  <Link href={`/hub/${agent.slug}`}>
+                <SidebarMenuButton 
+                  onClick={() => handleAgentSelect(agent.slug)}
+                  tooltip={agent.name} 
+                  className="justify-start"
+                >
                     <agent.Icon />
                     <span className="font-body">{agent.name}</span>
-                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}

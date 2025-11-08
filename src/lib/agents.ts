@@ -207,7 +207,7 @@ export const agents: Agent[] = [
   { name: 'Climate Impact AI', slug: 'climate-impact-ai', description: 'Analyzes and reports on the potential climate impact of various activities.', Icon: SunSnow },
   { name: 'Eco-Policy Advisor', slug: 'eco-policy-advisor', description: 'Advises on the creation and implementation of effective environmental policies.', Icon: File },
   { name: 'Renewable Energy Planner', slug: 'renewable-energy-planner', description: 'Helps plan and model renewable energy projects, like solar and wind farms.', Icon: Wind },
-  { name 'Waste Manager', slug: 'waste-manager', description: 'Provides strategies for waste reduction, recycling, and management.', Icon: Recycle },
+  { name: 'Waste Manager', slug: 'waste-manager', description: 'Provides strategies for waste reduction, recycling, and management.', Icon: Recycle },
   { name: 'Water Resource AI', slug: 'water-resource-ai', description: 'Analyzes and manages water resources for sustainability.', Icon: Droplets },
   { name: 'Biodiversity Monitor', slug: 'biodiversity-monitor', description: 'Monitors and reports on biodiversity in specific ecosystems.', Icon: Bird },
   { name: 'Pollution Tracker', slug: 'pollution-tracker', description: 'Tracks air, water, and soil pollution levels from various data sources.', Icon: Heater },
