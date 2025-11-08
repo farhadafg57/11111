@@ -54,7 +54,7 @@ export const agents: Agent[] = [
   { name: 'Game Designer', slug: 'game-designer', description: 'Assists in game design, from core mechanics and level design to character development.', Icon: Gamepad2 },
   { name: 'Content Writer', slug: 'content-writer', description: 'Writes high-quality articles, blog posts, and other content on any given topic.', Icon: FileText },
   { name: 'Technical Writer', slug: 'technical-writer', description: 'Creates clear, concise, and comprehensive technical documentation for your projects.', Icon: FileCode },
-  { name: 'Marketing Copywriter', slug: 'marketing-copywriter', description: 'Writes persuasive marketing copy for websites, ads, emails, and social media.', Icon: Sparkle },
+  { name: 'Marketing Copywriter', slug: 'marketing-copywriter', description: 'Writes persuasive marketing copy for websites, ads, emails, and social media.', Icon: Sparkles },
   { name: 'Ideation Assistant', slug: 'ideation-assistant', description: 'Helps brainstorm and develop new ideas for projects, products, and creative endeavors.', Icon: Lightbulb },
   { name: '3D Model Generator', slug: '3d-model-generator', description: 'Generates 3D models from text descriptions or 2D images.', Icon: Cuboid },
   { name: 'Script Writer', slug: 'script-writer', description: 'Writes scripts for videos, podcasts, plays, and other narrative media.', Icon: FileSignature },
