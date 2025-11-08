@@ -5,6 +5,7 @@ import ChatDisplay from '@/components/layout/chat-display';
 import CommandBar from '@/components/layout/command-bar';
 import { agents } from '@/lib/agents';
 import { notFound, useParams } from 'next/navigation';
+import CanvasPage from './canvas';
 
 export type Message = {
   id: string;
@@ -46,13 +47,13 @@ export default function AgentChatPage() {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col h-full z-10">
       <ChatDisplay messages={messages} />
       <CommandBar
         agent={agent}
         onNewMessage={handleNewMessage}
         onAgentResponse={handleAgentResponse}
       />
-    </>
+    </div>
   );
 }

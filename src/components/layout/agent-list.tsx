@@ -77,14 +77,10 @@ const UserStatus = () => {
 export default function AgentList() {
   const { t } = useLanguage();
   const router = useRouter();
+  const params = useParams();
+  const agentId = params.agentId as string;
 
-  // This function is a placeholder for future canvas interaction.
-  // Instead of navigating, it will eventually send a message to the 3D canvas
-  // to focus, select, or interact with the corresponding agent node.
   const handleAgentSelect = useCallback((agentSlug: string) => {
-    console.log(`Agent selected: ${agentSlug}. Implement canvas interaction here.`);
-    // For now, we'll navigate to keep some functionality.
-    // This will be removed once the canvas is fully interactive.
     router.push(`/hub/${agentSlug}`);
   }, [router]);
 
@@ -104,6 +100,7 @@ export default function AgentList() {
                 <SidebarMenuButton 
                   onClick={() => handleAgentSelect(agent.slug)}
                   tooltip={agent.name} 
+                  isActive={agent.slug === agentId}
                   className="justify-start"
                 >
                     <agent.Icon />

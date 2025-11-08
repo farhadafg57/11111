@@ -8,13 +8,6 @@ const nextConfig = {
       },
     ],
   },
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: [{ loader: '@svgr/webpack', options: { icon: true } }],
-    });
-    return config;
-  },
   compiler: {
     // Enables the styled-components SWC transform
     styledComponents: true,
@@ -23,14 +16,6 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: '4mb',
     },
-  },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'picsum.photos',
-      },
-    ],
   },
   // This is required for Drei's <Html> component to properly render SVGs from lucide-react
   // by allowing foreignObject in the SVG output.
