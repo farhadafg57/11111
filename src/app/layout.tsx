@@ -1,28 +1,20 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
-import { Providers } from './providers';
-import { Cormorant_Garamond, Source_Serif_4, Noto_Naskh_Arabic } from 'next/font/google';
+import { Manrope, Noto_Naskh_Arabic } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { SidebarProvider } from '@/components/ui/sidebar';
+import { LanguageProvider } from '@/lib/language';
+import { FirebaseClientProvider } from '@/firebase';
 
 export const metadata: Metadata = {
   title: 'AfghanAI Hub',
   description: 'An AI Hub for classical and modern knowledge.',
 };
 
-const cormorantGaramond = Cormorant_Garamond({
-  subsets: ['latin'],
-  variable: '--font-headline',
-  weight: ['400', '600', '700'],
-  display: 'swap',
-});
-
-const sourceSerif4 = Source_Serif_4({
+const manrope = Manrope({
   subsets: ['latin'],
   variable: '--font-body',
-  style: ['normal', 'italic'],
-  axes: ['opsz'],
   display: 'swap',
 });
 
@@ -40,20 +32,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" style={{ colorScheme: 'dark' }} suppressHydrationWarning>
       <head>
       </head>
       <body className={cn(
         'font-body antialiased',
-        cormorantGaramond.variable,
-        sourceSerif4.variable,
+        manrope.variable,
         notoNaskhArabic.variable
       )}>
-        <Providers>
-          <SidebarProvider>
-            {children}
-          </SidebarProvider>
-        </Providers>
+        <LanguageProvider>
+          <FirebaseClientProvider>
+            <SidebarProvider>
+              {children}
+            </SidebarProvider>
+          </FirebaseClientProvider>
+        </LanguageProvider>
         <Toaster />
       </body>
     </html>

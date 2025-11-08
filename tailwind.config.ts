@@ -88,7 +88,6 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
        fontFamily: {
-        headline: ['var(--font-headline)'],
         body: ['var(--font-body)'],
         arabic: ['var(--font-arabic)'],
       },
@@ -97,6 +96,10 @@ const config = {
       },
       backgroundSize: {
         'grid-primary/10': '1rem 1rem',
+      },
+      boxShadow: {
+        'glow-primary': '0 0 15px 0 hsl(var(--primary) / 0.5), 0 0 5px 0 hsl(var(--primary) / 0.7)',
+        'glow-primary-lg': '0 0 25px -5px hsl(var(--primary) / 0.6), 0 0 10px -5px hsl(var(--primary) / 0.8)',
       }
     },
   },
