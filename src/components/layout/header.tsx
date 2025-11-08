@@ -6,12 +6,18 @@ import { SidebarTrigger } from '../ui/sidebar';
 import { useUser } from '@/firebase';
 import { Button } from '../ui/button';
 import Link from 'next/link';
+import { Skeleton } from '../ui/skeleton';
 
 const AuthButton = () => {
     const { user, isUserLoading } = useUser();
 
-    if (isUserLoading) return null;
-    if (user) return null;
+    if (isUserLoading) {
+      return <Skeleton className="h-9 w-24" />;
+    }
+    
+    if (user) {
+      return null;
+    }
 
     return (
         <Button asChild variant="ghost" size="sm">
@@ -30,9 +36,9 @@ export default function AppHeader() {
       <div className="container mx-auto flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
            <SidebarTrigger />
-          <h1 className="text-3xl font-headline font-bold text-foreground tracking-tight">
+          <Link href="/" className="text-3xl font-headline font-bold text-foreground tracking-tight">
             AfghanAI
-          </h1>
+          </Link>
         </div>
         <div className="flex items-center gap-2">
             <AuthButton />

@@ -6,18 +6,17 @@ import { agents } from '@/lib/agents';
 import type { LucideIcon } from 'lucide-react';
 import { GanttChartSquare, BotMessageSquare, Repeat, Flag, Gamepad, Feather, Brush, Footprints, ChefHat, Scissors, Medal, FilePen, Zap, Mountain, Utensils, ThumbsUp } from 'lucide-react';
 
-
 const useWindowSize = () => {
     const [size, setSize] = useState([0, 0]);
     useEffect(() => {
-      if (typeof window === 'undefined') return;
+      // This effect runs only on the client
       function updateSize() {
         setSize([window.innerWidth, window.innerHeight]);
       }
       window.addEventListener('resize', updateSize);
       updateSize();
       return () => window.removeEventListener('resize', updateSize);
-    }, []);
+    }, []); // Empty dependency array ensures this runs once on mount
     return size;
 };
 
@@ -32,19 +31,18 @@ const simpleHash = (str: string) => {
     return Math.abs(hash);
 };
 
-
 const InteractiveHeroClient = () => {
   const [width] = useWindowSize();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    // This ensures that the component only renders its full content on the client.
     setIsClient(true);
   }, []);
   
   const orbitingAgents = useMemo(() => {
       if (!isClient) return [];
       
-      // Add a few more interesting and visually distinct icons to the exclusion list if needed
       const excludedIcons: LucideIcon[] = [GanttChartSquare, BotMessageSquare, Repeat, Flag, Gamepad, Feather, Brush, Footprints, ChefHat, Scissors, Medal, FilePen, Zap, Mountain, Utensils, ThumbsUp];
       
       const coreAgents = agents
@@ -64,6 +62,7 @@ const InteractiveHeroClient = () => {
       });
   }, [width, isClient]);
 
+  // Render a placeholder or nothing during SSR and initial client render
   if (!isClient) {
     return <div className="absolute inset-0 z-0" />;
   }
@@ -101,7 +100,6 @@ const InteractiveHeroClient = () => {
     </div>
   );
 };
-
 
 export default function HeroAnimation() {
     return <InteractiveHeroClient />;

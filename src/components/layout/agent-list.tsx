@@ -2,16 +2,10 @@
 
 import { agents } from '@/lib/agents';
 import {
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-  SidebarFooter,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupLabel,
-} from '@/components/ui/sidebar';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+  Avatar,
+  AvatarFallback,
+  AvatarImage
+} from '@/components/ui/avatar';
 import { useAuth, useUser } from '@/firebase';
 import { Skeleton } from '../ui/skeleton';
 import { Button } from '../ui/button';
@@ -22,6 +16,7 @@ import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import placeholderData from '@/lib/placeholder-images.json';
 import { useCallback } from 'react';
+import { ScrollArea } from '../ui/scroll-area';
 
 const UserStatus = () => {
     const auth = useAuth();
@@ -31,9 +26,9 @@ const UserStatus = () => {
 
     if (isUserLoading) {
         return (
-            <div className="flex items-center gap-3 p-3 group-data-[collapsible=icon]:justify-center">
+            <div className="flex items-center gap-3 p-4">
                 <Skeleton className="size-9 rounded-full" />
-                <div className="flex flex-col gap-1 group-data-[collapsible=icon]:hidden">
+                <div className="flex flex-col gap-1">
                     <Skeleton className="h-4 w-24" />
                     <Skeleton className="h-3 w-16" />
                 </div>
@@ -43,38 +38,42 @@ const UserStatus = () => {
 
     if (!user) {
         return (
-            <div className="p-3">
+            <div className="p-2">
                  <Button 
                     onClick={() => initiateAnonymousSignIn(auth)} 
                     className="w-full"
                     variant="outline"
                  >
                     <LogIn className="mr-2" />
-                    <span className='group-data-[collapsible=icon]:hidden'>{t('signInAnonymously')}</span>
+                    <span>{t('signInAnonymously')}</span>
                 </Button>
             </div>
         )
     }
 
-    const avatarSrc = userAvatarImage ? userAvatarImage.src.replace('{{id}}', user.uid) : '';
+    const avatarSrc = userAvatarImage && user.uid ? userAvatarImage.src.replace('{{id}}', user.uid) : '';
 
     return (
-         <div className="flex items-center gap-3 p-3 group-data-[collapsible=icon]:justify-center">
+         <div className="flex items-center gap-3 p-4">
             <Avatar className="size-9">
-                {userAvatarImage && (
+                {avatarSrc && (
                     <AvatarImage src={avatarSrc} alt="User" width={userAvatarImage.width} height={userAvatarImage.height} data-ai-hint={userAvatarImage.hint} />
                 )}
-                <AvatarFallback>{user.isAnonymous ? 'A' : 'U'}</AvatarFallback>
+                <AvatarFallback>{user.isAnonymous ? 'A' : (user.email ? user.email.charAt(0).toUpperCase() : 'U')}</AvatarFallback>
             </Avatar>
-            <div className="flex flex-col group-data-[collapsible=icon]:hidden">
-                <span className="text-sm font-medium text-sidebar-foreground truncate">{user.isAnonymous ? t('anonymousUser') : user.email || t('user')}</span>
-                <span className="text-xs text-sidebar-foreground/70">{user.uid.substring(0,8)}...</span>
+            <div className="flex flex-col overflow-hidden">
+                <span className="text-sm font-medium text-foreground truncate">{user.isAnonymous ? t('anonymousUser') : user.email || t('user')}</span>
+                <span className="text-xs text-muted-foreground truncate">{user.uid}</span>
             </div>
         </div>
     )
 }
 
-export default function AgentList() {
+type AgentListProps = {
+  onAgentSelect?: () => void;
+};
+
+export default function AgentList({ onAgentSelect }: AgentListProps) {
   const { t } = useLanguage();
   const router = useRouter();
   const params = useParams();
@@ -82,38 +81,40 @@ export default function AgentList() {
 
   const handleAgentSelect = useCallback((agentSlug: string) => {
     router.push(`/hub/${agentSlug}`);
-  }, [router]);
+    // If the onAgentSelect callback is provided (from the mobile sheet), call it.
+    if (onAgentSelect) {
+      onAgentSelect();
+    }
+  }, [router, onAgentSelect]);
 
   return (
-    <>
-      <SidebarHeader className="text-center p-4 border-b">
-        <h2 className="text-2xl font-headline font-semibold group-data-[collapsible=icon]:hidden">
+    <div className="flex flex-col h-full bg-background">
+      <div className="p-4 border-b">
+        <h2 className="text-2xl font-headline font-semibold">
           {t('scriptorium')}
         </h2>
-      </SidebarHeader>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>{t('agents')}</SidebarGroupLabel>
-          <SidebarMenu>
+      </div>
+      <ScrollArea className="flex-1">
+        <nav className="p-2">
+          <ul>
             {agents.map((agent) => (
-              <SidebarMenuItem key={agent.slug}>
-                <SidebarMenuButton 
+              <li key={agent.slug}>
+                <Button
                   onClick={() => handleAgentSelect(agent.slug)}
-                  tooltip={agent.name} 
-                  isActive={agent.slug === agentId}
-                  className="justify-start"
+                  variant={agent.slug === agentId ? 'secondary' : 'ghost'}
+                  className="w-full justify-start gap-3 h-12"
                 >
-                    <agent.Icon />
-                    <span className="font-body">{agent.name}</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+                  <agent.Icon className="size-5 text-primary" />
+                  <span className="font-body truncate">{agent.name}</span>
+                </Button>
+              </li>
             ))}
-          </SidebarMenu>
-        </SidebarGroup>
-      </SidebarContent>
-      <SidebarFooter className="mt-auto border-t">
+          </ul>
+        </nav>
+      </ScrollArea>
+      <div className="mt-auto border-t">
         <UserStatus />
-      </SidebarFooter>
-    </>
+      </div>
+    </div>
   );
 }
