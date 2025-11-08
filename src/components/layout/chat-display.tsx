@@ -83,10 +83,11 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
                 <Avatar className="size-10 bg-muted">
                   {showUserAvatar && user?.uid ? (
                     <AvatarImage src={userAvatarImage.src.replace('{{id}}', user.uid)} alt="User" width={userAvatarImage.width} height={userAvatarImage.height} data-ai-hint={userAvatarImage.hint} />
-                  ) : null}
+                  ) : (
                   <AvatarFallback>
                     <User className="size-5" />
                   </AvatarFallback>
+                  )}
                 </Avatar>
               )}
             </motion.div>

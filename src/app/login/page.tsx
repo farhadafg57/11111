@@ -29,6 +29,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/firebase';
+import { LoaderCircle } from 'lucide-react';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }),
@@ -141,6 +142,9 @@ export default function LoginPage() {
                 )}
               />
               <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading && (
+                  <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
+                )}
                 {isLoading
                   ? 'Loading...'
                   : isSignUp

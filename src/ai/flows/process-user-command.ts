@@ -137,7 +137,7 @@ const processUserCommandFlow = ai.defineFlow(
     
     const agentName = (selection?.agentName && agentNames.includes(selection.agentName)) ? selection.agentName : 'Oracle AI';
     const complexity = selection?.complexity || 'simple';
-    const model = complexity === 'complex' ? 'googleai/gemini-2.5-pro' : 'googleai/gemini-2.5-flash';
+    const model = complexity === 'complex' ? 'googleai/gemini-1.5-pro' : 'googleai/gemini-1.5-flash';
 
     // 2. Check for a cached response in Firestore
     if (userId) {
@@ -168,7 +168,7 @@ const processUserCommandFlow = ai.defineFlow(
         prompt: wrappedPrompt,
     });
     
-    const agentResponse = output || "I apologize, but I was unable to process your command.";
+    const agentResponse = output?.text || "I apologize, but I was unable to process your command.";
 
     // 4. Write the new response to the cache using a non-blocking operation
     if (userId) {

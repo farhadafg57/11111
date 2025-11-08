@@ -1,6 +1,6 @@
 'use client';
 
-import { BrainCircuit, LogIn } from 'lucide-react';
+import { LogIn } from 'lucide-react';
 import LanguageSwitcher from './language-switcher';
 import { SidebarTrigger } from '../ui/sidebar';
 import { useUser } from '@/firebase';
