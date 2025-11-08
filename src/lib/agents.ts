@@ -243,7 +243,7 @@ export const agents: Agent[] = [
   { name: 'Physics Simulator', slug: 'physics-simulator', description: 'Simulates physical systems and experiments.', Icon: TestTube },
   { name: 'Chemical Synthesizer', slug: 'chemical-synthesizer', description: 'Designs synthesis pathways for chemical compounds.', Icon: FlaskConical },
   { name: 'Astronomy Guide', slug: 'astronomy-guide', description: 'Provides information about celestial objects, constellations, and astronomical events.', Icon: Telescope },
-  { name:- name: 'Robotics Designer', slug: 'robotics-designer', description: 'Designs robotic systems and simulates their behavior.', Icon: Bot },
+  { name: 'Robotics Designer', slug: 'robotics-designer', description: 'Designs robotic systems and simulates their behavior.', Icon: Bot },
   { name: 'Genetics Analyzer', slug: 'genetics-analyzer', description: 'Analyzes genetic data to identify traits and potential health risks.', Icon: Dna },
   { name: 'Fluid Dynamics AI', slug: 'fluid-dynamics-ai', description: 'Simulates and analyzes fluid dynamics for engineering and scientific applications.', Icon: Waves },
   { name: 'Geology Expert', slug: 'geology-expert', description: 'Provides expertise on geological formations, minerals, and earth processes.', Icon: MountainSnow },
