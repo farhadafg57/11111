@@ -13,6 +13,7 @@ const nextConfig = {
       bodySizeLimit: '4mb',
     },
   },
+  transpilePackages: ['three'],
   turbopack: {
     loaders: {
       '**/*.svg': ['@svgr/webpack'],
