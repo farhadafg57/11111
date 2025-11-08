@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
-import { Manrope, Noto_Naskh_Arabic } from 'next/font/google';
+import { Manrope } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { Providers } from './providers';
 
@@ -16,14 +16,6 @@ const manrope = Manrope({
   display: 'swap',
 });
 
-const notoNaskhArabic = Noto_Naskh_Arabic({
-  subsets: ['arabic'],
-  variable: '--font-arabic',
-  weight: ['400', '700'],
-  display: 'swap',
-});
-
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,11 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" style={{ colorScheme: 'dark' }} suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16" />
       </head>
       <body className={cn(
         'font-body antialiased',
-        manrope.variable,
-        notoNaskhArabic.variable
+        manrope.variable
       )}>
         <Providers>
             {children}

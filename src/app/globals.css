@@ -4,90 +4,65 @@
 
 @layer base {
   :root {
-    --background: 226 62% 5%; /* #030612 - The Void */
-    --foreground: 210 20% 87%; /* #BCC9DE */
+    --background: 222 84% 5%; /* #030612 - The Void */
+    --foreground: 210 40% 96%;
 
     --card: 217 33% 80% / 0.1; /* #B4C5E4 with 10% opacity */
-    --card-foreground: 210 20% 87%;
+    --card-foreground: 210 40% 96%;
 
-    --popover: 226 62% 5%;
-    --popover-foreground: 210 20% 87%;
+    --popover: 222 84% 5%;
+    --popover-foreground: 210 40% 96%;
 
     --primary: 180 100% 50%; /* #00FFFF - The Spark (Cyan Plasm) */
-    --primary-foreground: 226 62% 5%;
+    --primary-foreground: 222 84% 5%;
 
-    --secondary: 220 23% 20%; /* #2A3447 */
-    --secondary-foreground: 210 20% 87%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 96%;
 
-    --muted: 220 23% 20%;
-    --muted-foreground: 217 21% 56%; /* #5C6A82 */
-    
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
     --accent: 180 100% 50% / 0.1;
     --accent-foreground: 180 100% 50%;
 
     --destructive: 0 63% 31%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 210 40% 98%;
 
     --border: 217 33% 80% / 0.2; /* #B4C5E4 with 20% opacity */
     --input: 217 33% 80% / 0.15;
     --ring: 180 100% 50%;
 
-    --chart-1: 180 100% 50%;
-    --chart-2: 210 100% 60%;
-    --chart-3: 260 100% 70%;
-    --chart-4: 300 100% 70%;
-    --chart-5: 340 100% 70%;
-
     --radius: 0.5rem;
-
-    --sidebar-background: 226 62% 7%; /* Slightly lighter than main bg */
-    --sidebar-foreground: 210 20% 87%;
-    --sidebar-primary: 180 100% 50%;
-    --sidebar-primary-foreground: 226 62% 5%;
-    --sidebar-accent: 180 100% 50% / 0.1;
-    --sidebar-accent-foreground: 180 100% 50%;
-    --sidebar-border: 217 33% 80% / 0.2;
-    --sidebar-ring: 180 100% 50%;
   }
 
   .dark {
-    /* Same as root for a forced dark theme */
-    --background: 226 62% 5%; /* #030612 - The Void */
-    --foreground: 210 20% 87%; /* #BCC9DE */
+    --background: 222 84% 5%;
+    --foreground: 210 40% 96%;
 
-    --card: 217 33% 80% / 0.1; /* #B4C5E4 with 10% opacity */
-    --card-foreground: 210 20% 87%;
+    --card: 217 33% 80% / 0.1;
+    --card-foreground: 210 40% 96%;
 
-    --popover: 226 62% 5%;
-    --popover-foreground: 210 20% 87%;
+    --popover: 222 84% 5%;
+    --popover-foreground: 210 40% 96%;
 
-    --primary: 180 100% 50%; /* #00FFFF - The Spark (Cyan Plasm) */
-    --primary-foreground: 226 62% 5%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 222 84% 5%;
 
-    --secondary: 220 23% 20%; /* #2A3447 */
-    --secondary-foreground: 210 20% 87%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 96%;
 
-    --muted: 220 23% 20%;
-    --muted-foreground: 217 21% 56%; /* #5C6A82 */
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
     
     --accent: 180 100% 50% / 0.1;
     --accent-foreground: 180 100% 50%;
 
     --destructive: 0 63% 31%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 80% / 0.2; /* #B4C5E4 with 20% opacity */
+    --border: 217 33% 80% / 0.2;
     --input: 217 33% 80% / 0.15;
     --ring: 180 100% 50%;
-    
-    --sidebar-background: 226 62% 7%;
-    --sidebar-foreground: 210 20% 87%;
-    --sidebar-primary: 180 100% 50%;
-    --sidebar-primary-foreground: 226 62% 5%;
-    --sidebar-accent: 180 100% 50% / 0.1;
-    --sidebar-accent-foreground: 180 100% 50%;
-    --sidebar-border: 217 33% 80% / 0.2;
-    --sidebar-ring: 180 100% 50%;
   }
 }
 
