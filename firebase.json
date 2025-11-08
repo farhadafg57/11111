@@ -5,7 +5,10 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.html"
+        "run": {
+          "serviceId": "afghanai-hub",
+          "region": "us-central1"
+        }
       }
     ]
   }
