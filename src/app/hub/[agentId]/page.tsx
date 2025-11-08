@@ -5,7 +5,6 @@ import ChatDisplay from '@/components/layout/chat-display';
 import CommandBar from '@/components/layout/command-bar';
 import { agents } from '@/lib/agents';
 import { notFound, useParams } from 'next/navigation';
-import CanvasPage from './canvas';
 
 export type Message = {
   id: string;
