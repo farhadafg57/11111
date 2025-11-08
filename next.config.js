@@ -13,12 +13,10 @@ const nextConfig = {
       bodySizeLimit: '4mb',
     },
   },
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.svg$/i,
-      use: ['@svgr/webpack'],
-    });
-    return config;
+  turbopack: {
+    loaders: {
+      '**/*.svg': ['@svgr/webpack'],
+    },
   },
 };
 
