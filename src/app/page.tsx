@@ -12,6 +12,26 @@ import {
   CheckCircle2,
   MousePointerClick,
   Package,
+  BrainCircuit,
+  Languages as LanguageIcon,
+  Search,
+  Database,
+  ShieldCheck,
+  Eye,
+  Cpu,
+  Combine,
+  GitBranch,
+  Layers,
+  Container,
+  Goal,
+  Wand2,
+  Users,
+  BadgeDollarSign,
+  Recycle,
+  Sparkles,
+  Blocks,
+  Settings,
+  AppWindow,
 } from 'lucide-react';
 import { useLanguage } from '@/lib/language';
 import placeholderData from '@/lib/placeholder-images.json';
@@ -37,6 +57,109 @@ const howItWorksSteps = [
         description: 'howItWorks3Desc'
     }
 ];
+
+const richFeatures = [
+    {
+        Icon: Cpu,
+        title: 'featureCognitiveCoreTitle',
+        description: 'featureCognitiveCoreDesc',
+    },
+    {
+        Icon: Eye,
+        title: 'featureSensoryIntelTitle',
+        description: 'featureSensoryIntelDesc',
+    },
+    {
+        Icon: Combine,
+        title: 'featureMemoryCoreTitle',
+        description: 'featureMemoryCoreDesc',
+    },
+    {
+        Icon: Search,
+        title: 'featureRealWorldTitle',
+        description: 'featureRealWorldDesc',
+    },
+    {
+        Icon: LanguageIcon,
+        title: 'featureCulturalSoulTitle',
+        description: 'featureCulturalSoulDesc',
+    },
+    {
+        Icon: BadgeDollarSign,
+        title: 'featureCostEffectiveTitle',
+        description: 'featureCostEffectiveDesc',
+    },
+];
+
+const agenticCoreFeatures = [
+    {
+        Icon: Goal,
+        title: 'agenticGoalTitle',
+        description: 'agenticGoalDesc',
+    },
+    {
+        Icon: Wand2,
+        title: 'agenticToolTitle',
+        description: 'agenticToolDesc',
+    },
+    {
+        Icon: Users,
+        title: 'agenticCollaborationTitle',
+        description: 'agenticCollaborationDesc',
+    },
+    {
+        Icon: GitBranch,
+        title: 'agenticLearningTitle',
+        description: 'agenticLearningDesc',
+    },
+];
+
+const modularityFeatures = [
+    {
+        Icon: Layers,
+        title: 'modularityAgentsTitle',
+        description: 'modularityAgentsDesc',
+    },
+    {
+        Icon: Combine,
+        title: 'modularityIntegrationTitle',
+        description: 'modularityIntegrationDesc',
+    },
+    {
+        Icon: Settings,
+        title: 'modularityManagementTitle',
+        description: 'modularityManagementDesc',
+    },
+    {
+        Icon: AppWindow,
+        title: 'modularityCustomizationTitle',
+        description: 'modularityCustomizationDesc',
+    },
+];
+
+const costFeatures = [
+    {
+        Icon: Sparkles,
+        title: 'costAllocationTitle',
+        description: 'costAllocationDesc',
+    },
+    {
+        Icon: Container,
+        title: 'costCachingTitle',
+        description: 'costCachingDesc',
+    },
+    {
+        Icon: Blocks,
+        title: 'costModelTitle',
+        description: 'costModelDesc',
+    },
+    {
+        Icon: Recycle,
+        title: 'costToolUsageTitle',
+        description: 'costToolUsageDesc',
+    },
+];
+
 
 const pricingTiers = [
     {
@@ -95,7 +218,7 @@ const faqItems = [
     },
     {
         q: 'faq6q',
-        a: 'faq6a'
+a: 'faq6a'
     }
 ];
 
@@ -218,6 +341,69 @@ export default function LandingPage() {
             </div>
         </section>
 
+        {/* Rich Features Section */}
+        <section id="features" className="py-20 lg:py-24 bg-background">
+            <div className="container mx-auto px-4">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={itemVariants}
+                    className="text-center max-w-3xl mx-auto">
+                    <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">{t('richFeaturesTitle')}</h2>
+                </motion.div>
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.1 }}
+                    variants={containerVariants}
+                >
+                    {richFeatures.map(feature => (
+                        <motion.div key={feature.title} variants={itemVariants} className="bg-card p-6 rounded-lg border border-border">
+                            <feature.Icon className="w-10 h-10 text-primary mb-4" />
+                            <h3 className="text-xl font-headline font-semibold mb-2">{t(feature.title)}</h3>
+                            <p className="text-foreground/70">{t(feature.description)}</p>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </div>
+        </section>
+
+        {/* Agentic Core Section */}
+        <section id="agentic-core" className="py-20 lg:py-24 bg-muted/30">
+            <div className="container mx-auto px-4">
+                 <motion.div
+                    className="grid md:grid-cols-2 gap-12 items-center"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={containerVariants}
+                >
+                    <motion.div variants={itemVariants}>
+                        <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">{t('agenticCoreTitle')}</h2>
+                        <p className="text-lg text-foreground/70 mb-6">{t('agenticCoreDesc')}</p>
+                        <div className="space-y-4">
+                           {agenticCoreFeatures.map(feature => (
+                                <div key={feature.title} className="flex items-start gap-4">
+                                    <div className="bg-background rounded-full p-2 border border-primary/20 mt-1">
+                                        <feature.Icon className="w-5 h-5 text-primary" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-semibold text-lg">{t(feature.title)}</h4>
+                                        <p className="text-foreground/70">{t(feature.description)}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                    <motion.div variants={itemVariants} className="relative aspect-square">
+                        <BrainCircuit className="w-full h-full text-primary/10" />
+                    </motion.div>
+                </motion.div>
+            </div>
+        </section>
+
          {/* Vision Section */}
         <section id="vision" className="py-20 lg:py-24 bg-background">
             <div className="container mx-auto px-4">
@@ -312,6 +498,70 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
+
+        {/* Modularity Section */}
+        <section id="modularity" className="py-20 lg:py-24 bg-background">
+            <div className="container mx-auto px-4 text-center">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={itemVariants}
+                    className="max-w-3xl mx-auto">
+                    <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">{t('modularityTitle')}</h2>
+                    <p className="text-lg text-foreground/70 mb-12">{t('modularityDesc')}</p>
+                </motion.div>
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.1 }}
+                    variants={containerVariants}
+                >
+                    {modularityFeatures.map(feature => (
+                        <motion.div key={feature.title} variants={itemVariants} className="text-center">
+                            <div className="inline-block bg-card p-4 rounded-full border border-primary/20 mb-4">
+                               <feature.Icon className="w-8 h-8 text-primary" />
+                            </div>
+                            <h3 className="text-xl font-headline font-semibold mb-2">{t(feature.title)}</h3>
+                            <p className="text-foreground/70">{t(feature.description)}</p>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </div>
+        </section>
+
+        {/* Cost Section */}
+        <section id="cost" className="py-20 lg:py-24 bg-muted/30">
+            <div className="container mx-auto px-4 text-center">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={itemVariants}
+                    className="max-w-3xl mx-auto">
+                    <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">{t('costTitle')}</h2>
+                    <p className="text-lg text-foreground/70 mb-12">{t('costDesc')}</p>
+                </motion.div>
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.1 }}
+                    variants={containerVariants}
+                >
+                    {costFeatures.map(feature => (
+                        <motion.div key={feature.title} variants={itemVariants} className="text-center">
+                             <div className="inline-block bg-card p-4 rounded-full border border-primary/20 mb-4">
+                               <feature.Icon className="w-8 h-8 text-primary" />
+                            </div>
+                            <h3 className="text-xl font-headline font-semibold mb-2">{t(feature.title)}</h3>
+                            <p className="text-foreground/70">{t(feature.description)}</p>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </div>
+        </section>
 
       {/* Mission Section */}
       <section id="mission" className="py-20 lg:py-24 bg-background overflow-hidden">
