@@ -253,7 +253,7 @@ export default function LandingPage() {
 
   return (
     <div className={language === 'fa' || language === 'ps' ? 'font-arabic' : ''}>
-      <AppHeader />
+      <AppHeader showSidebarTrigger={false} />
 
       {/* Hero Section */}
       <section className="relative text-center h-[90svh] py-20 lg:py-32 bg-background overflow-hidden">

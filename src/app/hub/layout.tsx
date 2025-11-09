@@ -9,7 +9,7 @@ export default function HubLayout({
 }) {
     return (
         <div className="flex flex-col h-screen bg-background">
-            <AppHeader />
+            <AppHeader showSidebarTrigger={true} />
             <div className="flex-1 grid md:grid-cols-[280px_1fr] overflow-hidden">
                 <aside className="hidden md:flex md:flex-col border-r">
                     <AgentList />
