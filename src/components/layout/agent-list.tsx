@@ -74,7 +74,6 @@ type AgentListProps = {
 };
 
 export default function AgentList({ onAgentSelect }: AgentListProps) {
-  const { t } = useLanguage();
   const router = useRouter();
   const params = useParams();
   const agentId = params.agentId as string;
@@ -89,9 +88,9 @@ export default function AgentList({ onAgentSelect }: AgentListProps) {
 
   return (
     <div className="flex flex-col h-full bg-background">
-      <div className="p-4 border-b">
+      <div className="hidden md:block p-4 border-b">
         <h2 className="text-2xl font-headline font-semibold">
-          {t('scriptorium')}
+          Scriptorium
         </h2>
       </div>
       <ScrollArea className="flex-1">
