@@ -40,7 +40,9 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
           const isUserMessage = message.role === 'user';
           const { Icon: AgentIcon, name: agentName } = getAgentInfo(message.agentName);
           const isThinking = message.isThinking;
+          
           const showUserAvatar = isUserMessage && user && !user.isAnonymous && userAvatarImage;
+          const avatarSrc = showUserAvatar && user?.uid ? userAvatarImage.src.replace('{{id}}', user.uid) : '';
 
           return (
             <motion.div
@@ -81,8 +83,8 @@ export default function ChatDisplay({ messages }: { messages: Message[] }) {
               </div>
               {isUserMessage && (
                 <Avatar className="size-10 bg-muted">
-                  {showUserAvatar && user?.uid ? (
-                    <AvatarImage src={userAvatarImage.src.replace('{{id}}', user.uid)} alt="User" width={userAvatarImage.width} height={userAvatarImage.height} data-ai-hint={userAvatarImage.hint} />
+                  {showUserAvatar ? (
+                    <AvatarImage src={avatarSrc} alt="User" width={userAvatarImage.width} height={userAvatarImage.height} data-ai-hint={userAvatarImage.hint} />
                   ) : (
                   <AvatarFallback>
                     <User className="size-5" />

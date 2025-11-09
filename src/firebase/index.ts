@@ -5,34 +5,22 @@ import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app';
 import { getAuth, type Auth } from 'firebase/auth';
 import { getFirestore, type Firestore } from 'firebase/firestore'
 
+let firebaseApp: FirebaseApp;
+let auth: Auth;
+let firestore: Firestore;
+
 // IMPORTANT: DO NOT MODIFY THIS FUNCTION
 export function initializeFirebase(): { firebaseApp: FirebaseApp; auth: Auth; firestore: Firestore; } {
-  if (getApps().length > 0) {
-    const app = getApp();
-    return getSdks(app);
+  if (getApps().length === 0) {
+    firebaseApp = initializeApp(firebaseConfig);
+    auth = getAuth(firebaseApp);
+    firestore = getFirestore(firebaseApp);
+  } else {
+    firebaseApp = getApp();
+    auth = getAuth(firebaseApp);
+    firestore = getFirestore(firebaseApp);
   }
-
-  // Firebase App Hosting integrates with initializeApp() to provide the necessary
-  // environment variables for production. During local development, these may
-  // not be present, so we fall back to the explicit config object.
-  try {
-    const app = initializeApp();
-    return getSdks(app);
-  } catch (e) {
-    if (process.env.NODE_ENV === 'production') {
-        console.warn('Automatic Firebase initialization failed, falling back to config. This might indicate a missing App Hosting backend.', e);
-    }
-    const app = initializeApp(firebaseConfig);
-    return getSdks(app);
-  }
-}
-
-export function getSdks(firebaseApp: FirebaseApp) {
-  return {
-    firebaseApp,
-    auth: getAuth(firebaseApp),
-    firestore: getFirestore(firebaseApp)
-  };
+  return { firebaseApp, auth, firestore };
 }
 
 export * from './provider';

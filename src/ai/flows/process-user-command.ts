@@ -22,6 +22,9 @@ import {
 import { initializeFirebase } from '@/firebase';
 import { agents } from '@/lib/agents';
 import { createHash } from 'crypto';
+import { errorEmitter, FirestorePermissionError } from '@/firebase';
+import type { SecurityRuleContext } from '@/firebase/errors';
+
 
 const ProcessUserCommandInputSchema = z.object({
   command: z.string().describe('The command entered by the user.'),
@@ -175,17 +178,24 @@ const processUserCommandFlow = ai.defineFlow(
     if (userId) {
        const cacheKey = createHash('sha256').update(command + agentName).digest('hex');
        const cacheRef = doc(firestore, 'users', userId, 'cachedResponses', cacheKey);
-       
-       setDoc(cacheRef, {
+       const cacheData = {
         prompt: command,
         response: agentResponse,
         agentId: agentName,
         userId: userId,
         timestamp: serverTimestamp(),
         ttl: 3600, // Cache for 1 hour
-      }, { merge: true }).catch(err => {
-        console.error("Failed to cache response:", err);
-      });
+      };
+       
+       setDoc(cacheRef, cacheData, { merge: true })
+        .catch(async (serverError) => {
+            const permissionError = new FirestorePermissionError({
+                path: cacheRef.path,
+                operation: 'write',
+                requestResourceData: cacheData
+            } satisfies SecurityRuleContext);
+            errorEmitter.emit('permission-error', permissionError);
+        });
     }
 
     return {
