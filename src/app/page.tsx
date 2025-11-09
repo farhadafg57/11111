@@ -4,26 +4,17 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import AppHeader from '@/components/layout/header';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   ArrowRight,
-  BookOpen,
-  Feather,
   Bot,
-  MessageSquare,
-  Server,
   Database,
   ShieldCheck,
-  Globe,
-  HeartHandshake,
   Lightbulb,
   Eye,
   Rocket,
   Cpu,
-  LayoutPanelLeft,
-  Pill,
   Combine,
-  Sigma,
   GitBranch,
   Layers,
   Container,
@@ -35,7 +26,6 @@ import {
   BrainCircuit,
   Languages as LanguageIcon,
   Search,
-  Map,
   Sparkles,
   Blocks,
   Settings,
@@ -182,19 +172,6 @@ const faqItems = [
 export default function LandingPage() {
   const { t, language } = useLanguage();
   const founderImage = placeholderData.images.find(img => img.id === 'founder-landing');
-  const targetRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ['start start', 'end start'],
-  });
-
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.2, 0.4], [1, 0.5, 0]);
-  const titleY = useTransform(scrollYProgress, [0, 0.4], ['0%', '-50%']);
-  const subtitleOpacity = useTransform(scrollYProgress, [0, 0.3, 0.5], [1, 0.5, 0]);
-  const subtitleY = useTransform(scrollYProgress, [0, 0.5], ['0%', '-100%']);
-  const buttonOpacity = useTransform(scrollYProgress, [0, 0.4, 0.6], [1, 0.5, 0]);
-  const buttonY = useTransform(scrollYProgress, [0, 0.6], ['0%', '-150%']);
-  const animationOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -223,19 +200,24 @@ export default function LandingPage() {
       <AppHeader />
 
       {/* Hero Section */}
-      <section ref={targetRef} className="relative text-center h-[100svh] py-20 lg:py-32 bg-background overflow-hidden">
-        <motion.div style={{ opacity: animationOpacity }} className="absolute inset-0">
+      <section className="relative text-center h-[100svh] py-20 lg:py-32 bg-background overflow-hidden">
+        <div className="absolute inset-0">
             <HeroAnimation />
-        </motion.div>
-        <div className="relative container mx-auto px-4 z-10 flex flex-col items-center justify-center h-full">
+        </div>
+        <motion.div 
+            className="relative container mx-auto px-4 z-10 flex flex-col items-center justify-center h-full"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+        >
           <motion.h1
-            style={{ y: titleY, opacity: titleOpacity }}
+            variants={itemVariants}
             className="text-5xl md:text-8xl font-headline font-bold tracking-tight mb-8"
           >
             AfghanAI
           </motion.h1>
           <motion.div
-            style={{ y: buttonY, opacity: buttonOpacity }}
+             variants={itemVariants}
           >
             <Link href="/hub" passHref>
               <Button size="lg" className="group text-lg h-14 px-10 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-shadow duration-300">
@@ -244,7 +226,7 @@ export default function LandingPage() {
               </Button>
             </Link>
           </motion.div>
-        </div>
+        </motion.div>
       </section>
       
        {/* Vision Section */}

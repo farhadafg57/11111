@@ -1,6 +1,6 @@
 import AgentList from "@/components/layout/agent-list";
 import AppHeader from "@/components/layout/header";
-import CanvasPage from "./[agentId]/canvas";
+import HeroAnimation from "@/components/animations/hero-animation";
 
 export default function HubLayout({
     children,
@@ -16,7 +16,7 @@ export default function HubLayout({
                 </aside>
                 <main className="relative flex flex-col h-full">
                     <div className="absolute inset-0 z-0">
-                        <CanvasPage />
+                        <HeroAnimation />
                     </div>
                     <div className="z-10 flex-1 flex flex-col">
                         {children}
