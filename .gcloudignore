@@ -1,0 +1,15 @@
+# .gitignore patterns
+.git
+.gitignore
+.firebase
+.firebaserc
+node_modules/
+.next/cache/
+.env.local
+.env.*.local
+*.md
+
+# Deployment files
+Dockerfile
+.gcloudignore
+cloudbuild.yaml

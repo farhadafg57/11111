@@ -128,8 +128,8 @@ export default function CommandBar({ agent, onNewMessage, onAgentResponse }: Com
     const responseMessage: Message = {
       id: agentMessageId,
       role: 'agent',
-      agentName: result.success ? (result.data.isCached ? `${result.data.agentName} (Cached)` : result.data.agentName) : 'System Error',
-      content: result.success ? result.data.agentResponse : result.error || 'An unknown error occurred.',
+      agentName: result.success && result.data ? (result.data.isCached ? `${result.data.agentName} (Cached)` : result.data.agentName) : 'System Error',
+      content: result.success && result.data ? result.data.agentResponse : result.error || 'An unknown error occurred.',
       isThinking: false,
     };
     onAgentResponse(responseMessage);

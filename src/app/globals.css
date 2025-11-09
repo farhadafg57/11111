@@ -70,10 +70,37 @@
   * {
     @apply border-border;
   }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body), serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     background-color: hsl(var(--background));
     background-image: radial-gradient(ellipse at 70% 30%, hsl(var(--secondary) / 0.3), transparent 50%),
                       radial-gradient(ellipse at 30% 70%, hsl(var(--primary) / 0.1), transparent 50%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headline), serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  [dir="rtl"] {
+    font-family: var(--font-arabic), var(--font-body), serif;
+  }
+
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3,
+  [dir="rtl"] h4,
+  [dir="rtl"] h5,
+  [dir="rtl"] h6 {
+    font-family: var(--font-arabic), var(--font-headline), serif;
   }
 }
