@@ -64,7 +64,7 @@ const config = {
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: { height: "0" },
+          from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
       },
@@ -73,8 +73,9 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
        fontFamily: {
-        body: ['var(--font-body)'],
-        arabic: ['var(--font-arabic)'],
+        headline: ["var(--font-headline)", "serif"],
+        body: ["var(--font-body)", "serif"],
+        arabic: ["var(--font-arabic)", "serif"],
       },
        backgroundImage: {
         'grid-primary/10': 'radial-gradient(circle, hsl(var(--primary) / 0.05) 1px, transparent 1px)',

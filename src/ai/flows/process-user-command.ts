@@ -22,9 +22,6 @@ import {
 import { initializeFirebase } from '@/firebase';
 import { agents } from '@/lib/agents';
 import { createHash } from 'crypto';
-import { errorEmitter, FirestorePermissionError } from '@/firebase';
-import type { SecurityRuleContext } from '@/firebase/errors';
-
 
 const ProcessUserCommandInputSchema = z.object({
   command: z.string().describe('The command entered by the user.'),
@@ -188,14 +185,7 @@ const processUserCommandFlow = ai.defineFlow(
       };
        
        setDoc(cacheRef, cacheData, { merge: true })
-        .catch(async (serverError) => {
-            const permissionError = new FirestorePermissionError({
-                path: cacheRef.path,
-                operation: 'write',
-                requestResourceData: cacheData
-            } satisfies SecurityRuleContext);
-            errorEmitter.emit('permission-error', permissionError);
-        });
+        .catch(console.error); // Log permission errors on the server without blocking
     }
 
     return {

@@ -1,0 +1,24 @@
+
+> afghanai-hub@0.1.0 build
+> next build
+
+ ⚠ Invalid next.config.mjs options detected: 
+ ⚠     Unrecognized key(s) in object: 'reactCompiler', 'swcMinify'
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+   ▲ Next.js 15.5.6
+
+   Creating an optimized production build ...
+
+
+Retrying 1/3...
+
+
+Retrying 1/3...
+ ✓ Compiled successfully in 40s
+   Linting and checking validity of types ...
+Failed to compile.
+
+src/app/agents-guide/page.tsx
+Type error: File '/workspaces/11111/src/app/agents-guide/page.tsx' is not a module.
+
+Next.js build worker exited with code: 1 and signal: null

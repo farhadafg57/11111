@@ -9,7 +9,7 @@ type AppHeaderProps = {
   showSidebarTrigger?: boolean;
 };
 
-export default function AppHeader({ showSidebarTrigger = true }: AppHeaderProps) {
+export default function AppHeader({ showSidebarTrigger = false }: AppHeaderProps) {
   return (
     <header className="p-4 border-b bg-background/80 backdrop-blur-sm sticky top-0 z-20">
       <div className="container mx-auto flex items-center justify-between gap-3">

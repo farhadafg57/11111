@@ -11,15 +11,18 @@ export function SidebarTrigger() {
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = React.useState(false);
 
-  // We only render this component on mobile devices
   if (!isMobile) {
     return null;
   }
+  
+  const handleAgentSelect = React.useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-7 w-7">
+        <Button variant="ghost" size="icon">
           <PanelLeft />
           <span className="sr-only">Toggle Sidebar</span>
         </Button>
@@ -28,8 +31,7 @@ export function SidebarTrigger() {
         <SheetHeader className="p-4 border-b">
           <SheetTitle className="text-2xl font-headline font-semibold">Scriptorium</SheetTitle>
         </SheetHeader>
-        {/* By passing a function that closes the sheet, we allow AgentList to control its parent */}
-        <AgentList onAgentSelect={() => setIsOpen(false)} />
+        <AgentList onAgentSelect={handleAgentSelect} />
       </SheetContent>
     </Sheet>
   );
