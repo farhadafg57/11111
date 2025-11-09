@@ -1,16 +1,12 @@
 {
   "hosting": {
+    "public": ".next/static",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
-        "run": {
-          "serviceId": "afghanai-hub",
-          "region": "us-central1"
-        }
+        "destination": "/index.html"
       }
     ]
-  },
-  "apphosting": {
-    "serviceId": "afghanai-hub"
   }
 }

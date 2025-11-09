@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Firebase Hosting compatible output configuration
-  output: 'standalone',
+  // Vercel-optimized output (removes 'standalone')
+  // Vercel handles deployment automatically
   
   // Strict mode enabled for production quality
   typescript: {
