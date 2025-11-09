@@ -1,5 +1,5 @@
 # Use the official Node.js 18 image as the base image
-FROM node:18-alpine as base
+FROM node:18-alpine
 
 # Set the working directory
 WORKDIR /app
@@ -13,7 +13,6 @@ RUN npm ci --only=production
 # Copy the standalone build output
 COPY .next/standalone .
 COPY .next/static .next/static
-COPY public public
 
 # Expose the port the app runs on
 EXPOSE 3000
