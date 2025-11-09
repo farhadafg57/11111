@@ -10,7 +10,6 @@ import {
   Bot,
   Lightbulb,
   CheckCircle2,
-  MousePointerClick,
   Package,
   BrainCircuit,
   Languages as LanguageIcon,
@@ -32,6 +31,10 @@ import {
   Blocks,
   Settings,
   AppWindow,
+  Twitter,
+  Linkedin,
+  Github,
+  MessageCircle as WhatsappIcon,
 } from 'lucide-react';
 import { useLanguage } from '@/lib/language';
 import placeholderData from '@/lib/placeholder-images.json';
@@ -39,20 +42,21 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import HeroAnimation from '@/components/animations/hero-animation';
 import React from 'react';
 import Image from 'next/image';
+import { HowItWorksDiagram1, HowItWorksDiagram2, HowItWorksDiagram3 } from '@/components/animations/diagrams';
 
 const howItWorksSteps = [
     {
-        Icon: MousePointerClick,
+        Diagram: HowItWorksDiagram1,
         title: 'howItWorks1Title',
         description: 'howItWorks1Desc'
     },
     {
-        Icon: Bot,
+        Diagram: HowItWorksDiagram2,
         title: 'howItWorks2Title',
         description: 'howItWorks2Desc'
     },
     {
-        Icon: Package,
+        Diagram: HowItWorksDiagram3,
         title: 'howItWorks3Title',
         description: 'howItWorks3Desc'
     }
@@ -310,8 +314,8 @@ export default function LandingPage() {
                         {t('howItWorksTitle')}
                     </h2>
                 </motion.div>
-                <motion.div
-                    className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 items-start"
+                 <motion.div
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-start"
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.2 }}
@@ -323,8 +327,8 @@ export default function LandingPage() {
                             variants={itemVariants}
                             className="relative flex flex-col items-center text-center"
                         >
-                            <div className="bg-background rounded-full p-4 border-2 border-primary/20 mb-4">
-                                <step.Icon className="w-10 h-10 text-primary" />
+                            <div className="relative h-40 w-full mb-6 flex items-center justify-center">
+                                <step.Diagram />
                             </div>
                             <h3 className="text-xl font-headline font-semibold mb-2">
                                 {t(step.title)}
@@ -332,9 +336,6 @@ export default function LandingPage() {
                             <p className="text-foreground/80 font-body">
                                 {t(step.description)}
                             </p>
-                            {index < howItWorksSteps.length - 1 && (
-                                <div className="hidden md:block absolute top-9 left-1/2 w-full h-px bg-border -translate-y-1/2 translate-x-1/2" />
-                            )}
                         </motion.div>
                     ))}
                 </motion.div>
@@ -645,13 +646,62 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
+      
+      {/* WhatsApp Floating Button */}
+      <motion.div
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 2, duration: 0.5, ease: "easeOut" }}
+        className="fixed bottom-6 right-6 z-50"
+      >
+        <Button asChild size="icon" className="rounded-full h-14 w-14 shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-shadow duration-300">
+            <a href="https://wa.me/93778893772" target="_blank" rel="noopener noreferrer" aria-label="Contact on WhatsApp">
+                <WhatsappIcon className="h-7 w-7" />
+            </a>
+        </Button>
+      </motion.div>
 
       {/* Footer */}
-      <footer className="py-6 border-t bg-background/50">
-        <div className="container mx-auto px-4 text-center text-foreground/60">
-          <div>&copy; {new Date().getFullYear()} AfghanAI. {t('footerRights')}</div>
-        </div>
-      </footer>
+        <footer className="bg-muted/30 border-t border-border/50 pt-16 pb-8">
+            <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                    <div className="md:col-span-1">
+                        <h3 className="text-lg font-headline font-semibold mb-4">{t('footerAboutTitle')}</h3>
+                        <p className="text-foreground/70 text-sm">{t('footerAboutText')}</p>
+                    </div>
+                    <div>
+                        <h3 className="text-lg font-headline font-semibold mb-4">{t('footerExploreTitle')}</h3>
+                        <ul className="space-y-2 text-sm">
+                            <li><Link href="#features" className="text-foreground/70 hover:text-primary transition-colors">{t('features')}</Link></li>
+                            <li><Link href="#pricing" className="text-foreground/70 hover:text-primary transition-colors">{t('pricing')}</Link></li>
+                            <li><Link href="/vision" className="text-foreground/70 hover:text-primary transition-colors">{t('theVision')}</Link></li>
+                            <li><Link href="/about" className="text-foreground/70 hover:text-primary transition-colors">{t('theHeritage')}</Link></li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h3 className="text-lg font-headline font-semibold mb-4">{t('footerLegalTitle')}</h3>
+                        <ul className="space-y-2 text-sm">
+                            <li><a href="#" className="text-foreground/70 hover:text-primary transition-colors">{t('footerPrivacy')}</a></li>
+                            <li><a href="#" className="text-foreground/70 hover:text-primary transition-colors">{t('footerTerms')}</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 className="text-lg font-headline font-semibold mb-4">{t('footerConnectTitle')}</h3>
+                        <div className="flex gap-4">
+                            <a href="#" aria-label="Twitter" className="text-foreground/70 hover:text-primary transition-colors"><Twitter /></a>
+                            <a href="#" aria-label="LinkedIn" className="text-foreground/70 hover:text-primary transition-colors"><Linkedin /></a>
+                            <a href="#" aria-label="GitHub" className="text-foreground/70 hover:text-primary transition-colors"><Github /></a>
+                        </div>
+                    </div>
+                </div>
+                <div className="border-t border-border/50 pt-8 mt-8 flex flex-col sm:flex-row justify-between items-center text-sm text-foreground/60">
+                    <p>&copy; {new Date().getFullYear()} AfghanAI. {t('footerRights')}</p>
+                    <p className="mt-4 sm:mt-0">{t('footerWhatsapp')}: <a href="https://wa.me/93778893772" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">+93 77 889 3772</a></p>
+                </div>
+            </div>
+        </footer>
     </div>
   );
 }
+
+    

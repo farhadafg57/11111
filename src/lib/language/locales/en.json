@@ -13,7 +13,6 @@
     "user": "User",
     "welcomeMessage": "Welcome to the AfghanAI Hub. The Scriptorium on the left lists available agents. How may I assist you today?",
     "commandBarPlaceholder": "Enter your command or use the mic...",
-    "commandBarShortcut": "Press Enter to send. Press Mic to use voice.",
     "voiceInputProcessing": "Processing voice input...",
     
     "heroTitle": "The Future of Intelligence, Rooted in Heritage.",
@@ -31,8 +30,10 @@
 
     "pricingTitle": "Choose Your Plan",
     "pricingSubtitle": "Powerful, accessible intelligence for everyone. Start for free, upgrade when you're ready.",
+    "pricing": "Pricing",
 
     "richFeaturesTitle": "Rich Features, Seamless Experience",
+    "features": "Features",
 
     "featureCognitiveCoreTitle": "Tiered Cognitive Core",
     "featureCognitiveCoreDesc": "Leverages a dual-intelligence system: swift \"Hafiz\" (Flash) for rapid tasks and contemplative \"Hakim\" (Pro) for deep, complex reasoning and complex coding/math tasks.",
@@ -130,5 +131,16 @@
     "faq5q": "Who built this?",
     "faq5a": "This platform was conceived and built by a single founder, forged through a period of intense, solitary effort. It stands as a testament to the idea that a singular vision, when pursued relentlessly, can make the impossible possible. The story is one of determination against all odds.",
     "faq6q": "What is the vision for AfghanAI?",
-    "faq6a": "Our vision is to spark a digital renaissance. We aim to create a sovereign AI ecosystem that not only preserves our rich intellectual and cultural heritage but also empowers a new generation of thinkers, creators, and builders. It is a 'House of Wisdom' for the 21st century."
+    "faq6a": "Our vision is to spark a digital renaissance. We aim to create a sovereign AI ecosystem that not only preserves our rich intellectual and cultural heritage but also empowers a new generation of thinkers, creators, and builders. It is a 'House of Wisdom' for the 21st century.",
+    
+    "footerAboutTitle": "About AfghanAI",
+    "footerAboutText": "A sovereign, living intelligence designed to preserve our past and build our future. Our digital renaissance starts now.",
+    "footerExploreTitle": "Explore",
+    "footerLegalTitle": "Legal",
+    "footerPrivacy": "Privacy Policy",
+    "footerTerms": "Terms of Service",
+    "footerConnectTitle": "Connect",
+    "footerWhatsapp": "WhatsApp Support"
 }
+
+    
