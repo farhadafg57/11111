@@ -12,8 +12,9 @@
     "anonymousUser": "Anonymous User",
     "user": "User",
     "welcomeMessage": "Welcome to the AfghanAI Hub. The Scriptorium on the left lists available agents. How may I assist you today?",
-    "commandBarPlaceholder": "Enter your command here...",
-    "commandBarShortcut": "Press ⌘B to toggle the Scriptorium.",
+    "commandBarPlaceholder": "Enter your command or use the mic...",
+    "commandBarShortcut": "Press Enter to send. Press Mic to use voice.",
+    "voiceInputProcessing": "Processing voice input...",
     
     "heroTitle": "The Future of Intelligence, Rooted in Heritage.",
     "heroSubtitle": "Welcome to the AfghanAI Hub, a sovereign, living intelligence designed to preserve our past and build our future. Your digital renaissance starts now.",
