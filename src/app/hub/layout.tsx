@@ -1,5 +1,6 @@
 import AppHeader from "@/components/layout/header";
 import HeroAnimation from "@/components/animations/hero-animation";
+import AgentList from "@/components/layout/agent-list";
 
 export default function HubLayout({
     children,
