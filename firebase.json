@@ -1,7 +1,5 @@
 {
   "hosting": {
-    "public": "out",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
@@ -11,5 +9,8 @@
         }
       }
     ]
+  },
+  "apphosting": {
+    "serviceId": "afghanai-hub"
   }
 }
