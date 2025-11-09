@@ -1,4 +1,3 @@
-import AgentList from "@/components/layout/agent-list";
 import AppHeader from "@/components/layout/header";
 import HeroAnimation from "@/components/animations/hero-animation";
 

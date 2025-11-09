@@ -4,7 +4,7 @@
     "hubSubtitle": "A sovereign AI ecosystem, fine-tuned from a synthesis of Anthropic, OpenAI, and Gemini models. An entire digital civilization, at your command.",
     "enterHub": "Enter the Hub",
     "theVision": "The Vision",
-    "theTechnology": "The Technology",
+    "theTechnology": "How It Works",
     "theHeritage": "The Heritage",
     "scriptorium": "Scriptorium",
     "agents": "Agents",
@@ -15,6 +15,22 @@
     "commandBarPlaceholder": "Enter your command here...",
     "commandBarShortcut": "Press ⌘B to toggle the Scriptorium.",
     
+    "heroTitle": "The Future of Intelligence, Rooted in Heritage.",
+    "heroSubtitle": "Welcome to the AfghanAI Hub, a sovereign, living intelligence designed to preserve our past and build our future. Your digital renaissance starts now.",
+    "getStartedFree": "Get Started for Free",
+    "login": "Login",
+
+    "howItWorksTitle": "How It Works",
+    "howItWorks1Title": "Choose Your Agent",
+    "howItWorks1Desc": "Select from over 120 specialized AI agents, each an expert in its field, from poetry to quantum physics.",
+    "howItWorks2Title": "Give Your Command",
+    "howItWorks2Desc": "Interact with your chosen agent using natural language. The Oracle AI will understand your intent and route your command.",
+    "howItWorks3Title": "Receive Your Solution",
+    "howItWorks3Desc": "Get intelligent, culturally-aware responses, generated content, or completed tasks in seconds.",
+
+    "pricingTitle": "Choose Your Plan",
+    "pricingSubtitle": "Powerful, accessible intelligence for everyone. Start for free, upgrade when you're ready.",
+
     "richFeaturesTitle": "Rich Features, Seamless Experience",
 
     "featureCognitiveCoreTitle": "Tiered Cognitive Core",
@@ -103,7 +119,7 @@
     "communitySubtitle": "The AfghanAI Hub is a non-commercial project dedicated to the preservation and promotion of our shared knowledge. It is, and always will be, free to use.",
     "faqTitle": "Frequently Asked Questions",
     "faq1q": "Is the AfghanAI Hub free to use?",
-    "faq1a": "Yes, completely. This is a non-commercial project built for the community. There are no fees or subscriptions.",
+    "faq1a": "Yes, a generous free tier is available. This is a community-focused project. Advanced features are available for Pro users.",
     "faq2q": "What languages does it support?",
     "faq2a": "The Hub is designed to be fluent in Dari and Pashto, in addition to English. Our AI agents will respond in the language of your prompt.",
     "faq3q": "Is my data private?",
