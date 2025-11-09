@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" style={{ colorScheme: 'dark' }} suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
       </head>
       <body className={cn(
         'font-body antialiased',

@@ -3,6 +3,7 @@
 import LanguageSwitcher from './language-switcher';
 import { SidebarTrigger } from '../ui/sidebar';
 import Link from 'next/link';
+import { Logo } from './logo';
 
 export default function AppHeader() {
   return (
@@ -10,7 +11,8 @@ export default function AppHeader() {
       <div className="container mx-auto flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
            <SidebarTrigger />
-          <Link href="/" className="text-3xl font-headline font-bold text-foreground tracking-tight">
+          <Link href="/" className="flex items-center gap-2 text-2xl font-headline font-bold text-foreground tracking-tight">
+            <Logo className="h-8 w-8" />
             AfghanAI
           </Link>
         </div>

@@ -18,6 +18,7 @@ import placeholderData from '@/lib/placeholder-images.json';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import HeroAnimation from '@/components/animations/hero-animation';
 import React from 'react';
+import Image from 'next/image';
 
 const howItWorksSteps = [
     {
@@ -102,6 +103,8 @@ const faqItems = [
 export default function LandingPage() {
   const { t, language } = useLanguage();
   const founderImage = placeholderData.images.find(img => img.id === 'founder-landing');
+  const visionImage = placeholderData.images.find(img => img.id === 'vision-landing');
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -215,8 +218,46 @@ export default function LandingPage() {
             </div>
         </section>
 
+         {/* Vision Section */}
+        <section id="vision" className="py-20 lg:py-24 bg-background">
+            <div className="container mx-auto px-4">
+                <motion.div
+                    className="grid md:grid-cols-2 gap-12 items-center"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={containerVariants}
+                >
+                    <motion.div variants={itemVariants}>
+                        <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">{t('visionTitle')}</h2>
+                        <p className="text-lg text-foreground/70 mb-6">{t('visionSubtitle')}</p>
+                        <blockquote className="border-l-4 border-primary pl-4 italic text-xl text-foreground/90 my-6">
+                            {t('visionQuote')}
+                        </blockquote>
+                        <Link href="/vision" passHref>
+                          <Button size="lg" variant="outline" className="group text-lg">
+                            {t('visionButton')}
+                            <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                          </Button>
+                        </Link>
+                    </motion.div>
+                    <motion.div variants={itemVariants} className="relative aspect-square">
+                        {visionImage && (
+                            <Image
+                                src={visionImage.src}
+                                alt="Vision"
+                                fill
+                                className="object-cover rounded-2xl shadow-glow-primary"
+                                data-ai-hint={visionImage.hint}
+                            />
+                        )}
+                    </motion.div>
+                </motion.div>
+            </div>
+        </section>
+
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 lg:py-24 bg-background overflow-hidden">
+      <section id="pricing" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div 
             initial="hidden"
@@ -273,7 +314,7 @@ export default function LandingPage() {
       </section>
 
       {/* Mission Section */}
-      <section id="mission" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
+      <section id="mission" className="py-20 lg:py-24 bg-background overflow-hidden">
         <div className="container mx-auto px-4 text-center">
              <motion.div
                 initial="hidden"
@@ -294,7 +335,7 @@ export default function LandingPage() {
       </section>
         
         {/* FAQ Section */}
-        <section id="faq" className="py-20 lg:py-24 bg-background overflow-hidden">
+        <section id="faq" className="py-20 lg:py-24 bg-muted/30 overflow-hidden">
             <div className="container mx-auto px-4">
                 <motion.div
                     initial="hidden"
@@ -329,7 +370,7 @@ export default function LandingPage() {
 
 
       {/* Final CTA Section */}
-      <section id="cta" className="py-20 lg:py-32 bg-muted/30 overflow-hidden">
+      <section id="cta" className="py-20 lg:py-32 bg-background overflow-hidden">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -356,7 +397,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-6 border-t bg-background">
+      <footer className="py-6 border-t bg-background/50">
         <div className="container mx-auto px-4 text-center text-foreground/60">
           <div>&copy; {new Date().getFullYear()} AfghanAI. {t('footerRights')}</div>
         </div>

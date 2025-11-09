@@ -27,6 +27,13 @@
       "width": 100,
       "height": 100,
       "hint": "portrait person"
+    },
+    {
+      "id": "vision-landing",
+      "src": "https://picsum.photos/seed/vision/800/800",
+      "width": 800,
+      "height": 800,
+      "hint": "abstract crystal"
     }
   ]
 }
