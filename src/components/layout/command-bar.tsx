@@ -185,9 +185,6 @@ export default function CommandBar({ agent, onNewMessage, onAgentResponse }: Com
             </Button>
           </div>
         </form>
-        <p className="text-xs text-center text-muted-foreground mt-2 px-2">
-          {t('commandBarShortcut')}
-        </p>
       </div>
     </div>
   );
